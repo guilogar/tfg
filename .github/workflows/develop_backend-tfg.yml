@@ -31,4 +31,4 @@ jobs:
         app-name: 'backend-tfg'
         slot-name: 'production'
         publish-profile: ${{ secrets.AZURE_CREDENTIALS }}
-        package: .
+        package: ./backend
