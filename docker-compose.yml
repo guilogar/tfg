@@ -1,0 +1,18 @@
+version: '1.0'
+services:
+  icrowdhouse:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'tfg'
+      MYSQL_USER: tfg
+      MYSQL_PASSWORD: 'tfg'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - tfg:/var/lib/mysql
+volumes:
+  tfg:
