@@ -1,0 +1,19 @@
+{
+  "name": "emulator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "simulator": "node simulator.js",
+    "read-messages": "node read-messages.js"
+  },
+  "author": "guilogar",
+  "license": "GNU/GPL",
+  "dependencies": {
+    "@azure/event-hubs": "^5.0.0",
+    "azure-iot-device": "^1.7.1",
+    "azure-iot-device-mqtt": "^1.7.1",
+    "dotenv": "^8.2.0"
+  }
+}
