@@ -1,4 +1,4 @@
-const User = require('../database/User');
+const User = require('../database/models/User');
 const sequelize = require('../database/sequelize');
 
 // Insert users

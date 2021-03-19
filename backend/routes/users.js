@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 
-const User = require('../database/User');
+const User = require('../database/models/User');
 const sequelize = require('../database/sequelize');
 
 router.get('/users', async (req, res) => {

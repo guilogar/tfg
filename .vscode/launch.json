@@ -5,13 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-          "name": "Attach to Chrome",
-          "port": 9222,
-          "request": "attach",
-          "type": "pwa-chrome",
-          "webRoot": "${workspaceFolder}"
-        },
-        {
           "type": "node",
           "request": "launch",
           "name": "Launch Current js",
@@ -29,7 +22,7 @@
           "runtimeExecutable": "node"
         },
         {
-          "name": "Launch in Chrome",
+          "name": "Launch Frontend in Chrome",
           "type": "chrome",
           "request": "launch",
           "url": "http://localhost:8100/",

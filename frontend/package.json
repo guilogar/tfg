@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "smartrural-frontend",
   "version": "0.0.1",
   "author": "Guillermo López García",
   "homepage": "https://github.com/guilogar/tfg",
@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1000.0",
-    "@angular/cli": "~10.0.5",
+    "@angular/cli": "10.0.8",
     "@angular/compiler": "~10.0.0",
     "@angular/compiler-cli": "~10.0.0",
     "@angular/language-service": "~10.0.0",
