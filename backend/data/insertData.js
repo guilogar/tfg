@@ -1,3 +1,4 @@
+const Auth = require('../database/models/Auth');
 const User = require('../database/models/User');
 const sequelize = require('../database/sequelize');
 const { setPassword } = require('../utils/password');
@@ -14,10 +15,15 @@ async function rebuildTables()
 async function removeUsers()
 {
     await sequelize.sync();
-    await User.destroy({
-        where: {},
-        truncate: true
-    });
+    await User.truncate({ cascade: true });
+    await sequelize.sync();
+}
+
+// Remove token auth
+async function removeAuths()
+{
+    await sequelize.sync();
+    await Auth.truncate({ cascade: true });
     await sequelize.sync();
 }
 
@@ -47,5 +53,6 @@ module.exports = {
     },
     rebuildTables,
     removeUsers,
+    removeAuths,
     insertUsers
 };

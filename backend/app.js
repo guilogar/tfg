@@ -17,12 +17,13 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+const registryLogin = require('./routes/registry-login');
 const users = require('./routes/users');
 
+app.use(baseAPI, registryLogin);
 app.use(baseAPI, users);
 
 const server = http.createServer(app);
-
 server.listen(PORT, function() {
     console.log('Server up and running on localhost:' + PORT);
 });

@@ -13,7 +13,7 @@ const sequelize = new Sequelize(
                 rejectUnauthorized: false
             }
         },
-        logging: (process.env.ENVIRONMENT === 'production')
+        logging: (process.env.ENVIRONMENT === 'production'),
     }
 );
 

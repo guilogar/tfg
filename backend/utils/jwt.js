@@ -14,7 +14,7 @@ const generateToken = (username, salt, time = null) => {
 }
 
 const verifyToken = (username, salt, token) => {
-    return username === jwt.verify(token, salt);
+    return username === jwt.verify(token, salt).data;
 }
 
 module.exports = {

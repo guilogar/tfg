@@ -25,10 +25,10 @@ Auth.init({
     timestamps: false,
 });
 
-Auth.prototype.isValid = () => {
-    console.log(new Date(this.expires));
-    console.log(new Date(DataTypes.NOW));
-    return (new Date(this.expires) >= new Date(DataTypes.NOW));
+Auth.prototype.isValid = function() {
+    return (
+        new Date(this.expires).getTime() >= new Date().getTime()
+    );
 }
 
 Auth.belongsTo(User);
