@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - backend-tfg
+name: Build and deploy Node.js app to Azure Web App - frontend-tfg
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
 
     - name: npm install
       run: |
-        cd backend
+        cd frontend
         npm install
 
     - name: 'Deploy to Azure Web App'
