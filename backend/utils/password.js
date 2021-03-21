@@ -1,8 +1,8 @@
 const crypto = require('crypto');
 
-const setPassword = (password = '') => {     
+const setPassword = (password = '', saltUser = null) => {     
     // Creating a unique salt for a particular user 
-    const salt = crypto.randomBytes(16).toString('hex'); 
+    const salt = (saltUser === null) ? crypto.randomBytes(16).toString('hex') : saltUser;
     
     // Hashing user's salt and password with 1000 iterations
     const hash = crypto.pbkdf2Sync(
@@ -10,18 +10,16 @@ const setPassword = (password = '') => {
     ).toString('hex');
 
     return (password === '') ? null : {
-        salt, hash
+        hash, salt
     };
-}; 
-    
-// Method to check the entered password is correct or not 
-const validPassword = (password, hash, salt) => { 
-    const newHash = crypto.pbkdf2Sync(
-        password, salt, 1000, 64, 'sha512'
-    ).toString('hex'); 
-
-    return hash === newHash;
 };
+
+const validPassword = (password, salt, hash) => { 
+    return hash === crypto.pbkdf2Sync(
+        password, salt, 1000, 64, `sha512`
+    ).toString(`hex`); 
+}; 
+
 
 module.exports = {
     setPassword, validPassword

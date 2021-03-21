@@ -1,6 +1,9 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-const { renewal } = require('./insertData');
+const { renewal, rebuildTables, removeUsers, insertUsers } = require('./insertData');
 
-renewal();
+(async () => {
+    await rebuildTables();
+    await removeUsers();
+})();
