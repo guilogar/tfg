@@ -1,18 +1,15 @@
-version: '1.0'
+version: '3'
 services:
-  icrowdhouse:
-    image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_DATABASE: 'tfg'
-      MYSQL_USER: tfg
-      MYSQL_PASSWORD: 'tfg'
-      MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      - '3306:3306'
-    expose:
-      - '3306'
+  postgresql:
+    image: postgres:9.6
     volumes:
-      - tfg:/var/lib/mysql
+      - smartrural:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=smartrural
+      - POSTGRES_USER=smartrural
+      - POSTGRES_PASSWORD=smartrural
 volumes:
-  tfg:
+  smartrural:
+    external: false
