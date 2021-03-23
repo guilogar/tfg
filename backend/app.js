@@ -7,8 +7,11 @@ const bodyParser = require('body-parser');
 const baseAPI = '/api/v1';
 const cors = require('cors');
 
+const args = process.argv.slice(2);
+process.env.ENVFILE = (args[0]) ? args[0] : '.env';
+
 const dotenv = require('dotenv');
-dotenv.config();
+dotenv.config({ path: process.env.ENVFILE });
 
 app.use(cors());
 app.use(bodyParser.json());

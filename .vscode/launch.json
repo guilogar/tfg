@@ -29,9 +29,23 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Server js",
+      "name": "Launch Server js with local database",
+      "program": "${workspaceFolder}/backend/app.js",
+      "args": [
+        ".env.test"
+      ],
+      "cwd": "${workspaceFolder}/backend",
+      "runtimeExecutable": "node"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Server js with remote database",
       "program": "${workspaceFolder}/backend/app.js",
       "cwd": "${workspaceFolder}/backend",
+      "args": [
+        ".env"
+      ],
       "runtimeExecutable": "node"
     },
     {
