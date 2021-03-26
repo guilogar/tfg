@@ -1,0 +1,26 @@
+const { Model, DataTypes } = require('sequelize');
+
+const sequelize = require('../sequelize');
+const Phytosanitary = require('./Phytosanitary');
+const Crop = require('./Crop');
+
+class CropPhytosanitary extends Model {}
+
+CropPhytosanitary.init({
+    id: {
+        type: DataTypes.BIGINT,
+        autoIncrement: true,
+        primaryKey: true
+    }
+}, {
+    sequelize,
+    modelName: 'CropPhytosanitary',
+    freezeTableName: true,
+    tableName: 'CropPhytosanitary',
+    timestamps: false,
+});
+
+CropPhytosanitary.belongsTo(Phytosanitary);
+CropPhytosanitary.belongsTo(Crop);
+
+module.exports = CropPhytosanitary;
