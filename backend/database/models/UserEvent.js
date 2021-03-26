@@ -11,6 +11,9 @@ UserEvent.init({
         type: DataTypes.BIGINT,
         autoIncrement: true,
         primaryKey: true
+    },
+    action: {
+        type: DataTypes.ENUM('Automatic', 'Manual')
     }
 }, {
     sequelize,

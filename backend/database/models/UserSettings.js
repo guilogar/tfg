@@ -16,6 +16,9 @@ UserSettings.init({
     },
     defaultLanguage: {
         type: DataTypes.STRING
+    },
+    defaultEventAction: {
+        type: DataTypes.ENUM('Automatic', 'Manual')
     }
 }, {
     sequelize,
