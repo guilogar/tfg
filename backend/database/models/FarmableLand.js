@@ -13,7 +13,7 @@ FarmableLand.init({
         primaryKey: true
     },
     type: {
-        type: DataTypes.ENUM('Irrigation', 'DryLand')
+        type: DataTypes.ENUM('Irrigation', 'DryLand', 'GreenHourse', 'OpenLand')
     },
     imageS3Id: {
         type: DataTypes.STRING
