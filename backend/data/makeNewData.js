@@ -1,10 +1,12 @@
-const dotenv = require('dotenv');
-dotenv.config();
+const args = process.argv.slice(2);
+process.env.ENVFILE = (args[0]) ? args[0] : '.env';
 
-const { renewal, rebuildTables, removeUsers, removeAuths, insertUsers } = require('./insertData');
+const dotenv = require('dotenv');
+dotenv.config({ path: process.env.ENVFILE });
+
+const { rebuildTables, truncateTables } = require('./insertData');
 
 (async () => {
     await rebuildTables();
-    await removeUsers();
-    await removeAuths();
+    await truncateTables();
 })();

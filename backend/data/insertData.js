@@ -1,7 +1,5 @@
-const Auth = require('../database/models/Auth');
-const User = require('../database/models/User');
 const sequelize = require('../database/sequelize');
-const { setPassword } = require('../utils/password');
+const models = require('../database/models/models');
 
 // Re-build all tables
 async function rebuildTables()
@@ -11,48 +9,17 @@ async function rebuildTables()
     });
 }
 
-// Remove users
-async function removeUsers()
+// Truncate all tables
+async function truncateTables()
 {
-    await sequelize.sync();
-    await User.truncate({ cascade: true });
-    await sequelize.sync();
-}
-
-// Remove token auth
-async function removeAuths()
-{
-    await sequelize.sync();
-    await Auth.truncate({ cascade: true });
-    await sequelize.sync();
-}
-
-// Insert users
-async function insertUsers()
-{
-    await sequelize.sync();
-    for(let i = 0; i < 15; i++)
+    for(const model of models)
     {
-        const { hash, salt } = setPassword('perico');
-        await User.create({
-            username: `perico${i}`,
-            password: hash,
-            salt: salt,
-            fullname: 'perico perez',
-            isActive: true
-        });
+        await sequelize.sync();
+        await model.truncate({ cascade: true });
+        await sequelize.sync();
     }
-    await sequelize.sync();
 }
 
 module.exports = {
-    renewal: async () => {
-        await rebuildTables();
-        await removeUsers();
-        await insertUsers();
-    },
-    rebuildTables,
-    removeUsers,
-    removeAuths,
-    insertUsers
+    rebuildTables, truncateTables
 };
