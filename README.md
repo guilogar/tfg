@@ -12,9 +12,11 @@ DATABASE_DIALECT=postgres
 ENVIRONMENT=develop
 ```
 
-### frontend/.env
+### frontend/env.tsx
 ```
-BACKEND_URL=...
+export const ENV = {
+    BACKEND_HOST: 'http://localhost:3000'
+};
 ```
 
 ## Database Posgresql
