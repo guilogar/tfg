@@ -7,6 +7,10 @@
 
 src/env.tsx
 
+electron/
+android/
+ios/
+
 # testing
 /coverage
 
