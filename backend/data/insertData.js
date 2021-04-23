@@ -1,5 +1,6 @@
 const sequelize = require('../database/sequelize');
 const models = require('../database/models/models');
+const { createUser } = require('../routes/services/create-user');
 
 // Re-build all tables
 async function rebuildTables()
@@ -20,6 +21,17 @@ async function truncateTables()
     }
 }
 
+// Create base data to development
+async function insertDataTable()
+{
+    // Insert user to test system
+    await createUser(
+        'test',
+        'test',
+        'Guillermo López García'
+    );
+}
+
 module.exports = {
-    rebuildTables, truncateTables
+    rebuildTables, truncateTables, insertDataTable
 };
