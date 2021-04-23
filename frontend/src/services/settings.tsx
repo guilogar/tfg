@@ -1,13 +1,12 @@
-import axios from 'axios';
-import { ENV } from '../env';
+import { api } from './utils';
 
 export const getSettings = async () => {
-    const { data } : any = await axios.get(ENV.BACKEND_HOST + '/settings');
+    const { data } : any = await api.get('/settings');
     return data;
 };
 
 export const postSettings = async (settings : any = {}) => {
-    const { data } : any = await axios.post(ENV.BACKEND_HOST + '/settings', {
+    const { data } : any = await api.post('/settings', {
         backgroundColor: '',
         defaultLanguage: '',
         defaultEventAction: ''
