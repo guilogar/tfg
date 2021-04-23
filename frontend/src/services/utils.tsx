@@ -2,7 +2,7 @@ import axios from "axios";
 import { ENV } from '../env';
 
 export const api = axios.create({
-  baseURL: `${ENV.BACKEND_HOST}`
+  baseURL: `${ENV.BACKEND_HOST}/api/v1`
 });
 
 export const login = (sessionId: string) : void => {

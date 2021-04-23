@@ -53,16 +53,16 @@ const appPages: AppPage[] = [
     mdIcon: archiveSharp
   },
   {
-    title: 'Ajustes',
-    url: '/dashboard/page/Setting',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp
-  },
-  {
     title: 'Métodos de Pago',
     url: '/dashboard/page/MethodPay',
     iosIcon: warningOutline,
     mdIcon: warningSharp
+  },
+  {
+    title: 'Ajustes',
+    url: '/dashboard/page/Setting',
+    iosIcon: trashOutline,
+    mdIcon: trashSharp
   }
 ];
 
@@ -73,8 +73,8 @@ const Menu: React.FC<{ setIsLog: Function }> = ({ setIsLog }) => {
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="inbox-list">
-          <IonListHeader>Inbox</IonListHeader>
-          <IonNote>hi@ionicframework.com</IonNote>
+          <IonListHeader>Menú</IonListHeader>
+          <IonNote>information@smartrural.es</IonNote>
           {
             appPages.map((appPage, index) => {
               return (

@@ -44,10 +44,10 @@ const Dashboard: React.FC = () => {
                             <Route path="/dashboard" exact={true}>
                                 <Redirect to="/dashboard/page/Inbox" />
                             </Route>
-                            <Route path="/dashboard/page/:name" exact={true}>
+                            {/* <Route path="/dashboard/page/:name" exact={true}>
                                 <Page />
-                            </Route>
-                            <Route path="/dashboard/settings" exact={true}>
+                            </Route> */}
+                            <Route path="/dashboard/page/Setting" exact={true}>
                                 <Settings />
                             </Route>
                         </IonRouterOutlet>

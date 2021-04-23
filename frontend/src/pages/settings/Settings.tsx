@@ -8,7 +8,7 @@ import { postSettings } from '../../services/settings';
 const Settings: React.FC = () => {
   const toggleDarkModeHandler = async () => {
     document.body.classList.toggle("dark");
-    await postSettings();
+    // await postSettings();
   };
 
   return (
