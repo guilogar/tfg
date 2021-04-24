@@ -6,32 +6,34 @@ import {
 } from '@ionic/react';
 import { pin } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
+import CanvasDraw from "react-canvas-draw";
 
-import { getApi } from '../../services/utils';
-import './FarmableLand.css';
+import { getApi } from '../../../services/utils';
+import './CreateFarmableLand.css';
 
-import CreateFarmableLand from './create/CreateFarmableLand';
-import UpdateFarmableLand from './update/UpdateFarmableLand';
-
-const FarmableLand: React.FC = () => {
+const CreateFarmableLand: React.FC = () => {
   const [message, setMessage] = useState<string>('');
-  const [create, setCreate] = useState<boolean>(false);
-  const [update, setUpdate] = useState<boolean>(false);
-  const [farmableLandId, setFarmableLandId] = useState<number>(0);
   const api = getApi();
+  let saveableCanvas: any = undefined;
 
   useEffect(() => {
     (async () => {
+      const { data } = await api.get('/farmableLandTypes');
 
+      let msg = '';
+      for (const type of data.types) {
+        msg += type + ', ';
+      }
+      setMessage(msg);
+      console.log(data);
+      
+      // const canvasData = saveableCanvas.getSaveData();
+      // saveableCanvas.loadSaveData(canvasData);
+      // saveableCanvas.undo();
+      // saveableCanvas.clear();
     })();
   });
 
-  if (create)
-  {
-    return(<CreateFarmableLand />);
-  } else if(update) {
-    return(<UpdateFarmableLand farmableLandId={farmableLandId} />);
-  } else
   return (
     <IonPage>
       <IonHeader>
@@ -41,8 +43,7 @@ const FarmableLand: React.FC = () => {
       </IonHeader>
       <IonContent>
         <IonCard>
-          <IonImg src="https://raw.githubusercontent.com/ionic-team/ionic-docs/master/src/demos/api/card/madison.jpg"
-                  class="img-farmable-land" />
+          <IonImg src="https://raw.githubusercontent.com/ionic-team/ionic-docs/master/src/demos/api/card/madison.jpg" class="img-farmable-land" />
           <IonCardHeader>
             <IonCardSubtitle>{message}</IonCardSubtitle>
             <IonCardTitle>{message}</IonCardTitle>
@@ -50,20 +51,21 @@ const FarmableLand: React.FC = () => {
           <IonItem>
             <IonIcon icon={pin} slot="start" />
             <IonLabel>{message}</IonLabel>
-            <IonButton 
-              fill="outline" slot="end"
-              onClick={() => {setUpdate(true)}}
-            >
-              Editar
-            </IonButton>
+            <IonButton fill="outline" slot="end">Editar</IonButton>
           </IonItem>
           <IonCardContent>
             {message}
           </IonCardContent>
         </IonCard>
+        <CanvasDraw
+          brushRadius={3} brushColor={'#009dff'}
+          ref={canvasDraw => (saveableCanvas = canvasDraw)}
+          canvasWidth="100%"
+          canvasHeight="100%"
+        />
       </IonContent>
     </IonPage>
   );
 };
 
-export default FarmableLand;
+export default CreateFarmableLand;

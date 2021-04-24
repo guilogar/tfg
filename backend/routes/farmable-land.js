@@ -44,8 +44,10 @@ router.post('/farmableLand', async (req, res) => {
   
   const farmableLand = await FarmableLand.create({
     type: req.body.type,
-    imageS3Id: null,
-    haveIOT: false,
+    image: req.body.image,
+    haveIOT: req.body.haveIOT,
+    area: req.body.area,
+    isSquare: req.body.isSquare,
     UserId: user.id
   });
 
@@ -65,8 +67,10 @@ router.put('/farmableLand/:id', async (req, res) => {
 
   farmableLand = await farmableLand.update({
     type: req.body.type,
-    imageS3Id: null,
+    image: req.body.image,
     haveIOT: req.body.haveIOT,
+    area: req.body.area,
+    isSquare: req.body.isSquare
   });
 
   res.status(200).send({

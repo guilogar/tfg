@@ -15,10 +15,16 @@ FarmableLand.init({
     type: {
         type: DataTypes.ENUM('Irrigation', 'DryLand', 'GreenHourse', 'OpenLand')
     },
-    imageS3Id: {
-        type: DataTypes.STRING
+    image: {
+        type: DataTypes.TEXT
     },
     haveIOT: {
+        type: DataTypes.BOOLEAN
+    },
+    area: {
+        type: DataTypes.DOUBLE
+    },
+    isSquare: {
         type: DataTypes.BOOLEAN
     }
 }, {
