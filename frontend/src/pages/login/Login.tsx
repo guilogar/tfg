@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { IonGrid, IonRow, IonCol } from '@ionic/react';
 import { personCircle } from 'ionicons/icons';
 
-import { api, login, isLogged } from '../../services/utils';
+import { getApi, login, isLogged } from '../../services/utils';
 import Dashboard from '../dashboard/Dashboard';
 
 const Login: React.FC = () => {
@@ -13,6 +13,7 @@ const Login: React.FC = () => {
   const [iserror, setIserror] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
   const [isLog, setIsLog] = useState(isLogged());
+  const api = getApi();
 
   const handleLogin = async () => {
     try {
@@ -23,6 +24,7 @@ const Login: React.FC = () => {
       login(data.token);
       setIsLog(true);
     } catch(err) {
+      console.log(err);
       setMessage('Auth failure! Please check your credentials!');
       setIserror(true);
     }

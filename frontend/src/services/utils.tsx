@@ -17,13 +17,12 @@ export const getSessionId = (): string | null => {
   return localStorage.getItem('sessionId');
 };
 
-const getApi = () : any => {
-  return (!isLogged()) ? null : axios.create({
+export const getApi = () : any => {
+  const headers = (!isLogged()) ? {} : {
+    authorization: `Bearer ${getSessionId()}`
+  };
+  return axios.create({
     baseURL: `${process.env.REACT_APP_BACKEND_HOST}/api/v1`,
-    headers: {
-      authorization: `Bearer ${getSessionId()}`
-    }
+    headers: headers
   });
 };
-
-export const api = getApi();

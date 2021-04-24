@@ -4,11 +4,12 @@ import {
 } from '@ionic/react';
 import React, { useState, useEffect } from 'react';
 
-import { api } from '../../services/utils';
+import { getApi } from '../../services/utils';
 
 const FarmableLand: React.FC = () => {
   const [message, setMessage] = useState<string>('');
   const handleLogin = async () => { };
+  const api = getApi();
 
   useEffect(() => {
     (async () => {
