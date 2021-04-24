@@ -6,7 +6,7 @@ import { isLogged } from '../../services/utils';
 import Menu from '../../components/Menu';
 import Login from '../../pages/login/Login';
 import Settings from '../settings/Settings';
-import FarmableLand from '../farmable-land/farmable-land';
+import FarmableLand from '../farmable-land/FarmableLand';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
