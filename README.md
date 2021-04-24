@@ -12,12 +12,11 @@ DATABASE_DIALECT=postgres
 ENVIRONMENT=develop
 ```
 
-### frontend/env.tsx
+### frontend/.env
 ```
-export const ENV = {
-    BACKEND_HOST: 'http://localhost:3000'
-};
+REACT_APP_BACKEND_HOST=http://localhost:3000
 ```
+The environment variables of frontend must always start with "REACT_APP_" prefix
 
 ## Database Posgresql
 ```
