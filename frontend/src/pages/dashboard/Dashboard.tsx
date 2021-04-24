@@ -2,7 +2,6 @@ import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 import Menu from '../../components/Menu';
-import Page from '../Page';
 import Settings from '../settings/Settings';
 import React, { useState } from 'react';
 import { isLogged } from '../../services/utils';
