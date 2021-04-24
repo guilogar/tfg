@@ -18,7 +18,7 @@ const middleware = async (req, res, next) => {
                 }
             });
 
-            if(auth)
+            if(auth && auth.isValid())
             {
                 const user = await User.findOne({
                     where: {

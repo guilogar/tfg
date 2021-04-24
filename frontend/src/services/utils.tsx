@@ -1,9 +1,5 @@
 import axios from "axios";
 
-export const api = axios.create({
-  baseURL: `${process.env.REACT_APP_BACKEND_HOST}/api/v1`
-});
-
 export const login = (sessionId: string) : void => {
   localStorage.setItem('sessionId', sessionId);
 }
@@ -20,3 +16,14 @@ export const isLogged = () : boolean => {
 export const getSessionId = (): string | null => {
   return localStorage.getItem('sessionId');
 };
+
+const getApi = () : any => {
+  return (!isLogged()) ? null : axios.create({
+    baseURL: `${process.env.REACT_APP_BACKEND_HOST}/api/v1`,
+    headers: {
+      authorization: `Bearer ${getSessionId()}`
+    }
+  });
+};
+
+export const api = getApi();

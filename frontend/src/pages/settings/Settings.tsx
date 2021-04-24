@@ -1,5 +1,8 @@
 import React from "react";
-import {IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonIcon, IonLabel, IonToggle} from "@ionic/react";
+import {
+  IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
+  IonList, IonItem, IonIcon, IonLabel, IonToggle
+} from "@ionic/react";
 import { moon } from "ionicons/icons";
 import "./Settings.css";
 

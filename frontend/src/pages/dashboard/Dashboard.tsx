@@ -1,11 +1,12 @@
 import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
-import Menu from '../../components/Menu';
-import Settings from '../settings/Settings';
 import React, { useState } from 'react';
 import { isLogged } from '../../services/utils';
+import Menu from '../../components/Menu';
 import Login from '../../pages/login/Login';
+import Settings from '../settings/Settings';
+import FarmableLand from '../farmable-land/farmable-land';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -40,12 +41,15 @@ const Dashboard: React.FC = () => {
                     <IonSplitPane contentId="main">
                         <Menu setIsLog={setIsLog} />
                         <IonRouterOutlet id="main">
-                            <Route path="/dashboard" exact={true}>
-                                <Redirect to="/dashboard/page/Inbox" />
+                            <Route path="/" exact={true}>
+                                <Redirect to="/dashboard/page/FarmableLand" />
                             </Route>
                             {/* <Route path="/dashboard/page/:name" exact={true}>
                                 <Page />
                             </Route> */}
+                            <Route path="/dashboard/page/FarmableLand" exact={true}>
+                                <FarmableLand />
+                            </Route>
                             <Route path="/dashboard/page/Setting" exact={true}>
                                 <Settings />
                             </Route>

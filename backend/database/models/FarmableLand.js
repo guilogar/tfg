@@ -30,6 +30,5 @@ FarmableLand.init({
 });
 
 FarmableLand.belongsTo(User);
-FarmableLand.belongsTo(Auth);
 
 module.exports = FarmableLand;

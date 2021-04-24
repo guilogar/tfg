@@ -22,9 +22,11 @@ app.use(bodyParser.urlencoded({
 
 const registryLogin = require('./routes/registry-login');
 const users = require('./routes/users');
+const farmableLand = require('./routes/farmable-land');
 
 app.use(baseAPI, registryLogin);
 app.use(baseAPI, users);
+app.use(baseAPI, farmableLand);
 
 const server = http.createServer(app);
 server.listen(PORT, function() {

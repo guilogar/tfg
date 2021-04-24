@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node .",
     "test": "mocha --timeout 10000",
-    "localMakeNewData": "node data/makeNewData.js .env.test",
-    "remoteMakeNewData": "node data/makeNewData.js"
+    "makeNewData": "node data/makeNewData.js .env"
   },
   "repository": "https://github.com/guilogar/tfg",
   "author": "Guillermo López García",
