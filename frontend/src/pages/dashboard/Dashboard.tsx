@@ -27,34 +27,34 @@ import '@ionic/react/css/display.css';
 import '../../theme/variables.css';
 
 const Dashboard: React.FC = () => {
-    const [isLog, setIsLog] = useState(isLogged());
+  const [isLog, setIsLog] = useState(isLogged());
 
-    if (!isLog)
-    {
-        return (<Redirect to="/login" />);
-    } else
-    {
-        return (
-            <IonApp>
-                <IonReactRouter>
-                    <IonSplitPane contentId="main">
-                        <Menu changeIsLog={setIsLog} />
-                        <IonRouterOutlet id="main">
-                            <Route path="/dashboard" exact={true}>
-                                <Redirect to="/dashboard/page/FarmableLand" />
-                            </Route>
-                            <Route path="/dashboard/page/FarmableLand" exact={true}>
-                                <FarmableLand />
-                            </Route>
-                            <Route path="/dashboard/page/Setting" exact={true}>
-                                <Settings />
-                            </Route>
-                        </IonRouterOutlet>
-                    </IonSplitPane>
-                </IonReactRouter>
-            </IonApp>
-        );
-    }
+  if (!isLog)
+  {
+    return (<Redirect to="/login" />);
+  } else
+  {
+    return (
+      <IonApp>
+        <IonReactRouter>
+          <IonSplitPane contentId="main">
+            <Menu changeIsLog={setIsLog} />
+            <IonRouterOutlet id="main">
+              <Route path="/dashboard" exact={true}>
+                <Redirect to="/dashboard/page/FarmableLand" />
+              </Route>
+              <Route path="/dashboard/page/FarmableLand" exact={true}>
+                <FarmableLand />
+              </Route>
+              <Route path="/dashboard/page/Setting" exact={true}>
+                <Settings />
+              </Route>
+            </IonRouterOutlet>
+          </IonSplitPane>
+        </IonReactRouter>
+      </IonApp>
+    );
+  }
 };
 
 export default Dashboard;

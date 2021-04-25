@@ -11,7 +11,7 @@ import CanvasDraw from "react-canvas-draw";
 import { getApi } from '../../../services/utils';
 import './CreateFarmableLand.css';
 
-const CreateFarmableLand: React.FC = () => {
+const CreateFarmableLand: React.FC<{ back: Function }> = ({ back }) => {
   const [message, setMessage] = useState<string>('');
   const api = getApi();
   let saveableCanvas: any = undefined;
@@ -42,27 +42,6 @@ const CreateFarmableLand: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonCard>
-          <IonImg src="https://raw.githubusercontent.com/ionic-team/ionic-docs/master/src/demos/api/card/madison.jpg" class="img-farmable-land" />
-          <IonCardHeader>
-            <IonCardSubtitle>{message}</IonCardSubtitle>
-            <IonCardTitle>{message}</IonCardTitle>
-          </IonCardHeader>
-          <IonItem>
-            <IonIcon icon={pin} slot="start" />
-            <IonLabel>{message}</IonLabel>
-            <IonButton fill="outline" slot="end">Editar</IonButton>
-          </IonItem>
-          <IonCardContent>
-            {message}
-          </IonCardContent>
-        </IonCard>
-        <CanvasDraw
-          brushRadius={3} brushColor={'#009dff'}
-          ref={canvasDraw => (saveableCanvas = canvasDraw)}
-          canvasWidth="100%"
-          canvasHeight="100%"
-        />
       </IonContent>
     </IonPage>
   );

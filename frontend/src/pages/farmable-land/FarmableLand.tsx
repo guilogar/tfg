@@ -23,16 +23,14 @@ const FarmableLand: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      setCreate(false);
-      setUpdate(false);
     })();
   });
 
   if (create)
   {
-    return(<CreateFarmableLand />);
+    return(<CreateFarmableLand back={setCreate} />);
   } else if(update) {
-    return(<UpdateFarmableLand farmableLandId={farmableLandId} />);
+    return(<UpdateFarmableLand back={setUpdate} farmableLandId={farmableLandId} />);
   } else
   return (
     <IonPage>
@@ -56,17 +54,13 @@ const FarmableLand: React.FC = () => {
                 <IonCardHeader>
                   <IonCardTitle>{farmableLand.type}</IonCardTitle>
                   <IonCardSubtitle>{farmableLand.area} m^2</IonCardSubtitle>
-                </IonCardHeader>
-                <IonItem>
-                  <IonIcon icon={pin} slot="start" />
-                  <IonLabel>{message}</IonLabel>
                   <IonButton 
                     fill="outline" slot="end"
                     onClick={() => {setUpdate(true)}}
                   >
                     Editar
                   </IonButton>
-                </IonItem>
+                </IonCardHeader>
                 <IonCardContent>
                   {message}
                 </IonCardContent>
