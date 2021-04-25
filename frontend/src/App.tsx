@@ -49,7 +49,7 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    setInterval(checkSession, 10000);
+    setInterval(checkSession, Number(process.env.REACT_APP_CHECK_SESSION_TIME));
   });
 
   const AlertSession = withRouter(({ history }) => (
