@@ -25,7 +25,7 @@ import './theme/variables.css';
 const App: React.FC = () => {
   return (
     <IonReactRouter>
-      <Route path="/" exact={true}>
+      <Route path="/*" exact={true}>
         <Redirect to="/login" />
       </Route>
       <Route path="/login" exact={true}>
