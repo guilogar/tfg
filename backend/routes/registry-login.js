@@ -30,19 +30,27 @@ router.post('/user', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    const token = await createUserAuth(
-        req.body.username, req.body.password
-    );
-
-    if(token)
+    try
     {
-        res.status(200).send({
-            token: token
-        });
-    } else
+        const token = await createUserAuth(
+            req.body.username, req.body.password
+        );
+    
+        if(token)
+        {
+            res.status(200).send({
+                token: token
+            });
+        } else
+        {
+            res.status(404).send({
+                msg: 'invalid username or password'
+            });
+        }
+    } catch(err)
     {
-        res.status(404).send({
-            msg: 'invalid username or password'
+        res.status(412).send({
+            msg: 'unexpected error'
         });
     }
 });

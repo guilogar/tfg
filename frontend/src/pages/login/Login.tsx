@@ -3,9 +3,9 @@ import { IonItem, IonLabel, IonInput, IonButton, IonIcon, IonAlert } from '@ioni
 import React, { useState } from 'react';
 import { IonGrid, IonRow, IonCol } from '@ionic/react';
 import { personCircle } from 'ionicons/icons';
+import { Redirect } from 'react-router-dom';
 
 import { getApi, login, isLogged } from '../../services/utils';
-import Dashboard from '../dashboard/Dashboard';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('test');
@@ -30,11 +30,11 @@ const Login: React.FC = () => {
     }
   };
 
-  if (isLog) {
-    return (
-      <Dashboard />
-    );
-  } else {
+  if (isLog)
+  {
+    return (<Redirect to="/dashboard" />);
+  } else
+  {
     return (
       <IonPage>
         <IonHeader>
@@ -93,7 +93,9 @@ const Login: React.FC = () => {
             </IonRow>
             <IonRow>
               <IonCol>
-                <IonButton expand='block' onClick={handleLogin}>Login</IonButton>
+                <IonButton expand='block' onClick={handleLogin}>
+                  Login
+                </IonButton>
               </IonCol>
             </IonRow>
           </IonGrid>

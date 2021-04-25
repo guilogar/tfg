@@ -4,7 +4,6 @@ import { Redirect, Route } from 'react-router-dom';
 import React, { useState } from 'react';
 import { isLogged } from '../../services/utils';
 import Menu from '../../components/Menu';
-import Login from '../../pages/login/Login';
 import Settings from '../settings/Settings';
 import FarmableLand from '../farmable-land/FarmableLand';
 
@@ -30,23 +29,20 @@ import '../../theme/variables.css';
 const Dashboard: React.FC = () => {
     const [isLog, setIsLog] = useState(isLogged());
 
-    if (!isLog) {
-        return (
-            <Login />
-        );
-    } else {
+    if (!isLog)
+    {
+        return (<Redirect to="/login" />);
+    } else
+    {
         return (
             <IonApp>
                 <IonReactRouter>
                     <IonSplitPane contentId="main">
-                        <Menu setIsLog={setIsLog} />
+                        <Menu changeIsLog={setIsLog} />
                         <IonRouterOutlet id="main">
-                            <Route path="/" exact={true}>
+                            <Route path="/dashboard" exact={true}>
                                 <Redirect to="/dashboard/page/FarmableLand" />
                             </Route>
-                            {/* <Route path="/dashboard/page/:name" exact={true}>
-                                <Page />
-                            </Route> */}
                             <Route path="/dashboard/page/FarmableLand" exact={true}>
                                 <FarmableLand />
                             </Route>

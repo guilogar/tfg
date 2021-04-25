@@ -66,9 +66,8 @@ const appPages: AppPage[] = [
   }
 ];
 
-const Menu: React.FC<{ setIsLog: Function }> = ({ setIsLog }) => {
+const Menu: React.FC<{ changeIsLog: Function }> = ({ changeIsLog }) => {
   const location = useLocation();
-
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
@@ -92,7 +91,7 @@ const Menu: React.FC<{ setIsLog: Function }> = ({ setIsLog }) => {
           <IonItem  routerLink={'/'} routerDirection="none" lines="none" detail={false}
                     onClick={() => {
                       logout();
-                      setIsLog(false);
+                      changeIsLog(false);
                     } }>
             <IonIcon slot="start" ios={logOutOutline} md={logOutOutline} />
             <IonLabel>Cerrar sesión</IonLabel>
