@@ -6,6 +6,10 @@ import { isLogged } from '../../services/utils';
 import Menu from '../../components/Menu';
 import Settings from '../settings/Settings';
 import FarmableLand from '../farmable-land/FarmableLand';
+import Crop from '../crop/Crop';
+import Events from '../events/Events';
+import MethodPay from '../method-pay/MethodPay';
+import Phytosanitary from '../phytosanitary/Phytosanitary';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -45,6 +49,18 @@ const Dashboard: React.FC = () => {
               </Route>
               <Route path="/dashboard/page/FarmableLand" exact={true}>
                 <FarmableLand />
+              </Route>
+              <Route path="/dashboard/page/Crop" exact={true}>
+                <Crop />
+              </Route>
+              <Route path="/dashboard/page/Event" exact={true}>
+                <Events />
+              </Route>
+              <Route path="/dashboard/page/MethodPay" exact={true}>
+                <MethodPay />
+              </Route>
+              <Route path="/dashboard/page/Phytosanitary" exact={true}>
+                <Phytosanitary />
               </Route>
               <Route path="/dashboard/page/Setting" exact={true}>
                 <Settings />
