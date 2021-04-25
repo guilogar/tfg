@@ -49,6 +49,7 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
+    checkSession();
     setInterval(checkSession, Number(process.env.REACT_APP_CHECK_SESSION_TIME));
   });
 
