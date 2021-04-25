@@ -43,7 +43,7 @@ const UpdateEvents: React.FC<{ farmableLandId: number, setUpdate: Function }> = 
               <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
             </IonButton>
           </IonButtons>
-          <IonTitle>EditFarmableLand</IonTitle>
+          <IonTitle>EditEvents</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>

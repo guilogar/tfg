@@ -43,7 +43,7 @@ const CreateCrop: React.FC<{ setCreate: Function }> = ({ setCreate }) => {
               <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
             </IonButton>
           </IonButtons>
-          <IonTitle>CreateFarmableLand</IonTitle>
+          <IonTitle>CreateCrop</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>

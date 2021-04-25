@@ -43,7 +43,7 @@ const UpdatePhytosanitary: React.FC<{ farmableLandId: number, setUpdate: Functio
               <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
             </IonButton>
           </IonButtons>
-          <IonTitle>EditFarmableLand</IonTitle>
+          <IonTitle>EditPhytosanitary</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>

@@ -43,7 +43,7 @@ const CreatePhytosanitary: React.FC<{ setCreate: Function }> = ({ setCreate }) =
               <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
             </IonButton>
           </IonButtons>
-          <IonTitle>CreateFarmableLand</IonTitle>
+          <IonTitle>CreatePhytosanitary</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
