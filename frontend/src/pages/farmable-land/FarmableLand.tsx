@@ -4,7 +4,7 @@ import {
   IonCardContent, IonItem, IonIcon, IonLabel, IonButton,
   IonImg, IonButtons
 } from '@ionic/react';
-import { pin, add } from 'ionicons/icons';
+import { add } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
 
 import { getApi } from '../../services/utils';
@@ -15,7 +15,6 @@ import UpdateFarmableLand from './update/UpdateFarmableLand';
 
 const FarmableLand: React.FC = () => {
   const api = getApi();
-  const [message, setMessage] = useState<string>('');
   const [create, setCreate] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
   const [farmableLandId, setFarmableLandId] = useState<number>(0);
@@ -28,9 +27,9 @@ const FarmableLand: React.FC = () => {
 
   if (create)
   {
-    return(<CreateFarmableLand back={setCreate} />);
+    return(<CreateFarmableLand setCreate={setCreate} />);
   } else if(update) {
-    return(<UpdateFarmableLand back={setUpdate} farmableLandId={farmableLandId} />);
+    return(<UpdateFarmableLand setUpdate={setUpdate} farmableLandId={farmableLandId} />);
   } else
   return (
     <IonPage>
@@ -62,7 +61,6 @@ const FarmableLand: React.FC = () => {
                   </IonButton>
                 </IonCardHeader>
                 <IonCardContent>
-                  {message}
                 </IonCardContent>
               </IonCard>
             );

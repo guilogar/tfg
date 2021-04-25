@@ -2,16 +2,16 @@ import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
   IonCardContent, IonItem, IonIcon, IonLabel, IonButton,
-  IonImg
+  IonImg, IonButtons
 } from '@ionic/react';
-import { pin } from 'ionicons/icons';
+import { arrowBack, arrowBackCircle } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
 import CanvasDraw from "react-canvas-draw";
 
 import { getApi } from '../../../services/utils';
 import './CreateFarmableLand.css';
 
-const CreateFarmableLand: React.FC<{ back: Function }> = ({ back }) => {
+const CreateFarmableLand: React.FC<{ setCreate: Function }> = ({ setCreate }) => {
   const [message, setMessage] = useState<string>('');
   const api = getApi();
   let saveableCanvas: any = undefined;
@@ -38,7 +38,12 @@ const CreateFarmableLand: React.FC<{ back: Function }> = ({ back }) => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>FarmableLand</IonTitle>
+          <IonButtons slot="start">
+            <IonButton onClick={() => {setCreate(false)}}>
+              <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
+            </IonButton>
+          </IonButtons>
+          <IonTitle>CreateFarmableLand</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>

@@ -38,7 +38,7 @@ const Dashboard: React.FC = () => {
       <IonApp>
         <IonReactRouter>
           <IonSplitPane contentId="main">
-            <Menu changeIsLog={setIsLog} />
+            <Menu setIsLog={setIsLog} />
             <IonRouterOutlet id="main">
               <Route path="/dashboard" exact={true}>
                 <Redirect to="/dashboard/page/FarmableLand" />
