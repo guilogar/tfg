@@ -1,7 +1,11 @@
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { IonAlert } from '@ionic/react';
+import { withRouter } from 'react-router-dom';
 import Login from './pages/login/Login';
 import Dashboard from './pages/dashboard/Dashboard';
+import { getApi, isLogged, getSessionId, logout } from './services/utils';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -23,22 +27,83 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 const App: React.FC = () => {
-  return (
-    <IonReactRouter>
-      <Route path="/*" exact={true}>
-        <Redirect to="/login" />
-      </Route>
-      <Route path="/login" exact={true}>
-        <Login />
-      </Route>
-      <Route path="/dashboard/*" exact={true}>
-        <Redirect to="/dashboard" />
-      </Route>
-      <Route path="/dashboard" exact={true}>
-        <Dashboard />
-      </Route>
-    </IonReactRouter>
-  );
+  const api = getApi();
+  let [isLog, setIsLog] = useState(isLogged());
+  const [showAlert, setShowAlert] = useState(false);
+
+  const checkSession = async () => {
+    isLog = isLogged();
+    if (isLog) {
+      try {
+        const { data } = await api.post('/sessionValid', {
+          token: getSessionId()
+        });
+        setIsLog(true);
+        setShowAlert(false);
+      } catch(err) {
+        logout();
+        setIsLog(false);
+        setShowAlert(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    setInterval(checkSession, 10000);
+  });
+
+  const AlertSession = withRouter(({ history }) => (
+    <IonAlert
+      isOpen={showAlert}
+      onDidDismiss={() => {
+        history.push('/login');
+        setShowAlert(false);
+      }}
+      cssClass='my-custom-class'
+      header={'Session expired'}
+      subHeader={'need re-login'}
+      message={'La sesión ha expirado. Por favor, vuelva a iniciar sesión. Gracias.'}
+      buttons={['OK']}
+    />
+  ));
+
+  if(!isLog) {
+    return (
+      <IonReactRouter>
+        <AlertSession />
+        <Redirect to="/" push={true} exact={true} />
+        <Route path="/*" exact={true}>
+          <Redirect to="/login" />
+        </Route>
+        <Route path="/login" exact={true}>
+          <Login />
+        </Route>
+        <Route path="/dashboard/*" exact={true}>
+          <Redirect to="/dashboard" />
+        </Route>
+        <Route path="/dashboard" exact={true}>
+          <Dashboard />
+        </Route>
+      </IonReactRouter>
+    );
+  } else {
+    return (
+      <IonReactRouter>
+        <Route path="/*" exact={true}>
+          <Redirect to="/login" />
+        </Route>
+        <Route path="/login" exact={true}>
+          <Login />
+        </Route>
+        <Route path="/dashboard/*" exact={true}>
+          <Redirect to="/dashboard" />
+        </Route>
+        <Route path="/dashboard" exact={true}>
+          <Dashboard />
+        </Route>
+      </IonReactRouter>
+    );
+  }
 };
 
 export default App;
