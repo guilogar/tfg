@@ -8,14 +8,15 @@ import { Redirect } from 'react-router-dom';
 import { getApi, login, isLogged } from '../../services/utils';
 
 const Login: React.FC = () => {
+  const api = getApi();
   const [email, setEmail] = useState<string>('test');
   const [password, setPassword] = useState<string>('test');
   const [iserror, setIserror] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
   const [isLog, setIsLog] = useState(isLogged());
-  const api = getApi();
 
-  const handleLogin = async () => {
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
     try {
       const { data } = await api.post('/login', {
         username: email,
@@ -44,60 +45,62 @@ const Login: React.FC = () => {
         </IonHeader>
         <IonContent fullscreen className='ion-padding ion-text-center'>
           <IonGrid>
-          <IonRow>
-            <IonCol>
-              <IonAlert
-                isOpen={iserror}
-                onDidDismiss={() => setIserror(false)}
-                cssClass='my-custom-class'
-                header={'Error!'}
-                message={message}
-                buttons={['Dismiss']}
-              />
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol>
-              <IonIcon
-                style={{ fontSize: '70px', color: '#0040ff' }}
-                icon={personCircle}
-              />
-            </IonCol>
-          </IonRow>
-            <IonRow>
-              <IonCol>
-              <IonItem>
-              <IonLabel position='floating'> Email</IonLabel>
-              <IonInput
-                type='email'
-                value={email}
-                onIonChange={(e) => setEmail(e.detail.value!)}
-              >
-              </IonInput>
-              </IonItem>
-              </IonCol>
-            </IonRow>
+            <form className="ion-padding" onSubmit={(event) => { handleSubmit(event) }}>
+              <IonRow>
+                <IonCol>
+                  <IonAlert
+                    isOpen={iserror}
+                    onDidDismiss={() => setIserror(false)}
+                    cssClass='my-custom-class'
+                    header={'Error!'}
+                    message={message}
+                    buttons={['Dismiss']}
+                  />
+                </IonCol>
+              </IonRow>
+              <IonRow>
+                <IonCol>
+                  <IonIcon
+                    style={{ fontSize: '70px', color: '#0040ff' }}
+                    icon={personCircle}
+                  />
+                </IonCol>
+              </IonRow>
+              <IonRow>
+                <IonCol>
+                  <IonItem>
+                    <IonLabel position='floating'> Email</IonLabel>
+                    <IonInput
+                      type='text'
+                      value={email}
+                      onIonChange={(e) => setEmail(e.detail.value!)}
+                    >
+                    </IonInput>
+                  </IonItem>
+                </IonCol>
+              </IonRow>
 
-            <IonRow>
-              <IonCol>
-              <IonItem>
-                <IonLabel position='floating'> Password</IonLabel>
-                <IonInput
-                  type='password'
-                  value={password}
-                  onIonChange={(e) => setPassword(e.detail.value!)}
-                >
-                </IonInput>
-              </IonItem>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <IonCol>
-                <IonButton expand='block' onClick={handleLogin}>
-                  Login
-                </IonButton>
-              </IonCol>
-            </IonRow>
+              <IonRow>
+                <IonCol>
+                  <IonItem>
+                    <IonLabel position='floating'> Password</IonLabel>
+                    <IonInput
+                      type='password'
+                      value={password}
+                      onIonChange={(e) => setPassword(e.detail.value!)}
+                    >
+                    </IonInput>
+                  </IonItem>
+                </IonCol>
+              </IonRow>
+              <IonRow>
+                <IonCol>
+                  <IonButton expand='block' type="submit">
+                    Login
+                  </IonButton>
+                </IonCol>
+              </IonRow>
+            </form>
           </IonGrid>
         </IonContent>
       </IonPage>

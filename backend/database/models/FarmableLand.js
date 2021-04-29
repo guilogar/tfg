@@ -2,7 +2,6 @@ const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../sequelize');
 const User = require('./User');
-const Auth = require('./Auth');
 
 class FarmableLand extends Model {}
 

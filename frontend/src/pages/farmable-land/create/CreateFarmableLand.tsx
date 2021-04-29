@@ -2,7 +2,8 @@ import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
   IonCardContent, IonItem, IonIcon, IonLabel, IonButton,
-  IonImg, IonButtons
+  IonImg, IonButtons, IonInput, IonCheckbox, IonSelect,
+  IonSelectOption
 } from '@ionic/react';
 import { arrowBack, arrowBackCircle } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
@@ -12,27 +13,37 @@ import { getApi } from '../../../services/utils';
 import './CreateFarmableLand.css';
 
 const CreateFarmableLand: React.FC<{ setCreate: Function }> = ({ setCreate }) => {
-  const [message, setMessage] = useState<string>('');
   const api = getApi();
-  let saveableCanvas: any = undefined;
+  const [typeRef, setTypeRef] = useState<HTMLIonSelectElement | null>(null);
+  const [areaRef, setAreaRef] = useState<HTMLIonInputElement | null>(null);
+  const [imageRef, setImageRef] = useState<HTMLInputElement | null>(null);
+  const [haveIOTRef, setHaveIOTRef] = useState<HTMLIonCheckboxElement | null>(null);
+  const [isSquareRef, setIsSquareRef] = useState<HTMLIonCheckboxElement | null>(null);
+  const [haveImage, setHaveImage] = useState<boolean>(true);
+  const [isSquare, setIsSquare] = useState<boolean>(true);
+
+  const [types, setTypes] = useState<Array<string>>([]);
+  const [canvas, setCanvas] = useState<any>();
+  // const canvasData = canvas.getSaveData();
+  // canvas.loadSaveData(canvasData);
+  // canvas.undo();
+  // canvas.clear();
 
   useEffect(() => {
     (async () => {
       const { data } = await api.get('/farmableLandTypes');
-
-      let msg = '';
-      for (const type of data.types) {
-        msg += type + ', ';
-      }
-      setMessage(msg);
-      console.log(data);
-      
-      // const canvasData = saveableCanvas.getSaveData();
-      // saveableCanvas.loadSaveData(canvasData);
-      // saveableCanvas.undo();
-      // saveableCanvas.clear();
+      setTypes(data.types);
     })();
-  });
+  }, []);
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    try {
+
+    } catch(err) {
+
+    }
+  };
 
   return (
     <IonPage>
@@ -47,6 +58,100 @@ const CreateFarmableLand: React.FC<{ setCreate: Function }> = ({ setCreate }) =>
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <form className="ion-padding" onSubmit={(event) => { handleSubmit(event) }}>
+          <IonItem>
+            <IonLabel position="floating">Tipo</IonLabel>
+            <IonSelect
+              ref={(typeRef) => { setTypeRef(typeRef) }}
+              name="type"
+            >
+              {
+                types.map((type, index) => {
+                  return (
+                    <IonSelectOption value={type} key={index}>
+                      {type}
+                    </IonSelectOption>
+                  );
+                })
+              }
+            </IonSelect>
+          </IonItem>
+          <IonItem>
+            <IonLabel position="floating">Area (m2)</IonLabel>
+            <IonInput
+              ref={(areaRef) => { setAreaRef(areaRef) }}
+              type="number" name="area"
+            />
+          </IonItem>
+          {
+            haveImage
+            &&
+            <IonItem>
+              <IonLabel>Imagen</IonLabel>
+              <input
+                ref={(imageRef) => { setImageRef(imageRef) }}
+                name="image"
+                type="file"
+                accept="image/*"
+                onChange={() => {}}
+                onClick={() => {}}
+              />
+            </IonItem>
+          }
+          {
+            !isSquare
+            &&
+            <div>
+              <IonItem>
+                <IonLabel>
+                  Al no ser el terreno rectangular, por favor,
+                  dibuje la forma que tiene el mismo
+                  (es solo para tener por parte de la administracion
+                  una idea de como es el terreno)
+                </IonLabel>
+              </IonItem>
+              <IonItem>
+                <CanvasDraw
+                  ref={(canvas) => { setCanvas(canvas) }}
+                  canvasWidth='100%'
+                  canvasHeight='400px'
+                />
+              </IonItem>
+            </div>
+          }
+          <IonItem lines="none">
+            <IonLabel>Agregar sistema de IOT</IonLabel>
+            <IonCheckbox
+              ref={(haveIOTRef) => { setHaveIOTRef(haveIOTRef) }}
+              checked={true} slot="start" name="haveIOT"
+            />
+          </IonItem>
+          <IonItem lines="none">
+            <IonLabel>Tengo foto aerea o plano del terreno</IonLabel>
+            <IonCheckbox
+              onClick={() => {
+                setHaveImage(!haveImage);
+                setIsSquare(true);
+              }}
+              checked={haveImage} slot="start" name="haveImage"
+            />
+          </IonItem>
+          {
+            !haveImage
+            &&
+            <IonItem lines="none">
+              <IonLabel>El terreno tiene forma de cuadrado o rectangulo</IonLabel>
+              <IonCheckbox
+                ref={(isSquareRef) => { setIsSquareRef(isSquareRef) }}
+                onClick={() => { setIsSquare(!isSquare) }}
+                checked={isSquare} slot="start" name="isSquare"
+              />
+            </IonItem>
+          }
+          <IonButton className="ion-margin-top" type="submit" expand="block">
+            Login
+          </IonButton>
+        </form>
       </IonContent>
     </IonPage>
   );
