@@ -9,7 +9,7 @@ import { arrowBack, arrowBackCircle } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
 import CanvasDraw from "react-canvas-draw";
 
-import { getApi } from '../../../services/utils';
+import { getApi, inputToDataURL } from '../../../services/utils';
 import './CreateFarmableLand.css';
 
 const CreateFarmableLand: React.FC<{ setCreate: Function }> = ({ setCreate }) => {
@@ -23,7 +23,7 @@ const CreateFarmableLand: React.FC<{ setCreate: Function }> = ({ setCreate }) =>
   const [isSquare, setIsSquare] = useState<boolean>(true);
 
   const [types, setTypes] = useState<Array<string>>([]);
-  const [canvas, setCanvas] = useState<any>();
+  const [canvas, setCanvas] = useState<CanvasDraw | null>();
   // const canvasData = canvas.getSaveData();
   // canvas.loadSaveData(canvasData);
   // canvas.undo();
@@ -39,9 +39,25 @@ const CreateFarmableLand: React.FC<{ setCreate: Function }> = ({ setCreate }) =>
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     try {
+      let image = null;
+      if (haveImage) {
+        image = await inputToDataURL(imageRef);
+      } else if(!isSquare) {
+        const canvasElements = document.getElementsByTagName('canvas');
+        const canvasElement = canvasElements?.item(1);
+        image = canvasElement?.toDataURL();
+      }
 
+      const farmableLand: any = {
+        type: (typeRef?.value) ? typeRef?.value : null,
+        image: image,
+        haveIOT: haveIOTRef?.checked,
+        area: (areaRef?.value) ? Number(areaRef?.value) : null,
+        isSquare: isSquareRef?.checked,
+      };
+      await api.post('/farmableLand', farmableLand);
     } catch(err) {
-
+      console.log(err);
     }
   };
 
@@ -80,7 +96,7 @@ const CreateFarmableLand: React.FC<{ setCreate: Function }> = ({ setCreate }) =>
             <IonLabel position="floating">Area (m2)</IonLabel>
             <IonInput
               ref={(areaRef) => { setAreaRef(areaRef) }}
-              type="number" name="area"
+              type="number" name="area" step="any"
             />
           </IonItem>
           {

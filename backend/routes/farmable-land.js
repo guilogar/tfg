@@ -3,7 +3,6 @@
 const express = require('express');
 const router = express.Router();
 
-const User = require('../database/models/User');
 const FarmableLand = require('../database/models/FarmableLand');
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
 
@@ -14,17 +13,16 @@ router.get('/farmableLand', async (req, res) => {
   const user = await getUserFromJwt(jwt);
 
   const where = (id) ? {
-    UserId: user.id, 
+    UserId: user.id,
     id: id
   } : {
     UserId: user.id
   };
-  const farmableLands = await User.findAll({
+  const farmableLands = await FarmableLand.findAll({
     where: where
   });
 
   res.status(200).send({
-    msg: 'got it!',
     lands: farmableLands
   });
 });
@@ -41,7 +39,7 @@ router.get('/farmableLandTypes', async (req, res) => {
 router.post('/farmableLand', async (req, res) => {
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
-  
+
   const farmableLand = await FarmableLand.create({
     type: req.body.type,
     image: req.body.image,
@@ -58,7 +56,7 @@ router.post('/farmableLand', async (req, res) => {
 
 router.put('/farmableLand/:id', async (req, res) => {
   const id = req.params.id;
-  
+
   let farmableLand = await FarmableLand.findOne({
     where: {
       id: id

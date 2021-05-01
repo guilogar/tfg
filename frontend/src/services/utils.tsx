@@ -26,3 +26,24 @@ export const getApi = () : any => {
     headers: headers
   });
 };
+
+export const inputToDataURL = (input: any) : Promise<any> => {
+  const reader = new FileReader();
+
+  return new Promise((resolve, reject) => {
+    if (!input.files || !input.files[0])
+    {
+      reject(new DOMException("Error loading the images of file"));
+    }
+
+    reader.onerror = () => {
+      reader.abort();
+      reject(new DOMException("Problem parsing input file"));
+    };
+
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+    reader.readAsDataURL(input.files[0]);
+  });
+};
