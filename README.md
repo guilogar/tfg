@@ -29,6 +29,38 @@ The database must be a postgresql database, also see the docker-composer.yml
 psql postgres://smartrural:smartrural@127.0.0.1:5432/smartrural
 ```
 
+## Firebase support
+### backend/firebaseServiceAccount.json
+```
+{
+  "type": "service_account",
+  "project_id": "",
+  "private_key_id": "",
+  "private_key": "",
+  "client_email": "",
+  "client_id": "",
+  "auth_uri": "",
+  "token_uri": "",
+  "auth_provider_x509_cert_url": "",
+  "client_x509_cert_url": ""
+}
+```
+Complete with your info in the file
+
+### frontend/android/app/google-services.json
+```
+{
+  "project_info": {
+    "project_number": "",
+    "project_id": "",
+    "storage_bucket": ""
+  },
+  "client": [...],
+  "configuration_version": ""
+}
+```
+Complete with your info in the file
+
 ## Start backend
 ```
 cd backend
