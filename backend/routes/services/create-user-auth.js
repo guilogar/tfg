@@ -1,11 +1,12 @@
 const User = require('../../database/models/User');
 const Auth = require('../../database/models/Auth');
+const FirebaseToken = require('../../database/models/FirebaseToken');
 const { Op } = require("sequelize");
 const { setPassword } = require('../../utils/password');
 const { generateToken } = require('../../utils/jwt');
 const { sumHourToDate } = require('../../utils/date');
 
-const createUserAuth = async (username, password) => {
+const createUserAuth = async (username, password, firebaseToken) => {
     let user = await User.findOne({
         where: {
             username: username
@@ -35,7 +36,7 @@ const createUserAuth = async (username, password) => {
                 }
             }
         });
-        
+
         if(!auth || !auth.isValid())
         {
             // 1 * 60 * 60 * 1000 = 1 hour
@@ -48,6 +49,22 @@ const createUserAuth = async (username, password) => {
                 expires: sumHourToDate(new Date(), 1),
                 UserId: user.id
             });
+        }
+
+        if(firebaseToken)
+        {
+          const firebase = await FirebaseToken.findOne({
+            where: {
+              token: firebaseToken
+            }
+          });
+
+          if(!firebase) {
+            await FirebaseToken.create({
+              token: firebaseToken,
+              UserId: user.id
+            });
+          }
         }
 
         token = auth.jwt;

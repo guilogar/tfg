@@ -1,4 +1,10 @@
 import axios from "axios";
+import {
+  Plugins,
+  PushNotification,
+  PushNotificationToken,
+  PushNotificationActionPerformed
+} from '@capacitor/core';
 
 export const login = (sessionId: string) : void => {
   localStorage.setItem('sessionId', sessionId);
@@ -46,4 +52,39 @@ export const inputToDataURL = (input: any) : Promise<any> => {
     };
     reader.readAsDataURL(input.files[0]);
   });
+};
+
+export const pushNotifications = async () => {
+  const { PushNotifications } = Plugins;
+
+  const result = await PushNotifications.requestPermission();
+  if (result.granted) {
+    // Register with Apple / Google to receive push via APNS/FCM
+    PushNotifications.register();
+  }
+
+  PushNotifications.addListener(
+    'registration',
+    (token: PushNotificationToken) => {
+      try {
+        localStorage.setItem('pushNotificationToken', token.value);
+      } catch (error) {
+        alert('error on save pushNotificationToken');
+      }
+    },
+  );
+
+  PushNotifications.addListener(
+    'pushNotificationReceived',
+    (notification: PushNotification) => {
+      alert('Push received: ' + JSON.stringify(notification));
+    },
+  );
+
+  PushNotifications.addListener(
+    'pushNotificationActionPerformed',
+    (notification: PushNotificationActionPerformed) => {
+      alert('Push action performed: ' + JSON.stringify(notification));
+    },
+  );
 };

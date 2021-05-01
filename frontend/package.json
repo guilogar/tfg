@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "./",
   "dependencies": {
+    "@capacitor/android": "^2.4.7",
     "@capacitor/core": "2.4.7",
     "@ionic/react": "^5.5.0",
     "@ionic/react-router": "^5.5.0",

@@ -35,29 +35,30 @@ router.post('/user', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    try
+  try
+  {
+    const token = await createUserAuth(
+      req.body.username, req.body.password,
+      req.body.firebaseToken
+    );
+
+    if(token)
     {
-        const token = await createUserAuth(
-            req.body.username, req.body.password
-        );
-    
-        if(token)
-        {
-            res.status(200).send({
-                token: token
-            });
-        } else
-        {
-            res.status(404).send({
-                msg: 'invalid username or password'
-            });
-        }
-    } catch(err)
+      res.status(200).send({
+        token: token
+      });
+    } else
     {
-        res.status(412).send({
-            msg: 'unexpected error'
-        });
+      res.status(404).send({
+        msg: 'invalid username or password'
+      });
     }
+  } catch(err)
+  {
+    res.status(412).send({
+      msg: 'unexpected error'
+    });
+  }
 });
 
 router.post('/sessionValid', async (req, res) => {

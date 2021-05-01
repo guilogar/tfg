@@ -5,7 +5,10 @@ import { IonAlert } from '@ionic/react';
 import { withRouter } from 'react-router-dom';
 import Login from './pages/login/Login';
 import Dashboard from './pages/dashboard/Dashboard';
-import { getApi, isLogged, getSessionId, logout } from './services/utils';
+import {
+  getApi, isLogged, getSessionId, logout,
+  pushNotifications
+} from './services/utils';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -35,7 +38,7 @@ const App: React.FC = () => {
     isLog = isLogged();
     if (isLog) {
       try {
-        const { data } = await api.post('/sessionValid', {
+        await api.post('/sessionValid', {
           token: getSessionId()
         });
         setIsLog(true);
@@ -49,6 +52,7 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
+    pushNotifications();
     checkSession();
     setInterval(checkSession, Number(process.env.REACT_APP_CHECK_SESSION_TIME));
   });

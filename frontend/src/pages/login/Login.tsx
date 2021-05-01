@@ -18,9 +18,11 @@ const Login: React.FC = () => {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     try {
+      const firebaseToken = localStorage.getItem('pushNotificationToken');
       const { data } = await api.post('/login', {
         username: email,
-        password: password
+        password: password,
+        firebaseToken: (firebaseToken) ? firebaseToken : null
       });
       login(data.token);
       setIsLog(true);
