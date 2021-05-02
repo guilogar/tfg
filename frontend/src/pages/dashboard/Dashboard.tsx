@@ -33,6 +33,8 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import '../../theme/variables.css';
+import CreateFarmableLand from '../farmable-land/create/CreateFarmableLand';
+import UpdateFarmableLand from '../farmable-land/update/UpdateFarmableLand';
 
 const Dashboard: React.FC = () => {
   const [isLog, setIsLog] = useState(isLogged());
@@ -73,6 +75,13 @@ const Dashboard: React.FC = () => {
             </Route>
             <Route path="/dashboard/page/FarmableLand" exact={true}>
               <FarmableLand />
+            </Route>
+            <Route path="/dashboard/page/FarmableLand/create" exact={true}>
+              <CreateFarmableLand />
+            </Route>
+            <Route
+                  path="/dashboard/page/FarmableLand/:id/update"
+                  exact={true} component={UpdateFarmableLand}>
             </Route>
             <Route path="/dashboard/page/Crop" exact={true}>
               <Crop />

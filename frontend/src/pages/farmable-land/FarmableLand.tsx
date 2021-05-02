@@ -12,6 +12,7 @@ import './FarmableLand.css';
 
 import CreateFarmableLand from './create/CreateFarmableLand';
 import UpdateFarmableLand from './update/UpdateFarmableLand';
+import { Redirect } from 'react-router';
 
 const FarmableLand: React.FC = () => {
   const api = getApi();
@@ -27,14 +28,18 @@ const FarmableLand: React.FC = () => {
     })();
   }, []);
 
-  if (create)
-  {
-    return(<CreateFarmableLand setCreate={setCreate} />);
-  } else if(update) {
-    return(<UpdateFarmableLand setUpdate={setUpdate} farmableLandId={farmableLandId} />);
-  } else
   return (
     <IonPage>
+      {
+        create
+        &&
+        <Redirect to="/dashboard/page/FarmableLand/create" push={true} exact={true} />
+      }
+      {
+        update
+        &&
+        <Redirect to="/dashboard/page/FarmableLand/:id/update" push={true} exact={true} />
+      }
       <IonHeader>
         <IonToolbar>
           <IonTitle>FarmableLand</IonTitle>

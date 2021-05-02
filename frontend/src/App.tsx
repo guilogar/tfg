@@ -1,5 +1,5 @@
 import { IonReactRouter } from '@ionic/react-router';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { IonAlert } from '@ionic/react';
 import { withRouter } from 'react-router-dom';
@@ -83,21 +83,24 @@ const App: React.FC = () => {
           <Redirect to="/login" exact={true} />
         </div>
       }
-      <Route path="/" exact={true}>
-        <Redirect to="/login" exact={true} />
-      </Route>
-      <Route path="/login" exact={true}>
-        <Login />
-      </Route>
-      <Route path="/dashboard/*" exact={true}>
-        <Redirect to="/dashboard" />
-      </Route>
-      <Route path="/dashboard" exact={true}>
-        <Dashboard />
-      </Route>
-      <Route path="/dashboard/page/FarmableLand" exact={true}>
-        <FarmableLand />
-      </Route>
+      <Switch>
+        <Route path="/" exact={true}>
+          <Redirect to="/login" exact={true} />
+        </Route>
+        <Route path="/login" exact={true}>
+          <Login />
+        </Route>
+        <Route path="/dashboard/*" exact={true}>
+          <Dashboard />
+        </Route>
+        <Route path="/dashboard" exact={true}>
+          <Dashboard />
+        </Route>
+        <Route path="/dashboard/page/FarmableLand" exact={true}>
+          <FarmableLand />
+        </Route>
+        <Route component={Login} />
+      </Switch>
     </IonReactRouter>
   );
 };

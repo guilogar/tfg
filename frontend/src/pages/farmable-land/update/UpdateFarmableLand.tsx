@@ -11,7 +11,7 @@ import CanvasDraw from "react-canvas-draw";
 import { getApi } from '../../../services/utils';
 import './UpdateFarmableLand.css';
 
-const UpdateFarmableLand: React.FC<{ farmableLandId: number, setUpdate: Function }> = ( { farmableLandId, setUpdate } ) => {
+const UpdateFarmableLand: React.FC = () => {
   const [message, setMessage] = useState<string>('');
   const api = getApi();
   let saveableCanvas: any = undefined;
@@ -40,7 +40,7 @@ const UpdateFarmableLand: React.FC<{ farmableLandId: number, setUpdate: Function
         <IonToolbar>
           <IonButtons slot="start">
             <IonMenuButton />
-            <IonButton onClick={() => {setUpdate(false)}}>
+            <IonButton onClick={() => {}}>
               <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
             </IonButton>
           </IonButtons>

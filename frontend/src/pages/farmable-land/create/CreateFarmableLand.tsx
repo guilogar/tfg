@@ -11,7 +11,7 @@ import CanvasDraw from "react-canvas-draw";
 import { getApi, inputToDataURL } from '../../../services/utils';
 import './CreateFarmableLand.css';
 
-const CreateFarmableLand: React.FC<{ setCreate: Function }> = ({ setCreate }) => {
+const CreateFarmableLand: React.FC = () => {
   const api = getApi();
   const [typeRef, setTypeRef] = useState<HTMLIonSelectElement | null>(null);
   const [areaRef, setAreaRef] = useState<HTMLIonInputElement | null>(null);
@@ -66,7 +66,7 @@ const CreateFarmableLand: React.FC<{ setCreate: Function }> = ({ setCreate }) =>
         <IonToolbar>
           <IonButtons slot="start">
             <IonMenuButton />
-            <IonButton onClick={() => {setCreate(false)}}>
+            <IonButton onClick={() => {}}>
               <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
             </IonButton>
           </IonButtons>
@@ -165,7 +165,7 @@ const CreateFarmableLand: React.FC<{ setCreate: Function }> = ({ setCreate }) =>
             </IonItem>
           }
           <IonButton className="ion-margin-top" type="submit" expand="block">
-            Login
+            Crear
           </IonButton>
         </form>
       </IonContent>
