@@ -3,7 +3,7 @@ import {
 } from '@ionic/react';
 
 import { IonReactRouter } from '@ionic/react-router';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import React, { useState } from 'react';
 import { isLogged, getWindowDimensions } from '../../services/utils';
 import Menu from '../../components/Menu';
@@ -63,40 +63,45 @@ const Dashboard: React.FC = () => {
         <IonSplitPane contentId="main">
           <Menu setIsLog={setIsLog} reduceFormat={width < 1024} />
           <IonRouterOutlet id="main">
-            <Route path="/dashboard" exact={true}>
-              {
-                (width < 1024)
-                &&
-                <Redirect to="/dashboard/page/Home" push={true} exact={true} />
-              }
-            </Route>
-            <Route path="/dashboard/page/Home" exact={true}>
-              <Home />
-            </Route>
-            <Route path="/dashboard/page/FarmableLand" exact={true}>
-              <FarmableLand />
-            </Route>
-            <Route path="/dashboard/page/FarmableLand/create" exact={true}>
-              <CreateFarmableLand />
-            </Route>
-            <Route path="/dashboard/page/FarmableLand/:id/update" exact={true}>
-              <UpdateFarmableLand />
-            </Route>
-            <Route path="/dashboard/page/Crop" exact={true}>
-              <Crop />
-            </Route>
-            <Route path="/dashboard/page/Event" exact={true}>
-              <Events />
-            </Route>
-            <Route path="/dashboard/page/MethodPay" exact={true}>
-              <MethodPay />
-            </Route>
-            <Route path="/dashboard/page/Phytosanitary" exact={true}>
-              <Phytosanitary />
-            </Route>
-            <Route path="/dashboard/page/Setting" exact={true}>
-              <Settings />
-            </Route>
+            <Switch>
+              <Route path="/dashboard" exact={true}>
+                {
+                  (width < 1024)
+                  &&
+                  <Redirect to="/dashboard/page/Home" push={true} exact={true} />
+                }
+              </Route>
+              <Route path="/dashboard/page/Home" exact={true}>
+                <Home />
+              </Route>
+              <Route path="/dashboard/page/FarmableLand" exact={true}>
+                <FarmableLand />
+              </Route>
+              <Route path="/dashboard/page/FarmableLand/create" exact={true}>
+                <CreateFarmableLand />
+              </Route>
+              <Route path="/dashboard/page/FarmableLand/:id/update" exact={true}>
+                <UpdateFarmableLand />
+              </Route>
+              <Route path="/dashboard/page/Crop" exact={true}>
+                <Crop />
+              </Route>
+              <Route path="/dashboard/page/Event" exact={true}>
+                <Events />
+              </Route>
+              <Route path="/dashboard/page/MethodPay" exact={true}>
+                <MethodPay />
+              </Route>
+              <Route path="/dashboard/page/Phytosanitary" exact={true}>
+                <Phytosanitary />
+              </Route>
+              <Route path="/dashboard/page/Setting" exact={true}>
+                <Settings />
+              </Route>
+              <Route>
+                <Redirect to="/dashboard" push={true} exact={true} />
+              </Route>
+            </Switch>
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
