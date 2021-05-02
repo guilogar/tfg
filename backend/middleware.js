@@ -45,23 +45,25 @@ const middleware = async (req, res, next) => {
         }
     } catch(err)
     {
-        res.status(401).send({
-            msg: (Object.keys(err).length === 0) ? 'token not send' : err
-        });
+      res.status(401).send({
+        msg: (Object.keys(err).length === 0) ? 'token not send' : err
+      });
     }
 }
 
 const unless = (paths, middleware) => {
-    return (req, res, next) => {
-        for (const path of paths)
-        {
-            if(path.path === req.path && path.method === req.method)
-                return next();
-        }
-        return middleware(req, res, next);
-    };
+  return (req, res, next) => {
+    // res.setHeader('Access-Control-Allow-Origin', '*');
+    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    for (const path of paths)
+    {
+      if(path.path === req.path && path.method === req.method)
+        return next();
+    }
+    return middleware(req, res, next);
+  };
 };
 
 module.exports = {
-    middleware, unless
+  middleware, unless
 };
