@@ -57,12 +57,6 @@ export const inputToDataURL = (input: any) : Promise<any> => {
 export const pushNotifications = async () => {
   const { PushNotifications } = Plugins;
 
-  const result = await PushNotifications.requestPermission();
-  if (result.granted) {
-    // Register with Apple / Google to receive push via APNS/FCM
-    PushNotifications.register();
-  }
-
   PushNotifications.addListener(
     'registration',
     (token: PushNotificationToken) => {
@@ -87,6 +81,10 @@ export const pushNotifications = async () => {
       alert('Push action performed: ' + JSON.stringify(notification));
     },
   );
+
+  const result = await PushNotifications.requestPermission();
+  // Register with Apple / Google to receive push via APNS/FCM
+  if (result.granted) PushNotifications.register();
 };
 
 export const getWindowDimensions = () => {
