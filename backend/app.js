@@ -39,6 +39,14 @@ const sequelize = require('./database/sequelize');
   await sequelize.sync();
 })();
 
+// const { sendNotificationToUser } = require('./routes/services/send-notification-to-user');
+// (async () => {
+//   await sendNotificationToUser(1, {
+//     title: 'Evento X',
+//     body: 'El Evento X ha sido disparado. Clicke aquí para mas información'
+//   });
+// })();
+
 const server = http.createServer(app);
 server.listen(PORT, function() {
     console.log('Server up and running on localhost:' + PORT);

@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { sendNotificationToUser } = require('./routes/services/send-notification-to-user');
+const { sendNotificationToUser } = require('./services/send-notification-to-user');
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
 
 router.get('/notification', async (req, res) => {
