@@ -7,7 +7,7 @@ import Login from './pages/login/Login';
 import Dashboard from './pages/dashboard/Dashboard';
 import {
   getApi, isLogged, getSessionId, logout,
-  pushNotifications
+  pushNotifications, backButtonNative
 } from './services/utils';
 
 /* Core CSS required for Ionic components to work properly */
@@ -53,10 +53,11 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
+    backButtonNative();
     pushNotifications();
     checkSession();
     setInterval(checkSession, Number(process.env.REACT_APP_CHECK_SESSION_TIME));
-  });
+  }, []);
 
   const AlertSession = withRouter(({ history }) => (
     <IonAlert

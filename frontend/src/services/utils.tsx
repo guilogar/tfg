@@ -1,6 +1,6 @@
 import axios from "axios";
 import {
-  Plugins,
+  Plugins, Capacitor,
   PushNotification,
   PushNotificationToken,
   PushNotificationActionPerformed
@@ -92,4 +92,17 @@ export const pushNotifications = async () => {
 export const getWindowDimensions = () => {
   const { innerWidth: width, innerHeight: height } = window;
   return { width, height };
+};
+
+export const backButtonNative = () => {
+  if (Capacitor.isNative) {
+    Plugins.App.addListener("backButton", (e) => {
+      const paths = [
+        '/login', '/dashboard', '/dashboard/page/Home'
+      ];
+      if (paths.includes(window.location.pathname)) {
+        Plugins.App.exitApp();
+      }
+    });
+  }
 };
