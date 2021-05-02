@@ -1,6 +1,11 @@
 # tfg
 Repository for make final degree project
 
+## To Compile new Stream Analytic Job's
+```
+Install dotnet https://dotnet.microsoft.com/download
+```
+
 ## Create a .env for environment variables
 ### backend/.env
 ```
