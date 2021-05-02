@@ -1,12 +1,13 @@
 # tfg
 Repository for make final degree project
 
-## To Compile new Stream Analytic Job's
+## To Create and Compile new Stream Analytic Job's
 ```
 Install dotnet
-
-https://dotnet.microsoft.com/download
 https://dotnet.microsoft.com/download/dotnet/3.0/runtime/?utm_source=getdotnetcore&utm_medium=referral
+
+See this guide:
+https://docs.microsoft.com/en-us/azure/stream-analytics/quick-create-visual-studio-code
 ```
 
 ## Create a .env for environment variables
