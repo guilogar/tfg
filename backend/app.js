@@ -33,6 +33,14 @@ app.use(baseAPI, registryLogin);
 app.use(baseAPI, users);
 app.use(baseAPI, farmableLand);
 
+const sequelize = require('./database/sequelize');
+
+(async () => {
+  await sequelize.sync({
+    force: true
+  });
+})();
+
 const server = http.createServer(app);
 server.listen(PORT, function() {
     console.log('Server up and running on localhost:' + PORT);
