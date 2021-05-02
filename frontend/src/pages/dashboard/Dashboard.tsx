@@ -35,6 +35,7 @@ import '@ionic/react/css/display.css';
 import '../../theme/variables.css';
 import CreateFarmableLand from '../farmable-land/create/CreateFarmableLand';
 import UpdateFarmableLand from '../farmable-land/update/UpdateFarmableLand';
+import Login from '../login/Login';
 
 const Dashboard: React.FC = () => {
   const [isLog, setIsLog] = useState(isLogged());
@@ -97,9 +98,6 @@ const Dashboard: React.FC = () => {
               </Route>
               <Route path="/dashboard/page/Setting" exact={true}>
                 <Settings />
-              </Route>
-              <Route>
-                <Redirect to="/dashboard" push={true} exact={true} />
               </Route>
             </Switch>
           </IonRouterOutlet>
