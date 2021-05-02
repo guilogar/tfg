@@ -79,9 +79,8 @@ const Dashboard: React.FC = () => {
             <Route path="/dashboard/page/FarmableLand/create" exact={true}>
               <CreateFarmableLand />
             </Route>
-            <Route
-                  path="/dashboard/page/FarmableLand/:id/update"
-                  exact={true} component={UpdateFarmableLand}>
+            <Route path="/dashboard/page/FarmableLand/:id/update" exact={true}>
+              <UpdateFarmableLand />
             </Route>
             <Route path="/dashboard/page/Crop" exact={true}>
               <Crop />
