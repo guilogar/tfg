@@ -3,7 +3,10 @@ Repository for make final degree project
 
 ## To Compile new Stream Analytic Job's
 ```
-Install dotnet https://dotnet.microsoft.com/download
+Install dotnet
+
+https://dotnet.microsoft.com/download
+https://dotnet.microsoft.com/download/dotnet/3.0/runtime/?utm_source=getdotnetcore&utm_medium=referral
 ```
 
 ## Create a .env for environment variables
