@@ -2,7 +2,7 @@ import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
   IonCardContent, IonItem, IonIcon, IonLabel, IonButton,
-  IonImg, IonButtons, IonCheckbox
+  IonImg, IonButtons, IonCheckbox, IonMenuButton
 } from '@ionic/react';
 import { add, create as createIcon, trash } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
@@ -38,6 +38,9 @@ const FarmableLand: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>FarmableLand</IonTitle>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
           <IonButtons slot="primary">
             <IonButton onClick={() => {setCreate(true)}}>
               <IonIcon slot="icon-only" icon={add} />

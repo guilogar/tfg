@@ -28,6 +28,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import FarmableLand from './pages/farmable-land/FarmableLand';
 
 const App: React.FC = () => {
   const api = getApi();
@@ -72,43 +73,30 @@ const App: React.FC = () => {
     />
   ));
 
-  if(!isLog) {
-    return (
-      <IonReactRouter>
-        <AlertSession />
-        <Redirect to="/" push={true} exact={true} />
-        <Route path="/*" exact={true}>
-          <Redirect to="/login" />
-        </Route>
-        <Route path="/login" exact={true}>
-          <Login />
-        </Route>
-        <Route path="/dashboard/*" exact={true}>
-          <Redirect to="/dashboard" />
-        </Route>
-        <Route path="/dashboard" exact={true}>
-          <Dashboard />
-        </Route>
-      </IonReactRouter>
-    );
-  } else {
-    return (
-      <IonReactRouter>
-        <Route path="/*" exact={true}>
-          <Redirect to="/login" />
-        </Route>
-        <Route path="/login" exact={true}>
-          <Login />
-        </Route>
-        <Route path="/dashboard/*" exact={true}>
-          <Redirect to="/dashboard" />
-        </Route>
-        <Route path="/dashboard" exact={true}>
-          <Dashboard />
-        </Route>
-      </IonReactRouter>
-    );
-  }
+  return (
+    <IonReactRouter>
+      {
+        !isLog
+        &&
+        <div>
+          <AlertSession />
+          <Redirect to="/login" exact={true} />
+        </div>
+      }
+      <Route path="/login" exact={true}>
+        <Login />
+      </Route>
+      <Route path="/dashboard/*" exact={true}>
+        <Redirect to="/dashboard" />
+      </Route>
+      <Route path="/dashboard" exact={true}>
+        <Dashboard />
+      </Route>
+      <Route path="/dashboard/page/FarmableLand" exact={true}>
+        <FarmableLand />
+      </Route>
+    </IonReactRouter>
+  );
 };
 
 export default App;

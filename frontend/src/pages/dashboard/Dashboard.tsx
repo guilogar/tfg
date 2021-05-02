@@ -1,9 +1,13 @@
-import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
+import {
+  IonApp, IonRouterOutlet, IonSplitPane
+} from '@ionic/react';
+
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 import React, { useState } from 'react';
-import { isLogged } from '../../services/utils';
+import { isLogged, getWindowDimensions } from '../../services/utils';
 import Menu from '../../components/Menu';
+import Home from '../home/Home';
 import Settings from '../settings/Settings';
 import FarmableLand from '../farmable-land/FarmableLand';
 import Crop from '../crop/Crop';
@@ -33,41 +37,63 @@ import '../../theme/variables.css';
 const Dashboard: React.FC = () => {
   const [isLog, setIsLog] = useState(isLogged());
 
-  if (!isLog)
-  {
-    return (<Redirect to="/login" />);
-  } else
-  {
-    return (
-      <IonApp>
-        <IonReactRouter>
-          <IonSplitPane contentId="main">
-            <Menu setIsLog={setIsLog} />
-            <IonRouterOutlet id="main">
-              <Route path="/dashboard/page/FarmableLand" exact={true}>
-                <FarmableLand />
-              </Route>
-              <Route path="/dashboard/page/Crop" exact={true}>
-                <Crop />
-              </Route>
-              <Route path="/dashboard/page/Event" exact={true}>
-                <Events />
-              </Route>
-              <Route path="/dashboard/page/MethodPay" exact={true}>
-                <MethodPay />
-              </Route>
-              <Route path="/dashboard/page/Phytosanitary" exact={true}>
-                <Phytosanitary />
-              </Route>
-              <Route path="/dashboard/page/Setting" exact={true}>
-                <Settings />
-              </Route>
-            </IonRouterOutlet>
-          </IonSplitPane>
-        </IonReactRouter>
-      </IonApp>
-    );
-  }
+  const dimensions = getWindowDimensions();
+  const [ width, setWidth ] = useState<number>(dimensions.width);
+  const handleResize = () => {
+    const dimensions = getWindowDimensions();
+    setWidth(dimensions.width);
+  };
+  window.addEventListener('resize', handleResize);
+
+  return (
+    <IonApp>
+      {
+        !isLog
+        &&
+        <Redirect to="/login" push={true} exact={true} />
+      }
+      {
+        (width < 1024)
+        &&
+        <Redirect to="/dashboard" exact={true} />
+      }
+      <IonReactRouter>
+        <IonSplitPane contentId="main">
+          <Menu setIsLog={setIsLog} reduceFormat={width < 1024} />
+          <IonRouterOutlet id="main">
+            <Route path="/dashboard" exact={true}>
+              {
+                (width < 1024)
+                &&
+                <Redirect to="/dashboard/page/Home" push={true} exact={true} />
+              }
+            </Route>
+            <Route path="/dashboard/page/Home" exact={true}>
+              <Home />
+            </Route>
+            <Route path="/dashboard/page/FarmableLand" exact={true}>
+              <FarmableLand />
+            </Route>
+            <Route path="/dashboard/page/Crop" exact={true}>
+              <Crop />
+            </Route>
+            <Route path="/dashboard/page/Event" exact={true}>
+              <Events />
+            </Route>
+            <Route path="/dashboard/page/MethodPay" exact={true}>
+              <MethodPay />
+            </Route>
+            <Route path="/dashboard/page/Phytosanitary" exact={true}>
+              <Phytosanitary />
+            </Route>
+            <Route path="/dashboard/page/Setting" exact={true}>
+              <Settings />
+            </Route>
+          </IonRouterOutlet>
+        </IonSplitPane>
+      </IonReactRouter>
+    </IonApp>
+  );
 };
 
 export default Dashboard;

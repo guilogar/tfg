@@ -1,9 +1,8 @@
 import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
-  IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
-  IonCardContent, IonItem, IonIcon, IonLabel, IonButton,
-  IonImg, IonButtons, IonInput, IonCheckbox, IonSelect,
-  IonSelectOption
+  IonItem, IonIcon, IonLabel, IonButton,
+  IonButtons, IonInput, IonCheckbox, IonSelect,
+  IonSelectOption, IonMenuButton
 } from '@ionic/react';
 import { arrowBack, arrowBackCircle } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
@@ -66,6 +65,7 @@ const CreateFarmableLand: React.FC<{ setCreate: Function }> = ({ setCreate }) =>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
+            <IonMenuButton />
             <IonButton onClick={() => {setCreate(false)}}>
               <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
             </IonButton>

@@ -1,19 +1,13 @@
 import {
-  IonContent,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonListHeader,
-  IonMenu,
-  IonMenuToggle,
-  IonNote,
+  IonContent, IonIcon, IonItem, IonLabel,
+  IonList, IonListHeader, IonMenu, IonMenuToggle,
+  IonNote
 } from '@ionic/react';
 import {
   archiveOutline, archiveSharp, bookmarkOutline,
   heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline,
   paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp,
-  logOutOutline
+  logOutOutline, home
 } from 'ionicons/icons';
 
 import './Menu.css';
@@ -66,14 +60,22 @@ const appPages: AppPage[] = [
   }
 ];
 
-const Menu: React.FC<{ setIsLog: Function }> = ({ setIsLog }) => {
+const Menu: React.FC<{ setIsLog: Function, reduceFormat: Boolean }> = ({ setIsLog, reduceFormat }) => {
   const location = useLocation();
   return (
     <IonMenu contentId="main" type="overlay">
-      <IonContent>
-        <IonList id="inbox-list">
+      <IonContent forceOverscroll={false}>
+        <IonList lines="none">
           <IonListHeader>Menú</IonListHeader>
           <IonNote>information@smartrural.es</IonNote>
+          {
+            reduceFormat
+            &&
+            <IonItem routerLink={'/dashboard/page/home'} routerDirection="none" lines="none" detail={false}>
+              <IonIcon slot="start" ios={home} md={home} />
+              <IonLabel>Home</IonLabel>
+            </IonItem>
+          }
           {
             appPages.map((appPage, index) => {
               return (
@@ -88,11 +90,12 @@ const Menu: React.FC<{ setIsLog: Function }> = ({ setIsLog }) => {
               );
             })
           }
-          <IonItem  routerLink={'/'} routerDirection="none" lines="none" detail={false}
-                    onClick={() => {
-                      logout();
-                      setIsLog(false);
-                    } }>
+          <IonItem routerLink={'/logout'} routerDirection="none"
+                  lines="none" detail={false}
+                  onClick={() => {
+                    logout();
+                    setIsLog(false);
+                  }}>
             <IonIcon slot="start" ios={logOutOutline} md={logOutOutline} />
             <IonLabel>Cerrar sesión</IonLabel>
           </IonItem>

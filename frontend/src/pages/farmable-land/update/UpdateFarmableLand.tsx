@@ -2,7 +2,7 @@ import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
   IonCardContent, IonItem, IonIcon, IonLabel, IonButton,
-  IonImg, IonButtons
+  IonImg, IonButtons, IonMenuButton
 } from '@ionic/react';
 import { arrowBack, arrowBackCircle } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
@@ -26,7 +26,7 @@ const UpdateFarmableLand: React.FC<{ farmableLandId: number, setUpdate: Function
       }
       setMessage(msg);
       console.log(data);
-      
+
       // const canvasData = saveableCanvas.getSaveData();
       // saveableCanvas.loadSaveData(canvasData);
       // saveableCanvas.undo();
@@ -39,6 +39,7 @@ const UpdateFarmableLand: React.FC<{ farmableLandId: number, setUpdate: Function
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
+            <IonMenuButton />
             <IonButton onClick={() => {setUpdate(false)}}>
               <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
             </IonButton>
