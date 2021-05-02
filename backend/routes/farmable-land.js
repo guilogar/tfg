@@ -7,12 +7,12 @@ const FarmableLand = require('../database/models/FarmableLand');
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
 
 router.get('/farmableLand', async (req, res) => {
-  const id = req.query.id;
+  const id = (req.query.id !== undefined) ? JSON.parse(req.query.id) : undefined;
 
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
 
-  const where = (id) ? {
+  const where = (id !== undefined) ? {
     UserId: user.id,
     id: id
   } : {

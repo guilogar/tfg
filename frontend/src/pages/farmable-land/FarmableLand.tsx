@@ -9,16 +9,13 @@ import React, { useState, useEffect } from 'react';
 
 import { getApi } from '../../services/utils';
 import './FarmableLand.css';
-
-import CreateFarmableLand from './create/CreateFarmableLand';
-import UpdateFarmableLand from './update/UpdateFarmableLand';
 import { Redirect } from 'react-router';
 
 const FarmableLand: React.FC = () => {
   const api = getApi();
   const [create, setCreate] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
-  const [farmableLandId, setFarmableLandId] = useState<number>(0);
+  const [farmableLandId, setFarmableLandId] = useState<number | null>(null);
   const [farmableLands, setFarmableLands] = useState<Array<any>>([]);
 
   useEffect(() => {
@@ -38,7 +35,7 @@ const FarmableLand: React.FC = () => {
       {
         update
         &&
-        <Redirect to="/dashboard/page/FarmableLand/:id/update" push={true} exact={true} />
+        <Redirect to={`/dashboard/page/FarmableLand/${farmableLandId}/update`} push={true} exact={true} />
       }
       <IonHeader>
         <IonToolbar>
@@ -58,7 +55,7 @@ const FarmableLand: React.FC = () => {
           farmableLands.map((farmableLand, index) => {
             return (
               <IonCard key={index}>
-                <IonImg src={farmableLand.image}
+                <IonImg src={(farmableLand.image) ? farmableLand.image : '/assets/no-image.png'}
                         class="img-farmable-land" />
                 <IonCardHeader>
                   <IonCardTitle>Tipo: {farmableLand.type}</IonCardTitle>
@@ -77,7 +74,10 @@ const FarmableLand: React.FC = () => {
                     <IonLabel>Acciones</IonLabel>
                     <IonButton
                       fill="outline" slot="end"
-                      onClick={() => {setUpdate(true)}}>
+                      onClick={() => {
+                        setFarmableLandId(farmableLand.id)
+                        setUpdate(true)
+                      }}>
                         <IonIcon icon={createIcon} />
                     </IonButton>
                     <IonButton

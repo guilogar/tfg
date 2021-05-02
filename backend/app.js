@@ -14,10 +14,13 @@ const dotenv = require('dotenv');
 dotenv.config({ path: process.env.ENVFILE });
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+  limit: '1024mb'
+}));
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true,
+  limit: '1024mb'
 }));
 
 const registryLogin = require('./routes/registry-login');

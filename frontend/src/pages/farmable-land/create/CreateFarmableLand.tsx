@@ -54,6 +54,7 @@ const CreateFarmableLand: React.FC = () => {
         isSquare: isSquareRef?.checked,
       };
       await api.post('/farmableLand', farmableLand);
+      setBack(true);
     } catch(err) {
       console.log(err);
     }
