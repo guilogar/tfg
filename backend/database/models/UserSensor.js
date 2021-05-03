@@ -11,8 +11,7 @@ UserSensor.init({
         autoIncrement: true,
         primaryKey: true
     },
-    name: DataTypes.STRING,
-    measure: DataTypes.ENUM('Temperature', 'Humidity')
+    name: DataTypes.STRING
 }, {
     sequelize,
     modelName: 'UserSensor',

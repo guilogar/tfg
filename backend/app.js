@@ -58,9 +58,12 @@ const sequelize = require('./database/sequelize');
 // # * * * * * *
 const cron = require('node-cron');
 const { getEventFromCosmos, getAllEventFromCosmos } = require('./routes/services/get-event-from-cosmos');
+const { checkEvent } = require('./routes/services/check-event');
+
 cron.schedule('* * * * * *', async () => {
   const items = await getAllEventFromCosmos();
-  console.log(items);
+  const events = await checkEvent(items);
+  console.log(events);
 });
 
 const server = http.createServer(app);

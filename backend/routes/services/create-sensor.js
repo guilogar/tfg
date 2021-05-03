@@ -1,9 +1,8 @@
 const UserSensor = require('../../database/models/UserSensor');
 
-const createSensor = async(userId, measure, name = undefined) => {
+const createSensor = async(userId, name = undefined) => {
   let userSensor = await UserSensor.create({
     name: name,
-    measure: measure,
     UserId: userId
   });
 

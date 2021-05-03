@@ -40,4 +40,4 @@ setInterval(async () => {
   } catch (error) {
     console.error('send error: ' + error.toString());
   }
-}, 30000);
+}, process.env.TIME_INTERVAL || 30000);

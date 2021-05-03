@@ -2,6 +2,7 @@ const sequelize = require('../database/sequelize');
 const models = require('../database/models/models');
 const { createUser } = require('../routes/services/create-user');
 const { createSensor } = require('../routes/services/create-sensor');
+const { createEvent, assignEventToUser } = require('../routes/services/create-event');
 
 // Re-build all tables
 async function rebuildTables()
@@ -34,9 +35,20 @@ async function insertDataTable()
 
   for(let i = 0; i < 100; i++)
   {
-    const measure = (Math.random() > 0.5 ? 'Temperature' : 'Humidity')
-    createSensor(user.id, measure);
+    await createSensor(user.id);
   }
+
+  const eventTemperature = await createEvent('TEMPERATURE', 'Temperature Event');
+  const eventHumidity = await createEvent('HUMIDITY', 'Humidity Event');
+  await assignEventToUser(
+    user.id, eventTemperature.id,
+    'AUTOMATIC', 20, 25
+  );
+
+  await assignEventToUser(
+    user.id, eventHumidity.id,
+    'AUTOMATIC', 60, 65
+  );
 }
 
 module.exports = {

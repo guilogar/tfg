@@ -13,7 +13,13 @@ UserEvent.init({
     primaryKey: true
   },
   action: {
-    type: DataTypes.ENUM('Automatic', 'Manual')
+    type: DataTypes.ENUM('AUTOMATIC', 'MANUAL')
+  },
+  minValue: {
+    type: DataTypes.DOUBLE
+  },
+  maxValue: {
+    type: DataTypes.DOUBLE
   }
 }, {
   sequelize,

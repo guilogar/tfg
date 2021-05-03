@@ -15,9 +15,6 @@ Event.init({
   },
   description: {
     type: DataTypes.STRING
-  },
-  alias: {
-    type: DataTypes.STRING
   }
 }, {
   sequelize,
