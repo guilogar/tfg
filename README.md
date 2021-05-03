@@ -4,6 +4,7 @@ Repository for make final degree project
 ## To Create and Compile new Stream Analytic Job's
 ```
 Install dotnet
+https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-3.1.408-windows-x64-installer
 https://dotnet.microsoft.com/download/dotnet/3.0/runtime/?utm_source=getdotnetcore&utm_medium=referral
 
 See this guide:

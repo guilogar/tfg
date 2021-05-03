@@ -6,7 +6,7 @@
         "AccountKey": null,
         "Database": "SmartRural",
         "ContainerName": "Events",
-        "DocumentId": ""
+        "DocumentId": "sensorId"
     },
     "DataSourceCredentialDomain": "4fb71d02-2540-4fe5-a28d-5c1d4290157e.StreamAnalystics",
     "ScriptType": "Output"
