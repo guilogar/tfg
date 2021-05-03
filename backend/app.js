@@ -50,7 +50,7 @@ const sequelize = require('./database/sequelize');
 // # * * * * * *
 const cron = require('node-cron');
 const { sendNotificationToUser } = require('./routes/services/send-notification-to-user');
-const { getEventFromCosmos, getAllEventFromCosmos } = require('./routes/services/get-event-from-cosmos');
+const { getEventFromCosmos, getAllEventFromCosmos, removeEventsFromCosmos } = require('./routes/services/get-event-from-cosmos');
 const { checkEvent } = require('./routes/services/check-event');
 
 const UserSensor = require('./database/models/UserSensor');
@@ -87,6 +87,12 @@ cron.schedule('* * * * *', async () => {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  try {
+    await removeEventsFromCosmos(items);
+  } catch (error) {
+    console.log(error);
   }
 });
 

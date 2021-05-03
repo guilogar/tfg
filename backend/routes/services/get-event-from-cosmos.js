@@ -16,6 +16,14 @@ const getAllEventFromCosmos = async () => {
   return items;
 }
 
+const removeEventsFromCosmos = async (items = []) => {
+  for(const item of items)
+  {
+    const { id, sensorId } = item;
+    const { resource: result } = await container.item(id, sensorId).delete();
+  }
+}
+
 const getEventFromCosmos = async (sensorId) => {
   const querySpec = {
     query: `SELECT * FROM c WHERE c.sensorId = '${sensorId}'`
@@ -25,5 +33,5 @@ const getEventFromCosmos = async (sensorId) => {
 }
 
 module.exports = {
-  getEventFromCosmos, getAllEventFromCosmos
+  getEventFromCosmos, getAllEventFromCosmos, removeEventsFromCosmos
 };
