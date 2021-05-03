@@ -58,8 +58,7 @@ const Event = require('./database/models/Event');
 
 cron.schedule('* * * * * *', async () => {
   const items = await getAllEventFromCosmos();
-  const events = await checkEvent(items);
-  console.log(events);
+  const eventsFired = await checkEvent(items);
 
   for(const eventFired of eventsFired)
   {
@@ -77,10 +76,14 @@ cron.schedule('* * * * * *', async () => {
       }
     });
 
-    await sendNotificationToUser(userId, {
+    const notification = {
       title: `Evento ${event.name}`,
-      body: `El Evento ${event.name} ha sido disparado con el sensor ${userSensor.name} y el valor ${value}. Clicke aquí para mas información.`
-    });
+      body: `El Evento ${event.name} ha sido disparado con el ` +
+            `sensor "${userSensor.name}" y el valor ${value}. ` +
+            `Clicke aquí para mas información.`
+    };
+    console.log(notification);
+    await sendNotificationToUser(userId, notification);
   }
 });
 
