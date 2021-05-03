@@ -1,6 +1,6 @@
 {
-    "name": "ASATemperature",
-    "startFile": "ASATemperature.asaql",
+    "name": "ASASmartRural",
+    "startFile": "ASASmartRural.asaql",
     "configurations": [
         {
             "filePath": "JobConfig.json",

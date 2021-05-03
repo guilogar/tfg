@@ -9,7 +9,7 @@
         "SharedAccessPolicyKey": null,
         "ConsumerGroupName": "$Default"
     },
-    "DataSourceCredentialDomain": "a50e02a8-3ef2-4d8b-a3b2-cd6b15f082bf.StreamAnalystics",
+    "DataSourceCredentialDomain": "dd2b4197-c511-4929-b72d-bbdec745ff82.StreamAnalystics",
     "Serialization": {
         "Type": "Json",
         "Encoding": "UTF8"

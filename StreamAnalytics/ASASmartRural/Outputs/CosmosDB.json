@@ -8,6 +8,6 @@
         "ContainerName": "Events",
         "DocumentId": "sensorId"
     },
-    "DataSourceCredentialDomain": "4fb71d02-2540-4fe5-a28d-5c1d4290157e.StreamAnalystics",
+    "DataSourceCredentialDomain": "71bb60fe-5743-4f25-93bb-85f28150d4c9.StreamAnalystics",
     "ScriptType": "Output"
 }
