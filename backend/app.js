@@ -47,6 +47,22 @@ const sequelize = require('./database/sequelize');
 //   });
 // })();
 
+// # ┌────────────── second (optional)
+// # │ ┌──────────── minute
+// # │ │ ┌────────── hour
+// # │ │ │ ┌──────── day of month
+// # │ │ │ │ ┌────── month
+// # │ │ │ │ │ ┌──── day of week
+// # │ │ │ │ │ │
+// # │ │ │ │ │ │
+// # * * * * * *
+const cron = require('node-cron');
+const { getEventFromCosmos, getAllEventFromCosmos } = require('./routes/services/get-event-from-cosmos');
+cron.schedule('* * * * * *', async () => {
+  const items = await getAllEventFromCosmos();
+  console.log(items);
+});
+
 const server = http.createServer(app);
 server.listen(PORT, function() {
     console.log('Server up and running on localhost:' + PORT);

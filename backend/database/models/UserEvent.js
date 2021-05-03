@@ -7,20 +7,20 @@ const Event = require('./Event');
 class UserEvent extends Model {}
 
 UserEvent.init({
-    id: {
-        type: DataTypes.BIGINT,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    action: {
-        type: DataTypes.ENUM('Automatic', 'Manual')
-    }
+  id: {
+    type: DataTypes.BIGINT,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  action: {
+    type: DataTypes.ENUM('Automatic', 'Manual')
+  }
 }, {
-    sequelize,
-    modelName: 'UserEvent',
-    freezeTableName: true,
-    tableName: 'UserEvent',
-    timestamps: false,
+  sequelize,
+  modelName: 'UserEvent',
+  freezeTableName: true,
+  tableName: 'UserEvent',
+  timestamps: false,
 });
 
 UserEvent.belongsTo(User);
