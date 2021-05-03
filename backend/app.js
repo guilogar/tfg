@@ -56,7 +56,7 @@ const { checkEvent } = require('./routes/services/check-event');
 const UserSensor = require('./database/models/UserSensor');
 const Event = require('./database/models/Event');
 
-cron.schedule('* * * * * *', async () => {
+cron.schedule('* * * * *', async () => {
   const items = await getAllEventFromCosmos();
   const eventsFired = await checkEvent(items);
 
@@ -82,8 +82,11 @@ cron.schedule('* * * * * *', async () => {
             `sensor "${userSensor.name}" y el valor ${value}. ` +
             `Clicke aquí para mas información.`
     };
-    console.log(notification);
-    await sendNotificationToUser(userId, notification);
+    try {
+      await sendNotificationToUser(userId, notification);
+    } catch (error) {
+      console.log(error);
+    }
   }
 });
 

@@ -1,3 +1,9 @@
+const admin = require('firebase-admin');
+const serviceAccount = require('../../firebaseServiceAccount.json');
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
 const FirebaseToken = require('../../database/models/FirebaseToken');
 
 const sendNotificationToUser = async (userId, notification) => {
@@ -7,12 +13,7 @@ const sendNotificationToUser = async (userId, notification) => {
     }
   });
 
-  const admin = require('firebase-admin');
-  const serviceAccount = require('../../firebaseServiceAccount.json');
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-  });
-
+  let responses = [];
   for(const firebaseToken of firebaseTokens)
   {
     // This registration token comes from the client FCM SDKs.
@@ -22,16 +23,15 @@ const sendNotificationToUser = async (userId, notification) => {
       notification: notification
     };
 
-    try {
-      const response = await admin.messaging().sendToDevice(registrationToken, message, {
+    responses.push(
+      await admin.messaging().sendToDevice(registrationToken, message, {
         priority: "high",
         timeToLive: 60 * 60 * 24
-      });
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+      })
+    );
   }
+
+  return responses;
 };
 
 module.exports = { sendNotificationToUser };
