@@ -39,14 +39,6 @@ const sequelize = require('./database/sequelize');
   await sequelize.sync();
 })();
 
-// const { sendNotificationToUser } = require('./routes/services/send-notification-to-user');
-// (async () => {
-//   await sendNotificationToUser(1, {
-//     title: 'Evento X',
-//     body: 'El Evento X ha sido disparado. Clicke aquí para mas información'
-//   });
-// })();
-
 // # ┌────────────── second (optional)
 // # │ ┌──────────── minute
 // # │ │ ┌────────── hour
@@ -57,13 +49,39 @@ const sequelize = require('./database/sequelize');
 // # │ │ │ │ │ │
 // # * * * * * *
 const cron = require('node-cron');
+const { sendNotificationToUser } = require('./routes/services/send-notification-to-user');
 const { getEventFromCosmos, getAllEventFromCosmos } = require('./routes/services/get-event-from-cosmos');
 const { checkEvent } = require('./routes/services/check-event');
+
+const UserSensor = require('./database/models/UserSensor');
+const Event = require('./database/models/Event');
 
 cron.schedule('* * * * * *', async () => {
   const items = await getAllEventFromCosmos();
   const events = await checkEvent(items);
   console.log(events);
+
+  for(const eventFired of eventsFired)
+  {
+    const { userId, sensorId, eventId, userEventId, value } = eventFired;
+
+    const userSensor = await UserSensor.findOne({
+      where: {
+        id: sensorId
+      }
+    });
+
+    const event = await Event.findOne({
+      where: {
+        id: eventId
+      }
+    });
+
+    await sendNotificationToUser(userId, {
+      title: `Evento ${event.name}`,
+      body: `El Evento ${event.name} ha sido disparado con el sensor ${userSensor.name} y el valor ${value}. Clicke aquí para mas información.`
+    });
+  }
 });
 
 const server = http.createServer(app);

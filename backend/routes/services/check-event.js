@@ -30,7 +30,8 @@ const checkEvent = async (cosmosData = []) => {
               userId: sensor.UserId,
               sensorId: sensor.id,
               eventId: event.id,
-              userEventId: userEvent.id
+              userEventId: userEvent.id,
+              value: value
             });
           }
         }
