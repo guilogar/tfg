@@ -7,17 +7,17 @@ const Crop = require('./Crop');
 class FarmableLandCrop extends Model {}
 
 FarmableLandCrop.init({
-    id: {
-        type: DataTypes.BIGINT,
-        autoIncrement: true,
-        primaryKey: true
-    }
+  id: {
+    type: DataTypes.BIGINT,
+    autoIncrement: true,
+    primaryKey: true
+  }
 }, {
-    sequelize,
-    modelName: 'FarmableLandCrop',
-    freezeTableName: true,
-    tableName: 'FarmableLandCrop',
-    timestamps: false,
+  sequelize,
+  modelName: 'FarmableLandCrop',
+  freezeTableName: true,
+  tableName: 'FarmableLandCrop',
+  timestamps: false,
 });
 
 FarmableLandCrop.belongsTo(FarmableLand);
