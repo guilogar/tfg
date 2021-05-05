@@ -6,26 +6,26 @@ const User = require('./User');
 class UserSettings extends Model {}
 
 UserSettings.init({
-    id: {
-        type: DataTypes.BIGINT,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    backgroundColor: {
-        type: DataTypes.STRING
-    },
-    defaultLanguage: {
-        type: DataTypes.STRING
-    },
-    defaultEventAction: {
-        type: DataTypes.ENUM('Automatic', 'Manual')
-    }
+  id: {
+    type: DataTypes.BIGINT,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  backgroundColor: {
+    type: DataTypes.STRING
+  },
+  defaultLanguage: {
+    type: DataTypes.STRING
+  },
+  defaultEventAction: {
+    type: DataTypes.ENUM('Automatic', 'Manual')
+  }
 }, {
-    sequelize,
-    modelName: 'UserSettings',
-    freezeTableName: true,
-    tableName: 'UserSettings',
-    timestamps: false,
+  sequelize,
+  modelName: 'UserSettings',
+  freezeTableName: true,
+  tableName: 'UserSettings',
+  timestamps: false,
 });
 
 UserSettings.belongsTo(User);

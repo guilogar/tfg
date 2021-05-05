@@ -73,14 +73,14 @@ router.put('/my-events/:id', async (req, res) => {
   const user = await getUserFromJwt(jwt);
 
   try {
-    const myEvent = await UserEvent.findOne({
+    let myEvent = await UserEvent.findOne({
       where: {
         id: id,
         UserId: user.id
       }
     });
 
-    myEvent.update({
+    myEvent = await myEvent.update({
       action: req.body.action,
       minValue: req.body.minValue,
       maxValue: req.body.maxValue,

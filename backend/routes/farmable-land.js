@@ -60,7 +60,7 @@ router.put('/farmableLand/:id', async (req, res) => {
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
 
-  const farmableLand = await FarmableLand.findOne({
+  let farmableLand = await FarmableLand.findOne({
     where: {
       id: id,
       UserId: user.id
