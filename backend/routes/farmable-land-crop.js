@@ -79,9 +79,13 @@ router.post('/farmableLandCrop', async (req, res) => {
 });
 
 router.delete('/farmableLandCrop/:id', async (req, res) => {
+  const jwt = getJwtFromRequest(req);
+  const user = await getUserFromJwt(jwt);
+
   await FarmableLandCrop.destroy({
     where: {
-      id: req.params.id
+      id: req.params.id,
+      UserId: user.id
     }
   });
 

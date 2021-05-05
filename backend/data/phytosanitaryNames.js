@@ -1,0 +1,23 @@
+
+const pNames = [
+  'MICROTHIOL SPECIAL DISPERSS',
+  'COBRE NORDOX 50',
+  'DECCOSOL-MF',
+  'BASAGRAN L',
+  'SP4OK',
+  'MICROTOX',
+  'EVER TRANSPARENTE',
+  'NUFO-Z',
+  'BANVEL-D',
+  'QUILAN',
+  'VENZAR',
+  'VYDATE 10 G',
+  'BELTASUR-500',
+  'CAPTANA',
+  'CALDO BORDELES MAC 80',
+  'FULMIT OLEO L.E',
+  'FULMIT',
+  'APHOX',
+];
+
+module.exports = { pNames };

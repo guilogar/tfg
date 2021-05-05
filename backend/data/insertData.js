@@ -5,6 +5,8 @@ const { createSensor } = require('../routes/services/create-sensor');
 const { createEvent, assignEventToUser } = require('../routes/services/create-event');
 const { createFirebaseToken } = require('../routes/services/create-firebase-token');
 const { createCrop } = require('../routes/services/create-crop');
+const { createPhytosanitary } = require('../routes/services/create-phytosanitary');
+const { pNames } = require('./phytosanitaryNames');
 
 // Re-build all tables
 async function rebuildTables()
@@ -61,36 +63,42 @@ async function insertDataTable()
     'PEA', 'El cultivo del guisante al exterior',
     'Guisantes', 8
   );
-
   await createCrop(
     'BEAN', 'El cultivo del frijol al exterior',
     'Frijol', 8
   );
-
   await createCrop(
     'POTAT0', 'El cultivo de la papa al exterior',
     'Patata', 10
   );
-
   await createCrop(
     'TOMATO', 'El cultivo del tomate al invernadero',
     'Tomate', 11
   );
-
   await createCrop(
     'MELON', 'El cultivo del melón al invernadero',
     'Melon', 12
   );
-
   await createCrop(
     'WATERMELON', 'El cultivo de la sandía invernadero',
     'Sandía', 12
   );
-
   await createCrop(
     'WATERMELON', 'El cultivo de la sandía al exterior',
     'Sandía americana', 12
   );
+
+  await createPhytosanitary(
+    'SYNTETIC_FERTILIZER', 'Abono sintetico', 'Abono sintetico'
+  );
+  await createPhytosanitary(
+    'POTASH', 'Potasa', 'Potasa'
+  );
+  for(const pName of pNames) {
+    await createPhytosanitary(
+      pname, pName.toLowerCase(), pName.toLowerCase()
+    );
+  }
 }
 
 module.exports = {

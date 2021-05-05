@@ -57,9 +57,13 @@ router.post('/farmableLand', async (req, res) => {
 router.put('/farmableLand/:id', async (req, res) => {
   const id = req.params.id;
 
-  let farmableLand = await FarmableLand.findOne({
+  const jwt = getJwtFromRequest(req);
+  const user = await getUserFromJwt(jwt);
+
+  const farmableLand = await FarmableLand.findOne({
     where: {
-      id: id
+      id: id,
+      UserId: user.id
     }
   });
 
@@ -77,9 +81,13 @@ router.put('/farmableLand/:id', async (req, res) => {
 });
 
 router.delete('/farmableLand/:id', async (req, res) => {
+  const jwt = getJwtFromRequest(req);
+  const user = await getUserFromJwt(jwt);
+
   await FarmableLand.destroy({
     where: {
-      id: req.params.id
+      id: req.params.id,
+      UserId: user.id
     }
   });
 
