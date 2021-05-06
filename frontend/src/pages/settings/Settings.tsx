@@ -1,7 +1,7 @@
 import React from "react";
 import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
-  IonList, IonItem, IonIcon, IonLabel, IonToggle
+  IonList, IonItem, IonIcon, IonLabel, IonToggle, IonButtons, IonMenuButton
 } from "@ionic/react";
 import { moon } from "ionicons/icons";
 import "./Settings.css";
@@ -18,7 +18,10 @@ const Settings: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Blank</IonTitle>
+          <IonTitle>Settings</IonTitle>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent>

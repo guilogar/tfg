@@ -2,7 +2,7 @@ import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
   IonCardContent, IonItem, IonIcon, IonLabel, IonButton,
-  IonImg, IonButtons
+  IonImg, IonButtons, IonMenuButton
 } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
@@ -10,8 +10,6 @@ import React, { useState, useEffect } from 'react';
 import { getApi } from '../../services/utils';
 import './MethodPay.css';
 
-import CreateMethodPay from './create/CreateMethodPay';
-import UpdateMethodPay from './update/UpdateMethodPay';
 import { Redirect } from 'react-router';
 
 const MethodPay: React.FC = () => {
@@ -40,6 +38,9 @@ const MethodPay: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>MethodPay</IonTitle>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
           <IonButtons slot="primary">
             <IonButton onClick={() => {setCreate(true)}}>
               <IonIcon slot="icon-only" icon={add} />
