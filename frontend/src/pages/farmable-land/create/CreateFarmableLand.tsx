@@ -14,6 +14,7 @@ import './CreateFarmableLand.css';
 
 const CreateFarmableLand: React.FC = () => {
   const api = getApi();
+  const [nameRef, setNameRef] = useState<HTMLIonInputElement | null>(null);
   const [typeRef, setTypeRef] = useState<HTMLIonSelectElement | null>(null);
   const [areaRef, setAreaRef] = useState<HTMLIonInputElement | null>(null);
   const [imageRef, setImageRef] = useState<HTMLInputElement | null>(null);
@@ -47,6 +48,7 @@ const CreateFarmableLand: React.FC = () => {
       }
 
       const farmableLand: any = {
+        name: (nameRef?.value) ? nameRef.value : null,
         type: (typeRef?.value) ? typeRef?.value : null,
         image: image,
         haveIOT: haveIOTRef?.checked,
@@ -80,6 +82,13 @@ const CreateFarmableLand: React.FC = () => {
       </IonHeader>
       <IonContent>
         <form className="ion-padding" onSubmit={(event) => { handleSubmit(event) }}>
+          <IonItem>
+            <IonLabel position="floating">Nombre</IonLabel>
+            <IonInput
+              ref={(nameRef) => { setNameRef(nameRef) }}
+              type="text" name="name"
+            />
+          </IonItem>
           <IonItem>
             <IonLabel position="floating">Tipo</IonLabel>
             <IonSelect

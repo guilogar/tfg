@@ -41,6 +41,7 @@ router.post('/farmableLand', async (req, res) => {
   const user = await getUserFromJwt(jwt);
 
   const farmableLand = await FarmableLand.create({
+    name: req.body.name,
     type: req.body.type,
     image: req.body.image,
     haveIOT: req.body.haveIOT,
@@ -68,6 +69,7 @@ router.put('/farmableLand/:id', async (req, res) => {
   });
 
   farmableLand = await farmableLand.update({
+    name: req.body.name,
     type: req.body.type,
     image: req.body.image,
     haveIOT: req.body.haveIOT,

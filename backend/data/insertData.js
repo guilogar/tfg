@@ -96,7 +96,7 @@ async function insertDataTable()
   );
   for(const pName of pNames) {
     await createPhytosanitary(
-      pname, pName.toLowerCase(), pName.toLowerCase()
+      pName, pName.toLowerCase(), pName.toLowerCase()
     );
   }
 }

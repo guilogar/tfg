@@ -58,8 +58,8 @@ const FarmableLand: React.FC = () => {
                 <IonImg src={(farmableLand.image) ? farmableLand.image : '/assets/no-image.png'}
                         class="img-farmable-land" />
                 <IonCardHeader>
-                  <IonCardTitle>Tipo: {farmableLand.type}</IonCardTitle>
-                  <IonCardSubtitle>Area: {farmableLand.area} m2</IonCardSubtitle>
+                  <IonCardTitle>Nombre: {farmableLand.name}</IonCardTitle>
+                  <IonCardSubtitle>Tipo: {farmableLand.type}, Area: {farmableLand.area} m2</IonCardSubtitle>
                 </IonCardHeader>
                 <IonCardContent>
                   <IonItem lines="none">

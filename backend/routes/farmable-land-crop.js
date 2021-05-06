@@ -14,7 +14,9 @@ router.get('/farmableLandCrop', async (req, res) => {
   const user = await getUserFromJwt(jwt);
 
   const farms = await FarmableLand.findAll({
-    UserId: user.id
+    where: {
+      UserId: user.id
+    }
   });
 
   let farmableLands = [];

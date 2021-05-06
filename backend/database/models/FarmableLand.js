@@ -11,6 +11,10 @@ FarmableLand.init({
     autoIncrement: true,
     primaryKey: true
   },
+  name: {
+    type: DataTypes.STRING,
+    defaultValue: 'Terreno X'
+  },
   type: {
     type: DataTypes.ENUM('Irrigation', 'DryLand', 'GreenHourse', 'OpenLand')
   },

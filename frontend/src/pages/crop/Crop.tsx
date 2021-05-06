@@ -20,8 +20,10 @@ const Crop: React.FC = () => {
 
   useEffect(() => {
     (async () => {
+      const { data } = await api.get('/farmableLandCrop');
+      setCrops(data.lands);
     })();
-  });
+  }, []);
 
   return (
     <IonPage>
@@ -52,12 +54,10 @@ const Crop: React.FC = () => {
         {
           crops.map((crop, index) => {
             return (
-              <IonCard>
-                <IonImg src={crop.image}
-                        class="img-farmable-land" />
+              <IonCard key={index}>
                 <IonCardHeader>
-                  <IonCardTitle>{crop.type}</IonCardTitle>
-                  <IonCardSubtitle>{crop.area} m^2</IonCardSubtitle>
+                  <IonCardTitle>{crop.name}</IonCardTitle>
+                  <IonCardSubtitle>{crop.crops.length} cultivos</IonCardSubtitle>
                   <IonButton
                     fill="outline" slot="end"
                     onClick={() => {setUpdate(true)}}

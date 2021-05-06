@@ -14,6 +14,7 @@ import './UpdateFarmableLand.css';
 
 const UpdateFarmableLand: React.FC = (props: any) => {
   const api = getApi();
+  const [farmName, setFarmName] = useState<any>(null);
   const [farmType, setFarmType] = useState<any>(null);
   const [farmImage, setFarmImage] = useState<any>(null);
   const [farmArea, setFarmArea] = useState<any>(null);
@@ -22,6 +23,7 @@ const UpdateFarmableLand: React.FC = (props: any) => {
 
   const [farmableLandId, setFarmableLandId] = useState<number | null>(null);
 
+  const [nameRef, setNameRef] = useState<HTMLIonInputElement | null>(null);
   const [typeRef, setTypeRef] = useState<HTMLIonSelectElement | null>(null);
   const [areaRef, setAreaRef] = useState<HTMLIonInputElement | null>(null);
   const [imageRef, setImageRef] = useState<HTMLInputElement | null>(null);
@@ -48,6 +50,7 @@ const UpdateFarmableLand: React.FC = (props: any) => {
       setFarmableLandId(farmId);
 
       const farm = data.lands[0];
+      setFarmName(farm.name);
       setFarmType(farm.type);
       setFarmImage(farm.image);
       setFarmArea(farm.area);
@@ -110,6 +113,13 @@ const UpdateFarmableLand: React.FC = (props: any) => {
       </IonHeader>
       <IonContent>
         <form className="ion-padding" onSubmit={(event) => { handleSubmit(event) }}>
+          <IonItem>
+            <IonLabel position="floating">Nombre</IonLabel>
+            <IonInput
+              ref={(nameRef) => { setNameRef(nameRef) }}
+              type="text" name="name" value={farmName}
+            />
+          </IonItem>
           <IonItem>
             <IonLabel position="floating">Tipo</IonLabel>
             <IonSelect
