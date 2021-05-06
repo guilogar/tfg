@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const { sendNotificationToUser } = require('./services/send-notification-to-user');
-const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
+const { getUserFromJwt, getJwtFromRequest } = require('./services/get-user-auth');
 
 router.get('/notification', async (req, res) => {
   const jwt = getJwtFromRequest(req);
@@ -33,3 +33,5 @@ router.post('/notification', async (req, res) => {
     notification: req.body
   });
 });
+
+module.exports = router;

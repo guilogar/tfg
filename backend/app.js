@@ -25,13 +25,11 @@ app.use(bodyParser.urlencoded({
   limit: '1024mb'
 }));
 
-const registryLogin = require('./routes/registry-login');
-const users = require('./routes/users');
-const farmableLand = require('./routes/farmable-land');
+const routes = require('./routes/routes');
 
-app.use(baseAPI, registryLogin);
-app.use(baseAPI, users);
-app.use(baseAPI, farmableLand);
+for (const route of routes) {
+  app.use(baseAPI, route);
+}
 
 const sequelize = require('./database/sequelize');
 
