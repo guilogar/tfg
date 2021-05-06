@@ -2,7 +2,7 @@ import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
   IonCardContent, IonItem, IonIcon, IonLabel, IonButton,
-  IonImg, IonButtons, IonMenuButton
+  IonImg, IonButtons, IonMenuButton, IonSelect, IonSelectOption
 } from '@ionic/react';
 import { arrowBack, arrowBackCircle } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
@@ -14,11 +14,35 @@ import './CreateCrop.css';
 const CreateCrop: React.FC = () => {
   const api = getApi();
   const [back, setBack] = useState<boolean>(false);
+  const [farms, setFarms] = useState<Array<any>>([]);
+  const [crops, setCrops] = useState<Array<any>>([]);
+  const [farmRef, setFarmRef] = useState<HTMLIonSelectElement | null>(null);
+  const [cropRef, setCropRef] = useState<HTMLIonSelectElement | null>(null);
 
   useEffect(() => {
     (async () => {
+      const { data } = await api.get('/farmableLand');
+      setFarms(data.lands);
     })();
-  });
+    (async () => {
+      const { data } = await api.get('/crop');
+      setCrops(data.crops);
+    })();
+  }, []);
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    try {
+      const farmCrop: any = {
+        farmId: farmRef?.value,
+        cropId: cropRef?.value
+      };
+      await api.post('/farmableLandCrop', farmCrop);
+      setBack(true);
+    } catch(err) {
+      console.log(err);
+    }
+  };
 
   return (
     <IonPage>
@@ -39,6 +63,45 @@ const CreateCrop: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <form className="ion-padding" onSubmit={(event) => { handleSubmit(event) }}>
+          <IonItem>
+            <IonLabel position="floating">Terreno</IonLabel>
+            <IonSelect
+              ref={(farmRef) => { setFarmRef(farmRef) }}
+              name="type"
+            >
+              {
+                farms.map((farm, index) => {
+                  return (
+                    <IonSelectOption value={farm.id} key={index}>
+                      {farm.name}
+                    </IonSelectOption>
+                  );
+                })
+              }
+            </IonSelect>
+          </IonItem>
+          <IonItem>
+            <IonLabel position="floating">Cultivo</IonLabel>
+            <IonSelect
+              ref={(cropRef) => { setCropRef(cropRef) }}
+              name="type"
+            >
+              {
+                crops.map((crop, index) => {
+                  return (
+                    <IonSelectOption value={crop.id} key={index}>
+                      {crop.alias}
+                    </IonSelectOption>
+                  );
+                })
+              }
+            </IonSelect>
+          </IonItem>
+          <IonButton className="ion-margin-top" type="submit" expand="block">
+            Crear
+          </IonButton>
+        </form>
       </IonContent>
     </IonPage>
   );

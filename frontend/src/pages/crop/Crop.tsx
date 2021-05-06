@@ -4,7 +4,7 @@ import {
   IonCardContent, IonItem, IonIcon, IonLabel, IonButton,
   IonImg, IonButtons, IonMenuButton
 } from '@ionic/react';
-import { add } from 'ionicons/icons';
+import { add, create as createIcon, trash } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
 
@@ -15,13 +15,13 @@ const Crop: React.FC = () => {
   const api = getApi();
   const [create, setCreate] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
-  const [cropId, setCropId] = useState<number>(0);
-  const [crops, setCrops] = useState<Array<any>>([]);
+  const [farmId, setFarmId] = useState<number>(0);
+  const [farms, setFarms] = useState<Array<any>>([]);
 
   useEffect(() => {
     (async () => {
       const { data } = await api.get('/farmableLandCrop');
-      setCrops(data.lands);
+      setFarms(data.lands);
     })();
   }, []);
 
@@ -35,7 +35,7 @@ const Crop: React.FC = () => {
       {
         update
         &&
-        <Redirect to={`/dashboard/page/Crop/${cropId}/update`} push={true} exact={true} />
+        <Redirect to={`/dashboard/page/Crop/${farmId}/update`} push={true} exact={true} />
       }
       <IonHeader>
         <IonToolbar>
@@ -52,20 +52,30 @@ const Crop: React.FC = () => {
       </IonHeader>
       <IonContent>
         {
-          crops.map((crop, index) => {
+          farms.map((farm, index) => {
             return (
               <IonCard key={index}>
                 <IonCardHeader>
-                  <IonCardTitle>{crop.name}</IonCardTitle>
-                  <IonCardSubtitle>{crop.crops.length} cultivos</IonCardSubtitle>
-                  <IonButton
-                    fill="outline" slot="end"
-                    onClick={() => {setUpdate(true)}}
-                  >
-                    Editar
-                  </IonButton>
+                  <IonCardTitle>{farm.name}</IonCardTitle>
+                  <IonCardSubtitle>{farm.crops.length} cultivo(s)</IonCardSubtitle>
                 </IonCardHeader>
                 <IonCardContent>
+                  <IonItem>
+                    <IonLabel>Acciones</IonLabel>
+                    <IonButton
+                      fill="outline" slot="end"
+                      onClick={() => {
+                        setFarmId(farm.id)
+                        setUpdate(true)
+                      }}>
+                        <IonIcon icon={createIcon} />
+                    </IonButton>
+                    <IonButton
+                      fill="outline" slot="end" color="danger"
+                      onClick={() => {setUpdate(true)}}>
+                        <IonIcon icon={trash} />
+                    </IonButton>
+                  </IonItem>
                 </IonCardContent>
               </IonCard>
             );

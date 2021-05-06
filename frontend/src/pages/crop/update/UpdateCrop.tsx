@@ -2,23 +2,50 @@ import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
   IonCardContent, IonItem, IonIcon, IonLabel, IonButton,
-  IonImg, IonButtons, IonMenuButton
+  IonImg, IonButtons, IonMenuButton, IonSelect, IonSelectOption, IonInput
 } from '@ionic/react';
-import { arrowBack, arrowBackCircle } from 'ionicons/icons';
+import { add, arrowBack, arrowBackCircle, trash } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
 
 import { getApi } from '../../../services/utils';
 import './UpdateCrop.css';
 
-const UpdateCrop: React.FC = () => {
+const UpdateCrop: React.FC = (props: any) => {
   const api = getApi();
   const [back, setBack] = useState<boolean>(false);
+  const [farms, setFarms] = useState<Array<any>>([]);
+  const [crops, setCrops] = useState<Array<any>>([]);
+  const [farmCrops, setFarmCrops] = useState<Array<any>>([]);
+  const [farmableLandId, setFarmableLandId] = useState<any | null>(null);
+  const [farmRef, setFarmRef] = useState<HTMLIonSelectElement | null>(null);
+  const [cropRef, setCropRef] = useState<HTMLIonSelectElement | null>(null);
 
   useEffect(() => {
     (async () => {
+      const farmId = props.match.params.id;
+      const { data } = await api.get(`/farmableLandCrop?id=${farmId}`);
+      setFarmableLandId(farmId);
+      setFarmCrops(data.lands[0].crops);
     })();
-  });
+    (async () => {
+      const { data } = await api.get('/farmableLand');
+      setFarms(data.lands);
+    })();
+    (async () => {
+      const { data } = await api.get('/crop');
+      setCrops(data.crops);
+    })();
+  }, []);
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    try {
+
+    } catch(err) {
+      console.log(err);
+    }
+  };
 
   return (
     <IonPage>
@@ -39,6 +66,72 @@ const UpdateCrop: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <form className="ion-padding" onSubmit={(event) => { handleSubmit(event) }}>
+          <IonItem>
+            <IonLabel position="floating">Terreno</IonLabel>
+            <IonSelect
+              ref={(farmRef) => { setFarmRef(farmRef) }}
+              name="type" value={farmableLandId}
+            >
+              {
+                farms.map((farm, index) => {
+                  return (
+                    <IonSelectOption value={farm.id} key={index}>
+                      {farm.name}
+                    </IonSelectOption>
+                  );
+                })
+              }
+            </IonSelect>
+          </IonItem>
+          {
+            farmCrops.map((farmCrop, index) => {
+              if (farmCrop) {
+                return (
+                  <IonItem key={index}>
+                    <IonLabel position="floating">{farmCrop.name}</IonLabel>
+                    <IonInput
+                      type="text" disabled
+                      value={`${farmCrop.alias}, ${farmCrop.description}`}
+                    />
+                    <IonButton slot="end" color="danger" onClick={() => {
+                      delete farmCrops[index];
+                      setFarmCrops([...farmCrops]);
+                    }}>
+                      <IonIcon slot="icon-only" ios={trash} md={trash} />
+                    </IonButton>
+                  </IonItem>
+                );
+              }
+            })
+          }
+          <IonItem>
+            <IonLabel position="floating">Cultivo</IonLabel>
+            <IonSelect
+              ref={(cropRef) => { setCropRef(cropRef) }}
+              name="type"
+            >
+              {
+                crops.map((crop, index) => {
+                  return (
+                    <IonSelectOption value={crop} key={index}>
+                      {crop.name}
+                    </IonSelectOption>
+                  );
+                })
+              }
+            </IonSelect>
+            <IonButton slot="end" color="primary" onClick={() => {
+              if(cropRef?.value)
+                setFarmCrops([...farmCrops, cropRef?.value]);
+            }}>
+              <IonIcon slot="icon-only" ios={add} md={add} />
+            </IonButton>
+          </IonItem>
+          <IonButton className="ion-margin-top" type="submit" expand="block">
+            Guardar
+          </IonButton>
+        </form>
       </IonContent>
     </IonPage>
   );
