@@ -2,40 +2,45 @@ import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
   IonCardContent, IonItem, IonIcon, IonLabel, IonButton,
-  IonImg, IonButtons
+  IonImg, IonButtons, IonMenuButton
 } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router';
 
 import { getApi } from '../../services/utils';
 import './Crop.css';
-
-import CreateCrop from './create/CreateCrop';
-import UpdateCrop from './update/UpdateCrop';
 
 const Crop: React.FC = () => {
   const api = getApi();
   const [create, setCreate] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
-  const [farmableLandId, setFarmableLandId] = useState<number>(0);
-  const [farmableLands, setFarmableLands] = useState<Array<any>>([]);
+  const [cropId, setCropId] = useState<number>(0);
+  const [crops, setCrops] = useState<Array<any>>([]);
 
   useEffect(() => {
     (async () => {
     })();
   });
 
-  if (create)
-  {
-    return(<CreateCrop setCreate={setCreate} />);
-  } else if(update) {
-    return(<UpdateCrop setUpdate={setUpdate} farmableLandId={farmableLandId} />);
-  } else
   return (
     <IonPage>
+      {
+        create
+        &&
+        <Redirect to="/dashboard/page/Crop/create" push={true} exact={true} />
+      }
+      {
+        update
+        &&
+        <Redirect to={`/dashboard/page/Crop/${cropId}/update`} push={true} exact={true} />
+      }
       <IonHeader>
         <IonToolbar>
           <IonTitle>Crop</IonTitle>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
           <IonButtons slot="primary">
             <IonButton onClick={() => {setCreate(true)}}>
               <IonIcon slot="icon-only" icon={add} />
@@ -45,15 +50,15 @@ const Crop: React.FC = () => {
       </IonHeader>
       <IonContent>
         {
-          farmableLands.map((farmableLand, index) => {
+          crops.map((crop, index) => {
             return (
               <IonCard>
-                <IonImg src={farmableLand.image}
+                <IonImg src={crop.image}
                         class="img-farmable-land" />
                 <IonCardHeader>
-                  <IonCardTitle>{farmableLand.type}</IonCardTitle>
-                  <IonCardSubtitle>{farmableLand.area} m^2</IonCardSubtitle>
-                  <IonButton 
+                  <IonCardTitle>{crop.type}</IonCardTitle>
+                  <IonCardSubtitle>{crop.area} m^2</IonCardSubtitle>
+                  <IonButton
                     fill="outline" slot="end"
                     onClick={() => {setUpdate(true)}}
                   >

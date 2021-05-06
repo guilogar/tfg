@@ -9,33 +9,13 @@ import { isLogged, getWindowDimensions } from '../../services/utils';
 import Menu from '../../components/Menu';
 import Home from '../home/Home';
 import Settings from '../settings/Settings';
-import FarmableLand from '../farmable-land/FarmableLand';
 import Crop from '../crop/Crop';
 import Events from '../events/Events';
 import MethodPay from '../method-pay/MethodPay';
 import Phytosanitary from '../phytosanitary/Phytosanitary';
 
-/* Core CSS required for Ionic components to work properly */
-import '@ionic/react/css/core.css';
-
-/* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css';
-import '@ionic/react/css/structure.css';
-import '@ionic/react/css/typography.css';
-
-/* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css';
-import '@ionic/react/css/float-elements.css';
-import '@ionic/react/css/text-alignment.css';
-import '@ionic/react/css/text-transformation.css';
-import '@ionic/react/css/flex-utils.css';
-import '@ionic/react/css/display.css';
-
-/* Theme variables */
-import '../../theme/variables.css';
-import CreateFarmableLand from '../farmable-land/create/CreateFarmableLand';
-import UpdateFarmableLand from '../farmable-land/update/UpdateFarmableLand';
-import Login from '../login/Login';
+import FarmableLandRoute from '../routes/farmable-land-routes';
+import CropRoute from '../routes/crop-routes';
 
 const Dashboard: React.FC = () => {
   const [isLog, setIsLog] = useState(isLogged());
@@ -75,20 +55,8 @@ const Dashboard: React.FC = () => {
               <Route path="/dashboard/page/Home" exact={true}>
                 <Home />
               </Route>
-              <Route path="/dashboard/page/FarmableLand" exact={true}>
-                <FarmableLand />
-              </Route>
-              <Route path="/dashboard/page/FarmableLand/create" exact={true}>
-                <CreateFarmableLand />
-              </Route>
-              <Route
-                path="/dashboard/page/FarmableLand/:id/update"
-                exact={true} component={UpdateFarmableLand}
-              >
-              </Route>
-              <Route path="/dashboard/page/Crop" exact={true}>
-                <Crop />
-              </Route>
+              {FarmableLandRoute}
+              {CropRoute}
               <Route path="/dashboard/page/Event" exact={true}>
                 <Events />
               </Route>

@@ -2,44 +2,36 @@ import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
   IonCardContent, IonItem, IonIcon, IonLabel, IonButton,
-  IonImg, IonButtons
+  IonImg, IonButtons, IonMenuButton
 } from '@ionic/react';
 import { arrowBack, arrowBackCircle } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
-import CanvasDraw from "react-canvas-draw";
+import { Redirect } from 'react-router';
 
 import { getApi } from '../../../services/utils';
 import './UpdateCrop.css';
 
-const UpdateCrop: React.FC<{ farmableLandId: number, setUpdate: Function }> = ( { farmableLandId, setUpdate } ) => {
-  const [message, setMessage] = useState<string>('');
+const UpdateCrop: React.FC = () => {
   const api = getApi();
-  let saveableCanvas: any = undefined;
+  const [back, setBack] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
-      const { data } = await api.get('/farmableLandTypes');
-
-      let msg = '';
-      for (const type of data.types) {
-        msg += type + ', ';
-      }
-      setMessage(msg);
-      console.log(data);
-      
-      // const canvasData = saveableCanvas.getSaveData();
-      // saveableCanvas.loadSaveData(canvasData);
-      // saveableCanvas.undo();
-      // saveableCanvas.clear();
     })();
   });
 
   return (
     <IonPage>
+      {
+        back
+        &&
+        <Redirect to="/dashboard/page/Crop" exact={true} />
+      }
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton onClick={() => {setUpdate(false)}}>
+            <IonMenuButton />
+            <IonButton onClick={() => { setBack(true) }}>
               <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
             </IonButton>
           </IonButtons>
