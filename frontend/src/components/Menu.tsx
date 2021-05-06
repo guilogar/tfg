@@ -42,7 +42,7 @@ const appPages: AppPage[] = [
   },
   {
     title: 'Eventos',
-    url: '/dashboard/page/Event',
+    url: '/dashboard/page/Events',
     iosIcon: archiveOutline,
     mdIcon: archiveSharp
   },

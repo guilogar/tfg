@@ -12,27 +12,31 @@ import './MethodPay.css';
 
 import CreateMethodPay from './create/CreateMethodPay';
 import UpdateMethodPay from './update/UpdateMethodPay';
+import { Redirect } from 'react-router';
 
 const MethodPay: React.FC = () => {
   const api = getApi();
   const [create, setCreate] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
-  const [farmableLandId, setFarmableLandId] = useState<number>(0);
-  const [farmableLands, setFarmableLands] = useState<Array<any>>([]);
+  const [methodPayId, setMethodPayId] = useState<number>(0);
 
   useEffect(() => {
     (async () => {
     })();
   });
 
-  if (create)
-  {
-    return(<CreateMethodPay setCreate={setCreate} />);
-  } else if(update) {
-    return(<UpdateMethodPay setUpdate={setUpdate} farmableLandId={farmableLandId} />);
-  } else
   return (
     <IonPage>
+      {
+        create
+        &&
+        <Redirect to="/dashboard/page/MethodPay/create" push={true} exact={true} />
+      }
+      {
+        update
+        &&
+        <Redirect to={`/dashboard/page/MethodPay/${methodPayId}/update`} push={true} exact={true} />
+      }
       <IonHeader>
         <IonToolbar>
           <IonTitle>MethodPay</IonTitle>
@@ -44,28 +48,6 @@ const MethodPay: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        {
-          farmableLands.map((farmableLand, index) => {
-            return (
-              <IonCard>
-                <IonImg src={farmableLand.image}
-                        class="img-farmable-land" />
-                <IonCardHeader>
-                  <IonCardTitle>{farmableLand.type}</IonCardTitle>
-                  <IonCardSubtitle>{farmableLand.area} m^2</IonCardSubtitle>
-                  <IonButton 
-                    fill="outline" slot="end"
-                    onClick={() => {setUpdate(true)}}
-                  >
-                    Editar
-                  </IonButton>
-                </IonCardHeader>
-                <IonCardContent>
-                </IonCardContent>
-              </IonCard>
-            );
-          })
-        }
       </IonContent>
     </IonPage>
   );

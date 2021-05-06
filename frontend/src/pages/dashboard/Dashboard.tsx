@@ -9,13 +9,12 @@ import { isLogged, getWindowDimensions } from '../../services/utils';
 import Menu from '../../components/Menu';
 import Home from '../home/Home';
 import Settings from '../settings/Settings';
-import Crop from '../crop/Crop';
-import Events from '../events/Events';
-import MethodPay from '../method-pay/MethodPay';
-import Phytosanitary from '../phytosanitary/Phytosanitary';
 
 import FarmableLandRoute from '../routes/farmable-land-routes';
 import CropRoute from '../routes/crop-routes';
+import EventsRoute from '../routes/event-routes';
+import PhytosanitaryRoute from '../routes/phytosanitary-routes';
+import MethodPayRoute from '../routes/method-pay-routes';
 
 const Dashboard: React.FC = () => {
   const [isLog, setIsLog] = useState(isLogged());
@@ -57,15 +56,9 @@ const Dashboard: React.FC = () => {
               </Route>
               {FarmableLandRoute}
               {CropRoute}
-              <Route path="/dashboard/page/Event" exact={true}>
-                <Events />
-              </Route>
-              <Route path="/dashboard/page/MethodPay" exact={true}>
-                <MethodPay />
-              </Route>
-              <Route path="/dashboard/page/Phytosanitary" exact={true}>
-                <Phytosanitary />
-              </Route>
+              {EventsRoute}
+              {PhytosanitaryRoute}
+              {MethodPayRoute}
               <Route path="/dashboard/page/Setting" exact={true}>
                 <Settings />
               </Route>
