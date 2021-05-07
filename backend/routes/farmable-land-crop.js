@@ -87,13 +87,69 @@ router.post('/farmableLandCrop', async (req, res) => {
   }
 });
 
-router.delete('/farmableLandCrop/:id', async (req, res) => {
+router.put('/farmableLandCrop/:farmId', async (req, res) => {
+  const jwt = getJwtFromRequest(req);
+  const user = await getUserFromJwt(jwt);
+
+  try {
+    let farm = await FarmableLand.findOne({
+      where: {
+        id: req.params.farmId,
+        UserId: user.id
+      }
+    });
+
+    if(farm) {
+      await FarmableLandCrop.destroy({
+        where: {
+          FarmableLandId: req.params.farmId
+        }
+      });
+
+      farm = await FarmableLand.findOne({
+        where: {
+          id: req.body.farmId,
+          UserId: user.id
+        }
+      });
+
+      if(farm) {
+        const crops = req.body.crops;
+
+        for (const crop of crops) {
+          await FarmableLandCrop.create({
+            FarmableLandId: req.body.farmId,
+            CropId: crop.id
+          });
+        }
+        req.url = `/farmableLandCrop?id=${req.body.farmId}`
+        req.method = `GET`;
+        return router.handle(req, res);
+      } else {
+        res.status(404).send({
+          error: 'not farm allowed'
+        });
+      }
+    } else {
+      res.status(404).send({
+        error: 'not farm allowed'
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(412).send({
+      error: 'unknow error'
+    });
+  }
+});
+
+router.delete('/farmableLandCrop/:farmId', async (req, res) => {
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
 
   await FarmableLandCrop.destroy({
     where: {
-      id: req.params.id,
+      FarmableLandId: req.params.farmId,
       UserId: user.id
     }
   });

@@ -41,7 +41,15 @@ const UpdateCrop: React.FC = (props: any) => {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     try {
-
+      const farmId = farmRef?.value;
+      const crops = farmCrops.filter((farmCrop) => {
+        return farmCrop !== null && farmCrop !== undefined;
+      });
+      await api.put(`/farmableLandCrop/${farmableLandId}`, {
+        farmId: farmId,
+        crops: crops
+      });
+      setBack(true);
     } catch(err) {
       console.log(err);
     }
