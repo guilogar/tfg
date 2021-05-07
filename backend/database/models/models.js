@@ -11,6 +11,7 @@ const FarmableLandCrop = require('./FarmableLandCrop');
 const CropPhytosanitary = require('./CropPhytosanitary');
 const FirebaseToken = require('./FirebaseToken');
 const UserSensor = require('./UserSensor');
+const Irrigate = require('./Irrigate');
 
 module.exports = [
   User, UserSettings, Auth,
@@ -18,5 +19,5 @@ module.exports = [
   Event, UserEvent, Crop,
   Phytosanitary, FarmableLandCrop,
   CropPhytosanitary, FirebaseToken,
-  UserSensor
+  UserSensor, Irrigate
 ];
