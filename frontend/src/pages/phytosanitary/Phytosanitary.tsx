@@ -23,7 +23,6 @@ const Phytosanitary: React.FC = () => {
   useEffect(() => {
     (async () => {
       const { data } = await api.get('/cropPhytosanitary');
-      console.log(data.lands);
       setFarms(data.lands);
     })();
   }, []);

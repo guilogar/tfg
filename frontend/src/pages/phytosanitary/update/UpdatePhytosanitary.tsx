@@ -35,7 +35,6 @@ const UpdatePhytosanitary: React.FC = (props: any) => {
     })();
     (async () => {
       const { data } = await api.get('/phytosanitary');
-      console.log(data);
       setPhytosanitarys(data.phytosanitarys);
     })();
     (async () => {
