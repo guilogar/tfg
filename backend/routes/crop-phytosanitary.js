@@ -90,34 +90,37 @@ router.get('/cropPhytosanitary', async (req, res) => {
   });
 });
 
-router.post('/cropPhytosanitary/:farmId', async (req, res) => {
-  // const jwt = getJwtFromRequest(req);
-  // const user = await getUserFromJwt(jwt);
+router.post('/cropPhytosanitary', async (req, res) => {
+  const jwt = getJwtFromRequest(req);
+  const user = await getUserFromJwt(jwt);
 
-  // try {
-  //   const farm = await FarmableLand.findOne({
-  //     id: req.body.farmId,
-  //     UserId: user.id
-  //   });
+  try {
+    const farm = await FarmableLand.findOne({
+      where: {
+        id: req.body.farmId,
+        UserId: user.id
+      }
+    });
 
-  //   if(farm) {
-  //     const farmableLandCrop = await FarmableLandCrop.create({
-  //       FarmableLandId: req.body.farmId,
-  //       CropId: req.body.cropId
-  //     });
-  //     res.status(200).send({
-  //       farmableLandCrop: farmableLandCrop
-  //     });
-  //   } else {
-  //     res.status(404).send({
-  //       error: 'not farm allowed'
-  //     });
-  //   }
-  // } catch (error) {
-  //   res.status(412).send({
-  //     error: 'unknow error'
-  //   });
-  // }
+    if(farm) {
+      await CropPhytosanitary.create({
+        FarmableLandId: req.body.farmId,
+        CropId: req.body.cropId,
+        PhytosanitaryId: req.body.phytosanitaryId
+      });
+      req.url = `/cropPhytosanitary?farmId=${req.params.farmId}&cropId=${req.body.cropId}`
+      req.method = `GET`;
+      return router.handle(req, res);
+    } else {
+      res.status(404).send({
+        error: 'not farm allowed'
+      });
+    }
+  } catch (error) {
+    res.status(412).send({
+      error: 'unknow error'
+    });
+  }
 });
 
 router.put('/cropPhytosanitary/:farmId/:cropId', async (req, res) => {
