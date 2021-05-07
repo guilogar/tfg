@@ -12,7 +12,7 @@ export default [
     <CreatePhytosanitary />
   </Route>,
   <Route
-    path="/dashboard/page/Phytosanitary/:id/update" key={index++}
+    path="/dashboard/page/Phytosanitary/:farmId/:cropId/update" key={index++}
     exact={true} component={UpdatePhytosanitary}
   >
   </Route>,

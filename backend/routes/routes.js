@@ -6,9 +6,12 @@ const crops = require('./crops');
 const events = require('./events');
 const settings = require('./settings');
 const notifications = require('./notifications');
+const phytosanitary = require('./phytosanitarys');
+const cropPhytosanitary = require('./crop-phytosanitary');
 
 module.exports = [
   registryLogin, users, farmableLand,
   farmableLandCrop, crops, events,
-  settings, notifications
+  settings, notifications, phytosanitary,
+  cropPhytosanitary
 ];

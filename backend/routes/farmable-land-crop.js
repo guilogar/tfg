@@ -10,14 +10,14 @@ const Crop = require('../database/models/Crop');
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
 
 router.get('/farmableLandCrop', async (req, res) => {
-  const id = (req.query.id !== undefined) ? JSON.parse(req.query.id) : undefined;
+  const farmId = (req.query.farmId !== undefined) ? JSON.parse(req.query.farmId) : undefined;
 
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
 
-  const where = (id !== undefined) ? {
+  const where = (farmId !== undefined) ? {
     UserId: user.id,
-    id: id
+    id: farmId
   } : {
     UserId: user.id
   };
@@ -44,9 +44,9 @@ router.get('/farmableLandCrop', async (req, res) => {
         }
       });
 
-      crops.map((crop) => {
+      for(const crop of crops) {
         farmableLand.crops.push(crop.toJSON());
-      });
+      }
     }
 
     farmableLands.push(farmableLand);

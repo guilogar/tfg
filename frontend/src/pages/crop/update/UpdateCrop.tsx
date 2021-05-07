@@ -16,15 +16,17 @@ const UpdateCrop: React.FC = (props: any) => {
   const [back, setBack] = useState<boolean>(false);
   const [farms, setFarms] = useState<Array<any>>([]);
   const [crops, setCrops] = useState<Array<any>>([]);
+
   const [farmCrops, setFarmCrops] = useState<Array<any>>([]);
   const [farmableLandId, setFarmableLandId] = useState<any | null>(null);
+
   const [farmRef, setFarmRef] = useState<HTMLIonSelectElement | null>(null);
   const [cropRef, setCropRef] = useState<HTMLIonSelectElement | null>(null);
 
   useEffect(() => {
     (async () => {
       const farmId = props.match.params.id;
-      const { data } = await api.get(`/farmableLandCrop?id=${farmId}`);
+      const { data } = await api.get(`/farmableLandCrop?farmId=${farmId}`);
       setFarmableLandId(farmId);
       setFarmCrops(data.lands[0].crops);
     })();
