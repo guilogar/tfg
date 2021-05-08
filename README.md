@@ -1,9 +1,9 @@
 # tfg
 Repository for make final degree project
 
-## To Create and Compile new Stream Analytic Job's
+## To Create and Compile new Stream Analytic Job's (Optional)
 ```
-Install dotnet
+Install dotnet:
 https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-3.1.408-windows-x64-installer
 https://dotnet.microsoft.com/download/dotnet/3.0/runtime/?utm_source=getdotnetcore&utm_medium=referral
 
@@ -15,7 +15,7 @@ https://docs.microsoft.com/en-us/azure/stream-analytics/quick-create-visual-stud
 ### backend/.env
 ```
 DATABASE_NAME=smartrural
-DATABASE_USERNAME=smartrural@smartrural
+DATABASE_USERNAME=smartrural
 DATABASE_PASSWORD=smartrural
 DATABASE_HOST=localhost
 DATABASE_DIALECT=postgres
@@ -30,6 +30,7 @@ COSMOS_CONTAINER_ID=...
 ### frontend/.env
 ```
 REACT_APP_BACKEND_HOST=http://localhost:3000
+REACT_APP_CHECK_SESSION_TIME=1000000
 ```
 The environment variables of frontend must always start with "REACT_APP_" prefix
 
@@ -93,4 +94,12 @@ ionic serve
 cd frontend
 ionic build
 npx serve -s build
+```
+
+## Build frontend for android
+```
+cd frontend
+ionic build
+ionic capacitor build android
+ionic capacitor run android
 ```
