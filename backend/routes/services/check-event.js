@@ -5,41 +5,40 @@ const UserSensor = require('../../database/models/UserSensor');
 const checkEvent = async (cosmosData = []) => {
   let eventsCheck = [];
 
-  const events = await Event.findAll();
-  for(const event of events)
+  for(const item of cosmosData)
   {
-    for(const item of cosmosData)
+    const sensorId = item['sensorId'];
+
+    const usersEvents = await UserEvent.findAll({
+      include: [
+        { model: Event }
+      ]
+    });
+    for(const userEvent of usersEvents)
     {
-      const value = item[event.name.toLowerCase()];
-      const sensorId = item['sensorId'];
-
-      const usersEvents = await UserEvent.findAll();
-      for(const userEvent of usersEvents)
+      const value = item[userEvent.Event.name.toLowerCase()];
+      if(value > userEvent.maxValue || value < userEvent.minValue)
       {
-        if(value > userEvent.maxValue || value < userEvent.minValue)
-        {
-          const sensor = await UserSensor.findOne({
-            where: {
-              id: sensorId
-            }
-          });
-
-          if(sensor)
-          {
-            eventsCheck.push({
-              userId: sensor.UserId,
-              sensorId: sensor.id,
-              eventId: event.id,
-              userEventId: userEvent.id,
-              action: userEvent.action,
-              value: value
-            });
+        const sensor = await UserSensor.findOne({
+          where: {
+            id: sensorId
           }
+        });
+
+        if(sensor)
+        {
+          eventsCheck.push({
+            userId: sensor.UserId,
+            sensorId: sensor.id,
+            eventId: userEvent.EventId,
+            userEventId: userEvent.id,
+            action: userEvent.action,
+            value: value
+          });
         }
       }
     }
   }
-
   return eventsCheck;
 };
 

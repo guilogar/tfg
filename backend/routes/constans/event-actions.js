@@ -11,6 +11,6 @@ const HumidityAction = async () => {
 };
 
 module.exports = {
-  TEMPERATUTE: TemperatureAction,
-  HUMIDITY: HumidityAction
+  'TEMPERATURE': TemperatureAction,
+  'HUMIDITY': HumidityAction
 };

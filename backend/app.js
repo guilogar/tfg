@@ -57,55 +57,63 @@ const Event = require('./database/models/Event');
 const ACTIONS = require('./routes/constans/event-actions');
 
 cron.schedule('* * * * *', async () => {
-  const items = await getAllEventFromCosmos();
-  const eventsFired = await checkEvent(items);
-
-  for(const eventFired of eventsFired)
+  try
   {
-    const { userId, sensorId, eventId, userEventId, value } = eventFired;
+    const items = await getAllEventFromCosmos();
+    const eventsFired = await checkEvent(items);
+    for (const eventFired of eventsFired)
+    {
+      const {
+        userId, sensorId, eventId,
+        userEventId, value, action
+      } = eventFired;
 
-    const userSensor = await UserSensor.findOne({
-      where: {
-        id: sensorId
+      const userSensor = await UserSensor.findOne({
+        where: {
+          id: sensorId
+        }
+      });
+
+      const event = await Event.findOne({
+        where: {
+          id: eventId
+        }
+      });
+
+      if(action === 'AUTOMATIC') {
+        const actionFunction = ACTIONS[event.name];
+        await actionFunction();
       }
-    });
 
-    const event = await Event.findOne({
-      where: {
-        id: eventId
+      const body = (action === 'AUTOMATIC' ?
+        `El Evento ${event.name} ha sido disparado con el ` +
+        `sensor "${userSensor.name}" y el valor ${value}. ` +
+        `Se ha realizado la accion automatizada.` +
+        `Clicke aquí para mas información.`
+        :
+        `El Evento ${event.name} ha sido disparado con el ` +
+        `sensor "${userSensor.name}" y el valor ${value}. ` +
+        `Clicke aquí para realizar la acción asociada al evento.`);
+
+      const notification = {
+        title: `Evento ${event.name}`,
+        body: body
+      };
+      try {
+        const response = await sendNotificationToUser(userId, notification);
+        // console.log(response);
+      } catch (error) {
+        console.log(error);
       }
-    });
 
-    if(eventFired.action === 'AUTOMATIC') {
-      const action = ACTIONS[event.name];
-      await action();
+      try {
+        await removeEventsFromCosmos(items);
+      } catch (error) {
+        // console.log(error);
+      }
     }
-
-    const body = (eventFired.action === 'AUTOMATIC' ?
-      `El Evento ${event.name} ha sido disparado con el ` +
-      `sensor "${userSensor.name}" y el valor ${value}. ` +
-      `Se ha realizado la accion automatizada.` +
-      `Clicke aquí para mas información.`
-      :
-      `El Evento ${event.name} ha sido disparado con el ` +
-      `sensor "${userSensor.name}" y el valor ${value}. ` +
-      `Clicke aquí para realizar la acción asociada al evento.`);
-
-    const notification = {
-      title: `Evento ${event.name}`,
-      body: body
-    };
-    try {
-      await sendNotificationToUser(userId, notification);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  try {
-    await removeEventsFromCosmos(items);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 });
 
