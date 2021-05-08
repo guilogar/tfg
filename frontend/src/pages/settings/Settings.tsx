@@ -7,9 +7,11 @@ import { moon } from "ionicons/icons";
 import "./Settings.css";
 
 import { getApi } from "../../services/utils";
+import { Redirect } from "react-router";
 
 const Settings: React.FC = () => {
   const api = getApi();
+  const [back, setBack] = useState<boolean>(false);
 
   const [languageRef, setLanguageRef] = useState<HTMLIonSelectElement | null>(null);
   const [eventActionRef, setEventActionRef] = useState<HTMLIonSelectElement | null>(null);
@@ -48,6 +50,7 @@ const Settings: React.FC = () => {
         defaultLanguage: languageRef?.value,
         defaultEventAction: eventActionRef?.value
       });
+      setBack(true);
     } catch(err) {
       console.log(err);
     }
@@ -55,6 +58,11 @@ const Settings: React.FC = () => {
 
   return (
     <IonPage>
+      {
+        back
+        &&
+        <Redirect to="/dashboard" exact={true} />
+      }
       <IonHeader>
         <IonToolbar>
           <IonTitle>Settings</IonTitle>

@@ -71,10 +71,10 @@ async function insertDataTable()
     'MANUAL', 60, 65
   );
 
-  await createFirebaseToken(
-    user.id,
-    'clCwbQFtRniHqXbIEAJw7k:APA91bEPXfL5UtQGYM2tZ7tnWfgnpiq95AlCEznEJhmOqXMFP1M8yTMIQQgSXW4uCWM9Qm0DiatEsG6ulHTxFGE4LgmA8LtQ__Kpsg0ME6dj5taId4mlwlCdwb3jMVPbDgAStGPEONY6'
-  );
+  // await createFirebaseToken(
+  //   user.id,
+  //   'clCwbQFtRniHqXbIEAJw7k:APA91bEPXfL5UtQGYM2tZ7tnWfgnpiq95AlCEznEJhmOqXMFP1M8yTMIQQgSXW4uCWM9Qm0DiatEsG6ulHTxFGE4LgmA8LtQ__Kpsg0ME6dj5taId4mlwlCdwb3jMVPbDgAStGPEONY6'
+  // );
 
   await createCrop(
     'PEA', 'El cultivo del guisante al exterior',

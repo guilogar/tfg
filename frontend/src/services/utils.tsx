@@ -62,7 +62,6 @@ export const pushNotifications = async () => {
     (token: PushNotificationToken) => {
       try {
         localStorage.setItem('pushNotificationToken', token.value);
-        alert(token.value);
       } catch (error) {
         alert('error on save pushNotificationToken');
       }
