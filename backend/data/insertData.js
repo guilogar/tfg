@@ -47,14 +47,14 @@ async function insertDataTable()
   for(let i = 0; i < 100; i++)
   {
     await createSensor(
-      user.id, (Math.random > 0.5) ? farm1.id : farm2.id
+      user.id, (Math.random() > 0.5) ? farm1.id : farm2.id
     );
   }
 
   for(let i = 0; i < 5; i++)
   {
     await createIrrigate(
-      36.3, 60, (Math.random > 0.5) ? farm1.id : farm2.id
+      36.3, 60, (Math.random() > 0.5) ? farm1.id : farm2.id
     );
   }
 
