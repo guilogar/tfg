@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const Event = require('../database/models/Event');
+const User = require('../database/models/User');
 const UserEvent = require('../database/models/UserEvent');
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
 
@@ -22,7 +23,15 @@ router.get('/events', async (req, res) => {
   });
 });
 
-router.get('/my-events', async (req, res) => {
+router.get('/event-actions', async (req, res) => {
+  res.status(200).send({
+    actions: [
+      'AUTOMATIC', 'MANUAL'
+    ]
+  });
+});
+
+router.get('/user-events', async (req, res) => {
   const id = (req.query.id !== undefined) ? JSON.parse(req.query.id) : undefined;
 
   const jwt = getJwtFromRequest(req);
@@ -34,8 +43,11 @@ router.get('/my-events', async (req, res) => {
   } : {
     UserId: user.id
   };
-  const events = await Event.findAll({
-    where: where
+  const events = await UserEvent.findAll({
+    where: where,
+    include: [
+      { model: Event }
+    ]
   });
 
   res.status(200).send({
@@ -43,7 +55,7 @@ router.get('/my-events', async (req, res) => {
   });
 });
 
-router.post('/my-events', async (req, res) => {
+router.post('/user-events', async (req, res) => {
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
 
@@ -66,28 +78,28 @@ router.post('/my-events', async (req, res) => {
   }
 });
 
-router.put('/my-events/:id', async (req, res) => {
+router.put('/user-events/:id', async (req, res) => {
   const id = req.params.id;
 
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
 
   try {
-    let myEvent = await UserEvent.findOne({
+    let userEvent = await UserEvent.findOne({
       where: {
         id: id,
         UserId: user.id
       }
     });
 
-    myEvent = await myEvent.update({
+    userEvent = await userEvent.update({
       action: req.body.action,
       minValue: req.body.minValue,
       maxValue: req.body.maxValue,
     });
 
     res.status(200).send({
-      userEvent: myEvent
+      userEvent: userEvent
     });
   } catch (error) {
     res.status(404).send({
@@ -96,7 +108,7 @@ router.put('/my-events/:id', async (req, res) => {
   }
 });
 
-router.delete('/my-events/:id', async (req, res) => {
+router.delete('/user-events/:id', async (req, res) => {
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
 

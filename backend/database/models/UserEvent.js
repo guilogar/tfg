@@ -20,7 +20,15 @@ UserEvent.init({
   },
   maxValue: {
     type: DataTypes.DOUBLE
-  }
+  },
+  UserId: {
+    type: DataTypes.INTEGER,
+    unique: 'compositeIndex'
+  },
+  EventId: {
+    type: DataTypes.INTEGER,
+    unique: 'compositeIndex'
+  },
 }, {
   sequelize,
   modelName: 'UserEvent',

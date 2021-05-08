@@ -1,9 +1,10 @@
 const UserSensor = require('../../database/models/UserSensor');
 
-const createSensor = async(userId, name = undefined) => {
+const createSensor = async(userId, farmId, name = undefined) => {
   let userSensor = await UserSensor.create({
     name: name,
-    UserId: userId
+    UserId: userId,
+    FarmableLandId: farmId
   });
 
   if(!name)

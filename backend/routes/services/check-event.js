@@ -31,6 +31,7 @@ const checkEvent = async (cosmosData = []) => {
               sensorId: sensor.id,
               eventId: event.id,
               userEventId: userEvent.id,
+              action: userEvent.action,
               value: value
             });
           }

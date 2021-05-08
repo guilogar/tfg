@@ -11,7 +11,7 @@ import { Redirect } from 'react-router';
 import { getApi } from '../../../services/utils';
 import './UpdateEvents.css';
 
-const UpdateEvents: React.FC<{ farmableLandId: number, setUpdate: Function }> = ( { farmableLandId, setUpdate } ) => {
+const UpdateEvents: React.FC = () => {
   const api = getApi();
   const [back, setBack] = useState<boolean>(false);
 

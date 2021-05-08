@@ -54,6 +54,8 @@ const { checkEvent } = require('./routes/services/check-event');
 const UserSensor = require('./database/models/UserSensor');
 const Event = require('./database/models/Event');
 
+const ACTIONS = require('./routes/constans/event-actions');
+
 cron.schedule('* * * * *', async () => {
   const items = await getAllEventFromCosmos();
   const eventsFired = await checkEvent(items);
@@ -74,11 +76,24 @@ cron.schedule('* * * * *', async () => {
       }
     });
 
+    if(eventFired.action === 'AUTOMATIC') {
+      const action = ACTIONS[event.name];
+      await action();
+    }
+
+    const body = (eventFired.action === 'AUTOMATIC' ?
+      `El Evento ${event.name} ha sido disparado con el ` +
+      `sensor "${userSensor.name}" y el valor ${value}. ` +
+      `Se ha realizado la accion automatizada.` +
+      `Clicke aquí para mas información.`
+      :
+      `El Evento ${event.name} ha sido disparado con el ` +
+      `sensor "${userSensor.name}" y el valor ${value}. ` +
+      `Clicke aquí para realizar la acción asociada al evento.`);
+
     const notification = {
       title: `Evento ${event.name}`,
-      body: `El Evento ${event.name} ha sido disparado con el ` +
-            `sensor "${userSensor.name}" y el valor ${value}. ` +
-            `Clicke aquí para mas información.`
+      body: body
     };
     try {
       await sendNotificationToUser(userId, notification);
