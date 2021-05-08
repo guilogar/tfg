@@ -3,6 +3,7 @@ const models = require('../database/models/models');
 const { createFarms } = require('./farms');
 const { createIrrigate } = require('../routes/services/create-irrigate');
 const { createUser } = require('../routes/services/create-user');
+const { createSettings } = require('../routes/services/create-settings');
 const { createSensor } = require('../routes/services/create-sensor');
 const { createEvent, assignEventToUser } = require('../routes/services/create-event');
 const { createFirebaseToken } = require('../routes/services/create-firebase-token');
@@ -39,6 +40,8 @@ async function insertDataTable()
     'Guillermo López García'
   );
 
+  await createSettings(user.id, 'es', 'white', 'AUTOMATIC');
+
   const { farm1, farm2 } = await createFarms(user.id);
 
   for(let i = 0; i < 100; i++)
@@ -57,6 +60,7 @@ async function insertDataTable()
 
   const eventTemperature = await createEvent('TEMPERATURE', 'Temperature Event');
   const eventHumidity = await createEvent('HUMIDITY', 'Humidity Event');
+
   await assignEventToUser(
     user.id, eventTemperature.id,
     'AUTOMATIC', 20, 25

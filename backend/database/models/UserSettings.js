@@ -18,8 +18,12 @@ UserSettings.init({
     type: DataTypes.STRING
   },
   defaultEventAction: {
-    type: DataTypes.ENUM('Automatic', 'Manual')
-  }
+    type: DataTypes.ENUM('AUTOMATIC', 'MANUAL')
+  },
+  UserId: {
+    type: DataTypes.INTEGER,
+    unique: true
+  },
 }, {
   sequelize,
   modelName: 'UserSettings',

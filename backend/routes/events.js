@@ -25,7 +25,7 @@ router.get('/events', async (req, res) => {
 router.get('/event-actions', async (req, res) => {
   res.status(200).send({
     actions: [
-      'AUTOMATIC', 'MANUAL'
+      'AUTOMATIC', 'MANUAL', 'SETTINGS'
     ]
   });
 });

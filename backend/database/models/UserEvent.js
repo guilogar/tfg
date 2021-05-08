@@ -13,7 +13,7 @@ UserEvent.init({
     primaryKey: true
   },
   action: {
-    type: DataTypes.ENUM('AUTOMATIC', 'MANUAL')
+    type: DataTypes.ENUM('AUTOMATIC', 'MANUAL', 'SETTINGS')
   },
   minValue: {
     type: DataTypes.DOUBLE
