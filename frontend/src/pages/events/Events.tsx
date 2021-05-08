@@ -57,7 +57,10 @@ const Events: React.FC = () => {
               <IonCard key={index}>
                 <IonCardHeader>
                   <IonCardTitle>Nombre: {userEvent.Event.name}</IonCardTitle>
-                  <IonCardSubtitle>Rango: {userEvent.minValue} - {userEvent.maxValue}</IonCardSubtitle>
+                  <IonCardSubtitle>
+                    Rango: {userEvent.minValue} - {userEvent.maxValue},
+                    Ejecuciones: {userEvent.countFired}
+                  </IonCardSubtitle>
                 </IonCardHeader>
                 <IonCardContent>
                   <IonItem lines="none">

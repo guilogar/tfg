@@ -23,7 +23,7 @@ const Settings: React.FC = () => {
 
   const toggleDarkModeHandler = async () => {
     setDarkMode(!darkMode);
-    document.body.classList.toggle("dark");
+    document.body.classList.add("dark");
   };
 
   useEffect(() => {

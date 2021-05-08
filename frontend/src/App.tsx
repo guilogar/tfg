@@ -28,7 +28,6 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import FarmableLand from './pages/farmable-land/FarmableLand';
 
 const App: React.FC = () => {
   const api = getApi();
@@ -57,6 +56,11 @@ const App: React.FC = () => {
     pushNotifications();
     checkSession();
     setInterval(checkSession, Number(process.env.REACT_APP_CHECK_SESSION_TIME));
+
+    const localSettings = localStorage.getItem('localSettings');
+    if (localSettings) {
+      // TODO: set dark mode or white mode
+    }
   }, []);
 
   const AlertSession = withRouter(({ history }) => (
@@ -96,9 +100,6 @@ const App: React.FC = () => {
         </Route>
         <Route path="/dashboard" exact={true}>
           <Dashboard />
-        </Route>
-        <Route path="/dashboard/page/FarmableLand" exact={true}>
-          <FarmableLand />
         </Route>
         <Route component={Login} />
       </Switch>

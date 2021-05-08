@@ -9,6 +9,7 @@ import { isLogged, getWindowDimensions, getApi } from '../../services/utils';
 import Menu from '../../components/Menu';
 import Home from '../home/Home';
 import Settings from '../settings/Settings';
+import Notification from '../notifications/Notification';
 
 import FarmableLandRoute from '../routes/farmable-land-routes';
 import CropRoute from '../routes/crop-routes';
@@ -29,12 +30,15 @@ const Dashboard: React.FC = () => {
   window.addEventListener('resize', handleResize);
 
   useEffect(() => {
-    (async () => {
-      const { data } = await api.get('/settings');
-      if (data.userSettings?.backgroundColor === 'DARK') {
-        document.body.classList.toggle("dark");
-      }
-    })();
+    const localSettings = localStorage.getItem('localSettings');
+    if (!localSettings) {
+      (async () => {
+        const { data } = await api.get('/settings');
+        if (data.userSettings?.backgroundColor === 'DARK') {
+          document.body.classList.add("dark");
+        }
+      })();
+    }
   }, []);
 
   return (
@@ -69,6 +73,9 @@ const Dashboard: React.FC = () => {
               {EventsRoute}
               {PhytosanitaryRoute}
               {IrrigateRoute}
+              <Route path="/dashboard/page/Notification" exact={true}>
+                <Notification />
+              </Route>
               <Route path="/dashboard/page/Setting" exact={true}>
                 <Settings />
               </Route>

@@ -53,6 +53,12 @@ const appPages: AppPage[] = [
     mdIcon: warningSharp
   },
   {
+    title: 'Notificaciones',
+    url: '/dashboard/page/Notification',
+    iosIcon: warningOutline,
+    mdIcon: warningSharp
+  },
+  {
     title: 'Ajustes',
     url: '/dashboard/page/Setting',
     iosIcon: trashOutline,
