@@ -23,7 +23,11 @@ const Settings: React.FC = () => {
 
   const toggleDarkModeHandler = async () => {
     setDarkMode(!darkMode);
-    document.body.classList.add("dark");
+    if (!darkMode) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
   };
 
   useEffect(() => {
@@ -77,7 +81,9 @@ const Settings: React.FC = () => {
             <IonItem>
               <IonIcon
                 slot="start" icon={moon} className="component-icon component-icon-dark" />
-              <IonLabel>Dark Mode</IonLabel>
+              <IonLabel>
+                {(darkMode) ? `Dark Mode` : `Light Mode`}
+              </IonLabel>
               <IonToggle
                 slot="end" name="darkMode" checked={darkMode}
                 onClick={toggleDarkModeHandler} />
