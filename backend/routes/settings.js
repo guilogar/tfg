@@ -21,28 +21,6 @@ router.get('/settings', async (req, res) => {
   });
 });
 
-router.post('/settings', async (req, res) => {
-  const jwt = getJwtFromRequest(req);
-  const user = await getUserFromJwt(jwt);
-
-  try {
-    const userSettings = await UserSettings.create({
-      backgroundColor: req.body.backgroundColor,
-      defaultLanguage: req.body.defaultLanguage,
-      defaultEventAction: req.body.defaultEventAction,
-      UserId: user.id
-    });
-
-    res.status(200).send({
-      userSettings: userSettings
-    });
-  } catch (error) {
-    res.status(404).send({
-      msg: 'invalid data'
-    });
-  }
-});
-
 router.put('/settings/:id', async (req, res) => {
   const id = req.params.id;
 
