@@ -96,6 +96,7 @@ router.put('/user-events/:id', async (req, res) => {
       action: req.body.action,
       minValue: req.body.minValue,
       maxValue: req.body.maxValue,
+      EventId: req.body.eventId
     });
 
     res.status(200).send({

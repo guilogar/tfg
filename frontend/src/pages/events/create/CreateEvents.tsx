@@ -14,6 +14,7 @@ import './CreateEvents.css';
 const CreateEvents: React.FC = () => {
   const api = getApi();
   const [back, setBack] = useState<boolean>(false);
+  const [messageError, setMessageError] = useState<string>('');
   const [showErrorAlert, setShowErrorAlert] = useState(false);
 
   const [eventRef, setEventRef] = useState<HTMLIonSelectElement | null>(null);
@@ -23,8 +24,6 @@ const CreateEvents: React.FC = () => {
 
   const [events, setEvents] = useState<Array<any>>([]);
   const [eventActions, setEventActions] = useState<Array<any>>([]);
-
-  const [messageError, setMessageError] = useState<string>('');
 
   useEffect(() => {
     (async () => {
