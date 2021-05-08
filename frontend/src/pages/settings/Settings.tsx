@@ -3,10 +3,10 @@ import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonList, IonItem, IonIcon, IonLabel, IonToggle, IonButtons, IonMenuButton, IonSelect, IonSelectOption, IonButton
 } from "@ionic/react";
-import { moon } from "ionicons/icons";
+import { language, moon } from "ionicons/icons";
 import "./Settings.css";
 
-import { getApi } from "../../services/utils";
+import { getApi, insertDataIntoLocalStorage } from "../../services/utils";
 import { Redirect } from "react-router";
 
 const Settings: React.FC = () => {
@@ -44,16 +44,18 @@ const Settings: React.FC = () => {
       const { data } = await api.get('/eventActions');
       setEventActions(data.actions);
     })();
+
   }, []);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     try {
-      await api.put('/settings', {
+      const { data } = await api.put('/settings', {
         backgroundColor: (darkMode) ? 'DARK' : 'WHITE',
         defaultLanguage: languageRef?.value,
         defaultEventAction: eventActionRef?.value
       });
+      insertDataIntoLocalStorage('userSettings', JSON.stringify(data.userSettings));
       setBack(true);
     } catch(err) {
       console.log(err);
