@@ -53,6 +53,7 @@ const { checkEvent } = require('./routes/services/check-event');
 
 const UserSensor = require('./database/models/UserSensor');
 const Event = require('./database/models/Event');
+const Notification = require('./database/models/Notification');
 
 const ACTIONS = require('./routes/constans/event-actions');
 
@@ -99,6 +100,13 @@ cron.schedule('* * * * *', async () => {
         title: `Evento ${event.name}`,
         body: body
       };
+
+      await Notification.create({
+        title: notification.title,
+        body: notification.body,
+        UserId: userId
+      });
+
       try {
         const response = await sendNotificationToUser(userId, notification);
         // console.log(response);
