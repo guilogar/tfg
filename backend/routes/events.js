@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 
 const Event = require('../database/models/Event');
-const User = require('../database/models/User');
 const UserEvent = require('../database/models/UserEvent');
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
 

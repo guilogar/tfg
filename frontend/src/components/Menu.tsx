@@ -47,8 +47,8 @@ const appPages: AppPage[] = [
     mdIcon: archiveSharp
   },
   {
-    title: 'Métodos de Pago',
-    url: '/dashboard/page/MethodPay',
+    title: 'Riegos',
+    url: '/dashboard/page/Irrigate',
     iosIcon: warningOutline,
     mdIcon: warningSharp
   },

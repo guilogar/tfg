@@ -1,6 +1,7 @@
 const sequelize = require('../database/sequelize');
 const models = require('../database/models/models');
 const { createFarms } = require('./farms');
+const { createIrrigate } = require('../routes/services/create-irrigate');
 const { createUser } = require('../routes/services/create-user');
 const { createSensor } = require('../routes/services/create-sensor');
 const { createEvent, assignEventToUser } = require('../routes/services/create-event');
@@ -42,7 +43,16 @@ async function insertDataTable()
 
   for(let i = 0; i < 100; i++)
   {
-    await createSensor(user.id, (Math.random > 0.5) ? farm1.id : farm2.id);
+    await createSensor(
+      user.id, (Math.random > 0.5) ? farm1.id : farm2.id
+    );
+  }
+
+  for(let i = 0; i < 5; i++)
+  {
+    await createIrrigate(
+      36.3, 60, (Math.random > 0.5) ? farm1.id : farm2.id
+    );
   }
 
   const eventTemperature = await createEvent('TEMPERATURE', 'Temperature Event');

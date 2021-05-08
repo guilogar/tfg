@@ -14,7 +14,7 @@ import FarmableLandRoute from '../routes/farmable-land-routes';
 import CropRoute from '../routes/crop-routes';
 import EventsRoute from '../routes/event-routes';
 import PhytosanitaryRoute from '../routes/phytosanitary-routes';
-import MethodPayRoute from '../routes/method-pay-routes';
+import IrrigateRoute from '../routes/irrigate-routes';
 
 const Dashboard: React.FC = () => {
   const [isLog, setIsLog] = useState(isLogged());
@@ -58,7 +58,7 @@ const Dashboard: React.FC = () => {
               {CropRoute}
               {EventsRoute}
               {PhytosanitaryRoute}
-              {MethodPayRoute}
+              {IrrigateRoute}
               <Route path="/dashboard/page/Setting" exact={true}>
                 <Settings />
               </Route>
