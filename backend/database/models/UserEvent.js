@@ -21,6 +21,10 @@ UserEvent.init({
   maxValue: {
     type: DataTypes.DOUBLE
   },
+  countFired: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0
+  },
   UserId: {
     type: DataTypes.INTEGER,
     unique: 'compositeIndex'

@@ -19,6 +19,10 @@ const checkEvent = async (cosmosData = []) => {
       const value = item[userEvent.Event.name.toLowerCase()];
       if(value > userEvent.maxValue || value < userEvent.minValue)
       {
+        await userEvent.update({
+          countFired: (++userEvent.countFired)
+        });
+
         const sensor = await UserSensor.findOne({
           where: {
             id: sensorId
