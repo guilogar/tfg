@@ -54,6 +54,21 @@ export const inputToDataURL = (input: any) : Promise<any> => {
   });
 };
 
+export const insertDataIntoLocalStorage = (
+  inputKey: string, inputValue: string
+) : void  => {
+    try {
+      localStorage.setItem(inputKey, inputValue);
+    }
+    catch(error) {
+      console.error(error);
+    }
+}
+
+export const fetchKeyDataFromLocalStorage = (inputKey: string) : string | null => {
+  return localStorage.getItem(inputKey);
+}
+
 export const pushNotifications = async () => {
   const { PushNotifications } = Plugins;
 
