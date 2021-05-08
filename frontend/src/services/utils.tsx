@@ -5,6 +5,7 @@ import {
   PushNotificationToken,
   PushNotificationActionPerformed
 } from '@capacitor/core';
+import { key } from "ionicons/icons";
 
 export const login = (sessionId: string) : void => {
   localStorage.setItem('sessionId', sessionId);
@@ -53,6 +54,21 @@ export const inputToDataURL = (input: any) : Promise<any> => {
     reader.readAsDataURL(input.files[0]);
   });
 };
+
+export const insertDataIntoLocalStorage = (
+  inputKey: string, inputValue: string
+) : void  => {
+    try {
+      localStorage.setItem(inputKey, inputValue);
+    }
+    catch(error) {
+      console.error(error);
+    }
+}
+
+export const fetchKeyDataFromLocalStorage = (inputKey: string) : string | null => {
+  return localStorage.getItem(inputKey); 
+}
 
 export const pushNotifications = async () => {
   const { PushNotifications } = Plugins;
