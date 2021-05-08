@@ -6,6 +6,18 @@ const router = express.Router();
 const UserSettings = require('../database/models/UserSettings');
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
 
+router.get('/languages', async (req, res) => {
+  res.status(200).send({
+    languages: ['es', 'en']
+  });
+});
+
+router.get('/eventActions', async (req, res) => {
+  res.status(200).send({
+    actions: ['AUTOMATIC', 'MANUAL']
+  });
+});
+
 router.get('/settings', async (req, res) => {
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
@@ -21,16 +33,13 @@ router.get('/settings', async (req, res) => {
   });
 });
 
-router.put('/settings/:id', async (req, res) => {
-  const id = req.params.id;
-
+router.put('/settings', async (req, res) => {
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
 
   try {
     let userSettings = await UserSettings.findOne({
       where: {
-        id: id,
         UserId: user.id
       }
     });
@@ -49,22 +58,6 @@ router.put('/settings/:id', async (req, res) => {
       msg: 'invalid data'
     });
   }
-});
-
-router.delete('/settings/:id', async (req, res) => {
-  const jwt = getJwtFromRequest(req);
-  const user = await getUserFromJwt(jwt);
-
-  await UserSettings.destroy({
-    where: {
-      id: req.params.id,
-      UserId: user.id
-    }
-  });
-
-  res.status(200).send({
-    msg: 'destroyed!'
-  });
 });
 
 module.exports = router;

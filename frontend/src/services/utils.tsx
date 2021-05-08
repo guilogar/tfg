@@ -11,7 +11,7 @@ export const login = (sessionId: string) : void => {
 }
 
 export const logout = () : void => {
-  localStorage.clear();
+  localStorage.removeItem('sessionId');
 };
 
 export const isLogged = () : boolean => {

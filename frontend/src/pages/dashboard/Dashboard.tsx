@@ -4,8 +4,8 @@ import {
 
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import React, { useState } from 'react';
-import { isLogged, getWindowDimensions } from '../../services/utils';
+import React, { useEffect, useState } from 'react';
+import { isLogged, getWindowDimensions, getApi } from '../../services/utils';
 import Menu from '../../components/Menu';
 import Home from '../home/Home';
 import Settings from '../settings/Settings';
@@ -17,6 +17,7 @@ import PhytosanitaryRoute from '../routes/phytosanitary-routes';
 import IrrigateRoute from '../routes/irrigate-routes';
 
 const Dashboard: React.FC = () => {
+  const api = getApi();
   const [isLog, setIsLog] = useState(isLogged());
 
   const dimensions = getWindowDimensions();
@@ -26,6 +27,15 @@ const Dashboard: React.FC = () => {
     setWidth(dimensions.width);
   };
   window.addEventListener('resize', handleResize);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await api.get('/settings');
+      if (data.userSettings?.backgroundColor === 'DARK') {
+        document.body.classList.toggle("dark");
+      }
+    })();
+  }, []);
 
   return (
     <IonApp>

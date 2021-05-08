@@ -40,7 +40,7 @@ async function insertDataTable()
     'Guillermo López García'
   );
 
-  await createSettings(user.id, 'es', 'white', 'AUTOMATIC');
+  await createSettings(user.id, 'es', 'WHITE', 'AUTOMATIC');
 
   const { farm1, farm2 } = await createFarms(user.id);
 

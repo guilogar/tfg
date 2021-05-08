@@ -12,7 +12,7 @@ UserSettings.init({
     primaryKey: true
   },
   backgroundColor: {
-    type: DataTypes.STRING
+    type: DataTypes.ENUM('WHITE', 'DARK')
   },
   defaultLanguage: {
     type: DataTypes.STRING
