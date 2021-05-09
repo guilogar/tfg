@@ -20,11 +20,10 @@ jobs:
         working_directory: documentation/
         root_file: main.tex
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v1
       with:
-        working_directory: documentation/
         name: docs
-        path: main.pdf
+        path: documentation
 
     - name: Send mail
       uses: dawidd6/action-send-mail@v3
