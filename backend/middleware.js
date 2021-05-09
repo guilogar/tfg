@@ -1,6 +1,6 @@
 const Auth = require('./database/models/Auth');
 const User = require('./database/models/User');
-const { Op } = require("sequelize");
+const { Op } = require('sequelize');
 const { verifyToken } = require('./utils/jwt');
 
 const middleware = async (req, res, next) => {

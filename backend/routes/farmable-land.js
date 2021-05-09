@@ -5,19 +5,45 @@ const router = express.Router();
 
 const FarmableLand = require('../database/models/FarmableLand');
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
+const { Op } = require('sequelize');
+const sequelize = require('../database/sequelize');
 
 router.get('/farmableLand', async (req, res) => {
   const id = (req.query.id !== undefined) ? JSON.parse(req.query.id) : undefined;
+  const filter = (req.query.filter !== undefined) ? req.query.filter : undefined;
 
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
 
-  const where = (id !== undefined) ? {
+  let where = (id !== undefined) ? {
     UserId: user.id,
     id: id
   } : {
     UserId: user.id
   };
+
+  if (filter !== undefined) {
+    where[Op.or] = [
+      {
+        name: {
+          [Op.iLike]: `%${filter}%`
+        }
+      },
+      sequelize.where(
+        sequelize.cast(sequelize.col('FarmableLand.type'), 'varchar'),
+        {
+          [Op.iLike]: `%${filter}%`
+        }
+      ),
+      sequelize.where(
+        sequelize.cast(sequelize.col('FarmableLand.area'), 'varchar'),
+        {
+          [Op.iLike]: `%${filter}%`
+        }
+      ),
+    ];
+  }
+
   const farmableLands = await FarmableLand.findAll({
     where: where
   });
