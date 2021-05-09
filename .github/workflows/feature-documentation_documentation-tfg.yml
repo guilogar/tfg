@@ -7,11 +7,6 @@ on:
   push:
     branches:
       - feature/documentation
-
-defaults:
-  run:
-    working-directory: documentation
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -22,10 +17,12 @@ jobs:
     - name: Compile LaTeX documentation
       uses: xu-cheng/latex-action@v2
       with:
+        working_directory: documentation/
         root_file: main.tex
 
     - uses: actions/upload-artifact@v2
       with:
+        working_directory: documentation/
         name: docs
         path: main.pdf
 
@@ -40,8 +37,8 @@ jobs:
         to: ${{secrets.MAIL_TO}}
         from: ${{secrets.MAIL_USERNAME}}
         secure: true
-        html_body: file://../INFO.md
+        html_body: file://INFO.md
         convert_markdown: true
         cc: ${{secrets.MAIL_CC}}
         ignore_cert: true
-        attachments: ../LICENSE,main.pdf
+        attachments: LICENSE,documentation/main.pdf
