@@ -20,16 +20,22 @@ import IrrigateRoute from '../routes/irrigate-routes';
 const Dashboard: React.FC = () => {
   const api = getApi();
   const [isLog, setIsLog] = useState(isLogged());
+  const [ fullname, setFullname ] = useState<string | null>(null);
 
   const dimensions = getWindowDimensions();
   const [ width, setWidth ] = useState<number>(dimensions.width);
-  const handleResize = () => {
+
+  window.addEventListener('resize', () => {
     const dimensions = getWindowDimensions();
     setWidth(dimensions.width);
-  };
-  window.addEventListener('resize', handleResize);
+  });
 
   useEffect(() => {
+    (async () => {
+      const { data } = await api.get('/user/fullname');
+      setFullname(data.fullname);
+    })();
+
     const localSettings = localStorage.getItem('localSettings');
     if (!localSettings) {
       (async () => {
@@ -55,7 +61,7 @@ const Dashboard: React.FC = () => {
       }
       <IonReactRouter>
         <IonSplitPane contentId="main">
-          <Menu setIsLog={setIsLog} reduceFormat={width < 1024} />
+          <Menu setIsLog={setIsLog} reduceFormat={width < 1024} fullname={`${fullname}`} />
           <IonRouterOutlet id="main">
             <Switch>
               <Route path="/dashboard" exact={true}>

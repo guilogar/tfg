@@ -66,14 +66,20 @@ const appPages: AppPage[] = [
   }
 ];
 
-const Menu: React.FC<{ setIsLog: Function, reduceFormat: Boolean }> = ({ setIsLog, reduceFormat }) => {
+interface Menu {
+  setIsLog: Function;
+  reduceFormat: Boolean;
+  fullname: string;
+};
+
+const Menu: React.FC<Menu> = ({ setIsLog, reduceFormat, fullname }) => {
   const location = useLocation();
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent forceOverscroll={false}>
         <IonList lines="none">
           <IonListHeader>Menú</IonListHeader>
-          <IonNote>information@smartrural.es</IonNote>
+          <IonNote>Dashboard de {fullname}</IonNote>
           {
             reduceFormat
             &&
