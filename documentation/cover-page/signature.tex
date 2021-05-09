@@ -1,0 +1,33 @@
+\newenvironment{declaracion}
+{
+    \setlength{\parskip}{2em}
+    \renewcommand{\baselinestretch}{1.25}
+    \begin{center}
+}
+{
+    \end{center}
+    \restoregeometry{}
+}
+
+\begin{declaracion}
+    \Large \MakeUppercase{\textbf{\underline{Declaración Personal de Autoría}}} \vspace{1.5cm}
+
+    \justify{\normalsize{} \autor{} con DNI \DNI{}, estudiante del \titulacion{} en la Escuela Superior de Ingeniería de la Universidad de Cádiz,
+    como autor de este documento academico, titulado \proyecto{} y presentado como trabajo final
+    de \tipo{}.}
+
+    \justify{\MakeUppercase{\normalsize{} Declaro que}}
+
+    \justify{\normalsize Es un trabajo original, que no copio ni utilizo parte de obra alguna sin mencionar de
+    forma clara su origen, tanto en el cuerpo del texto, como en su bibliografía, y que no
+    empleo datos de terceros sin la debida autorización, de acuerdo con la legislación vigente.
+    Así mismo, declaro que soy plenamente consciente de que no respetar esta obligación podrá
+    implicar la aplicación de sanciones académicas, sin prejuicio de otras actuaciones que
+    pudieran iniciarse.}
+
+
+    \justify{\normalsize{} En Puerto Real, a \Fecha{} }\\ \vspace{2cm}
+
+
+    \justify{\normalsize{} Fdo: \autor{}}
+\end{declaracion}
