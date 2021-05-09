@@ -7,6 +7,7 @@ const { createSettings } = require('../routes/services/create-settings');
 const { createSensor } = require('../routes/services/create-sensor');
 const { createEvent, assignEventToUser } = require('../routes/services/create-event');
 const { createFirebaseToken } = require('../routes/services/create-firebase-token');
+const { createNotification } = require('../routes/services/create-notification');
 const { createCrop } = require('../routes/services/create-crop');
 const { createPhytosanitary } = require('../routes/services/create-phytosanitary');
 const { pNames } = require('./phytosanitaryNames');
@@ -70,6 +71,25 @@ async function insertDataTable()
     user.id, eventHumidity.id,
     'MANUAL', 60, 65
   );
+
+  for(let i = 0; i < 5; i++)
+  {
+    const eventNotification = (Math.random() > 0.5) ? eventTemperature : eventHumidity;
+    const title = `Evento ${eventNotification.name}`;
+    const body = ((Math.random() > 0.5) ?
+    `El Evento ${eventNotification.name} ha sido disparado con el ` +
+    `sensor "${parseInt(Math.random() * 10)}" y el valor ${Math.random() * 20}. ` +
+    `Se ha realizado la accion automatizada.` +
+    `Clicke aquí para mas información.`
+    :
+    `El Evento ${eventNotification.name} ha sido disparado con el ` +
+    `sensor "${parseInt(Math.random() * 10)}" y el valor ${Math.random() * 20}. ` +
+    `Clicke aquí para realizar la acción asociada al evento.`);
+
+    await createNotification(
+      title, body, user.id
+    );
+  }
 
   // await createFirebaseToken(
   //   user.id,
