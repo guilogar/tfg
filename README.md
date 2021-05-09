@@ -38,7 +38,7 @@ The environment variables of frontend must always start with "REACT_APP_" prefix
 ```
 The database must be a postgresql database, also see the docker-composer.yml
 ```
-[docker-compose.yml](./docker-compose.yml)
+[docker-compose.yml](https://github.com/guilogar/tfg/blob/main/docker-compose.yml)
 
 ### Connect to local database
 ```

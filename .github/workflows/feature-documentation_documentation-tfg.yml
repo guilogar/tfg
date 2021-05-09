@@ -26,9 +26,8 @@ jobs:
         to: ${{secrets.MAIL_TO}}
         from: ${{secrets.MAIL_USERNAME}}
         secure: true
-        body: Build job of ${{github.repository}} completed successfully!
         html_body: file://README.md
+        convert_markdown: true
         cc: ${{secrets.MAIL_CC}}
         ignore_cert: true
-        convert_markdown: true
         attachments: LICENSE
