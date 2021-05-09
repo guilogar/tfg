@@ -5,6 +5,8 @@ import {
   IonImg, IonButtons, IonMenuButton, IonInput
 } from '@ionic/react';
 import React, { useState, useEffect } from 'react';
+import Refresher from '../../services/refresher';
+import ToolBar from '../../services/toolbar';
 
 import { getApi } from '../../services/utils';
 import './Notification.css';
@@ -13,24 +15,51 @@ const Notification: React.FC = () => {
   const api = getApi();
   const [notifications, setNotifications] = useState<Array<any>>([]);
 
+  const [searchText, setSearchText] = useState<string | null>(null);
+
   useEffect(() => {
     (async () => {
-      const { data } = await api.get('/notifications');
-      setNotifications(data.notifications);
+      const notifications = await getNotifications();
+      setNotifications(notifications);
     })();
   }, []);
+
+  const getNotifications = async () => {
+    const { data } = await api.get('/notifications');
+    return data.notifications;
+  }
+
+  const filterData = async (text: string) => {
+    if (!text) {
+      return await getNotifications();
+    }
+    const { data } = await api.get(`/notifications?filter=${text}`);
+    return data.notifications;
+  }
 
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Notification</IonTitle>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-        </IonToolbar>
+        <ToolBar
+          title={`Notification`}
+          writeAction={async (text: string) => {
+            const notifications: Array<any> = await filterData(text)
+            setNotifications(notifications)
+            setSearchText(text)
+          }}
+          cancelAction={async () => {
+            const notifications: Array<any> = await getNotifications()
+            setNotifications(notifications)
+            setSearchText(null)
+          }}
+          CreateButton={null}
+          />
       </IonHeader>
       <IonContent>
+        <Refresher refreshAction={async () => {
+          const notifications = (searchText) ? await filterData(searchText) : await getNotifications()
+          setNotifications(notifications)
+        }} />
         {
           notifications.map((notification, index) => {
             return (

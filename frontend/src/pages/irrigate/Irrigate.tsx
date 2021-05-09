@@ -11,6 +11,8 @@ import { getApi } from '../../services/utils';
 import './Irrigate.css';
 
 import { Redirect } from 'react-router';
+import ToolBar from '../../services/toolbar';
+import Refresher from '../../services/refresher';
 
 const Irrigate: React.FC = () => {
   const api = getApi();
@@ -19,12 +21,39 @@ const Irrigate: React.FC = () => {
   const [irrigateId, setIrrigateId] = useState<number | null>(null);
   const [irrigates, setIrrigates] = useState<Array<any>>([]);
 
+  const [searchText, setSearchText] = useState<string | null>(null);
+
   useEffect(() => {
     (async () => {
-      const { data } = await api.get('/irrigates');
-      setIrrigates(data.irrigates);
+      const irrigates = await getIrrigates();
+      setIrrigates(irrigates);
     })();
   }, []);
+
+  const removeIrrigate = async (irrigateId: number) => {
+    await api.delete(`/irrigate/${irrigateId}`);
+  };
+
+  const getIrrigates = async () => {
+    const { data } = await api.get('/irrigate');
+    return data.irrigates;
+  }
+
+  const filterData = async (text: string) => {
+    if (!text) {
+      return await getIrrigates();
+    }
+    const { data } = await api.get(`/irrigate?filter=${text}`);
+    return data.irrigates;
+  }
+
+  const CreateButton = () => {
+    return (
+      <IonButton onClick={() => { setCreate(true) }}>
+        <IonIcon slot="icon-only" icon={add} />
+      </IonButton>
+    );
+  };
 
   return (
     <IonPage>
@@ -39,19 +68,26 @@ const Irrigate: React.FC = () => {
         <Redirect to={`/dashboard/page/Irrigate/${irrigateId}/update`} push={true} exact={true} />
       }
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Irrigate</IonTitle>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonButtons slot="primary">
-            <IonButton onClick={() => {setCreate(true)}}>
-              <IonIcon slot="icon-only" icon={add} />
-            </IonButton>
-          </IonButtons>
-        </IonToolbar>
+        <ToolBar
+          title={`Irrigate`}
+          writeAction={async (text: string) => {
+            const irrigates: Array<any> = await filterData(text)
+            setIrrigates(irrigates)
+            setSearchText(text)
+          }}
+          cancelAction={async () => {
+            const irrigates: Array<any> = await getIrrigates()
+            setIrrigates(irrigates)
+            setSearchText(null)
+          }}
+          CreateButton={CreateButton}
+          />
       </IonHeader>
       <IonContent>
+        <Refresher refreshAction={async () => {
+          const irrigates = (searchText) ? await filterData(searchText) : await getIrrigates()
+          setIrrigates(irrigates)
+        }} />
         {
           irrigates.map((irrigate, index) => {
             return (
@@ -78,7 +114,11 @@ const Irrigate: React.FC = () => {
                     </IonButton>
                     <IonButton
                       fill="outline" slot="end" color="danger"
-                      onClick={() => {setUpdate(true)}}>
+                      onClick={async () => {
+                        await removeIrrigate(irrigate.id)
+                        const irrigates = await getIrrigates()
+                        setIrrigates(irrigates)
+                      }}>
                         <IonIcon icon={trash} />
                     </IonButton>
                   </IonItem>

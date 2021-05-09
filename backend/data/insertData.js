@@ -55,7 +55,8 @@ async function insertDataTable()
   for(let i = 0; i < 5; i++)
   {
     await createIrrigate(
-      36.3, 60, (Math.random() > 0.5) ? farm1.id : farm2.id
+      Math.random() * 30, parseInt(Math.random() * 60),
+      (Math.random() > 0.5) ? farm1.id : farm2.id
     );
   }
 

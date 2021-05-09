@@ -3,16 +3,25 @@
 const express = require('express');
 const router = express.Router();
 
+const { Op } = require('sequelize');
+
 const Irrigate = require('../database/models/Irrigate');
 const FarmableLand = require('../database/models/FarmableLand');
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
+const { getFilterIrrigate } = require('./constans/filters');
 
-router.get('/irrigates', async (req, res) => {
+router.get('/irrigate', async (req, res) => {
   const id = (req.query.id !== undefined) ? JSON.parse(req.query.id) : undefined;
+  const filter = (req.query.filter !== undefined) ? req.query.filter : undefined;
 
   const where = (id !== undefined) ? {
     id: id
   } : { };
+
+  if (filter !== undefined) {
+    where[Op.or] = getFilterIrrigate(filter);
+  }
+
   const irrigates = await Irrigate.findAll({
     where: where,
     include: [

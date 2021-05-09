@@ -60,6 +60,57 @@ const getFilterEvent = (filter) => {
   ];
 };
 
+const getFilterIrrigate = (filter) => {
+  return [
+    sequelize.where(
+      sequelize.cast(sequelize.col('Irrigate.amountWater'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+    sequelize.where(
+      sequelize.cast(sequelize.col('Irrigate.lengthMinutes'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+    sequelize.where(
+      sequelize.cast(sequelize.col('FarmableLand.name'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+    sequelize.where(
+      sequelize.cast(sequelize.col('FarmableLand.type'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+    sequelize.where(
+      sequelize.cast(sequelize.col('FarmableLand.area'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+  ];
+};
+
+const getFilterNotification = (filter) => {
+  return [
+    {
+      title: {
+        [Op.iLike]: `%${filter}%`
+      }
+    },
+    {
+      body: {
+        [Op.iLike]: `%${filter}%`
+      }
+    },
+  ];
+};
+
 module.exports = {
-  getFilterFarm, getFilterEvent
+  getFilterFarm, getFilterEvent,
+  getFilterIrrigate, getFilterNotification
 };

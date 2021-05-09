@@ -29,7 +29,7 @@ const UpdateIrrigate: React.FC = (props: any) => {
   useEffect(() => {
     (async () => {
       const irrigateId = props.match.params.id;
-      const { data } = await api.get(`/irrigates?id=${irrigateId}`);
+      const { data } = await api.get(`/irrigate?id=${irrigateId}`);
       setFarmableLandId(data.irrigates[0].FarmableLandId);
       setIrrigateId(irrigateId);
       setIrrigate(data.irrigates[0]);
