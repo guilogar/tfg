@@ -15,14 +15,20 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    - name: Send some mail
-      uses: wadeww/send-email-action@master
+    - name: Send mail
+      uses: dawidd6/action-send-mail@v3
       with:
         server_address: smtp.gmail.com
-        port: 465
+        server_port: 465
         username: ${{secrets.MAIL_USERNAME}}
         password: ${{secrets.MAIL_PASSWORD}}
-        subject: Backend deploy finished
-        body: Job completed ${{job.status}}
+        subject: Memoria del TFG
         to: ${{secrets.MAIL_TO}}
-        from: Me
+        from: ${{secrets.MAIL_USERNAME}}
+        secure: true
+        body: Build job of ${{github.repository}} completed successfully!
+        html_body: file://README.html
+        cc: ${{secrets.MAIL_CC}}
+        ignore_cert: true
+        convert_markdown: true
+        attachments: LICENSE
