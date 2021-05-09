@@ -11,20 +11,21 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./documentation
 
     steps:
     - uses: actions/checkout@master
 
     - name: Compile LaTeX documentation
       uses: xu-cheng/latex-action@v2
-      working-directory: ./documentation
       with:
         root_file: main.tex
 
     - uses: actions/upload-artifact@v2
       with:
         name: docs
-        path: ./documentation/main.pdf
+        path: main.pdf
 
     - name: Send mail
       uses: dawidd6/action-send-mail@v3
@@ -37,8 +38,8 @@ jobs:
         to: ${{secrets.MAIL_TO}}
         from: ${{secrets.MAIL_USERNAME}}
         secure: true
-        html_body: file://INFO.md
+        html_body: file://../INFO.md
         convert_markdown: true
         cc: ${{secrets.MAIL_CC}}
         ignore_cert: true
-        attachments: LICENSE,./documentation/main.pdf
+        attachments: ../LICENSE,main.pdf
