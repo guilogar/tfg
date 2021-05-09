@@ -2,14 +2,18 @@ import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
   IonCardContent, IonItem, IonIcon, IonLabel, IonButton,
-  IonImg, IonButtons, IonCheckbox, IonMenuButton, IonRefresher, IonRefresherContent, IonToast, IonSearchbar
+  IonImg, IonButtons, IonCheckbox, IonMenuButton, IonRefresher,
+  IonRefresherContent, IonToast, IonSearchbar
 } from '@ionic/react';
-import { add, create as createIcon, trash, search, options } from 'ionicons/icons';
+import { add, create as createIcon, trash, search, } from 'ionicons/icons';
 import React, { useState, useEffect, useRef } from 'react';
 
 import { getApi } from '../../services/utils';
-import './FarmableLand.css';
 import { Redirect } from 'react-router';
+import './FarmableLand.css';
+
+import Refresher from '../../services/refresher';
+import ToolBar from '../../services/toolbar';
 
 const FarmableLand: React.FC = () => {
   const api = getApi();
@@ -17,17 +21,13 @@ const FarmableLand: React.FC = () => {
   const [update, setUpdate] = useState<boolean>(false);
   const [farmableLandId, setFarmableLandId] = useState<number | null>(null);
   const [farmableLands, setFarmableLands] = useState<Array<any>>([]);
-  const [allFarms, setAllFarms] = useState<Array<any>>([]);
 
-  const [showSearchbar, setShowSearchbar] = useState<boolean>(false);
-  const ionRefresherRef = useRef<HTMLIonRefresherElement>(null);
-  const [showCompleteToast, setShowCompleteToast] = useState(false);
+  const [searchText, setSearchText] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
       const farms = await getFarms();
       setFarmableLands(farms);
-      setAllFarms(farms);
     })();
   }, []);
 
@@ -48,14 +48,12 @@ const FarmableLand: React.FC = () => {
     return data.lands;
   }
 
-  const doRefresh = async () => {
-    ionRefresherRef.current!.complete();
-    if (showSearchbar) {
-      await filterData('');
-    } else {
-      await getFarms();
-    }
-    setShowCompleteToast(true);
+  const CreateButton = () => {
+    return (
+      <IonButton onClick={() => { setCreate(true) }}>
+        <IonIcon slot="icon-only" icon={add} />
+      </IonButton>
+    );
   };
 
   return (
@@ -71,60 +69,26 @@ const FarmableLand: React.FC = () => {
         <Redirect to={`/dashboard/page/FarmableLand/${farmableLandId}/update`} push={true} exact={true} />
       }
       <IonHeader>
-        <IonToolbar>
-          {
-            !showSearchbar
-            &&
-            <IonButtons slot="start">
-              <IonMenuButton />
-            </IonButtons>
-          }
-          {
-            !showSearchbar
-            &&
-            <IonTitle>FarmableLand</IonTitle>
-          }
-          {
-            showSearchbar
-            &&
-            <IonSearchbar
-              showCancelButton="always" placeholder="Search"
-              onIonChange={async (e: CustomEvent) => {
-                const farms: Array<any> = await filterData(e.detail.value)
-                setFarmableLands(farms)
-              }}
-              onIonCancel={async () => {
-                setShowSearchbar(false)
-                const farms: Array<any> = await getFarms()
-                setFarmableLands(farms)
-              }} />
-          }
-          <IonButtons slot="end">
-            {
-              !showSearchbar
-              &&
-              <IonButton onClick={() => setShowSearchbar(true)}>
-                <IonIcon slot="icon-only" icon={search}></IonIcon>
-              </IonButton>
-            }
-          </IonButtons>
-          <IonButtons slot="end">
-            <IonButton onClick={() => {setCreate(true)}}>
-              <IonIcon slot="icon-only" icon={add} />
-            </IonButton>
-          </IonButtons>
-        </IonToolbar>
+        <ToolBar
+          title={`FarmableLand`}
+          writeAction={async (text: string) => {
+            const farms: Array<any> = await filterData(text)
+            setFarmableLands(farms)
+            setSearchText(text)
+          }}
+          cancelAction={async () => {
+            const farms: Array<any> = await getFarms()
+            setFarmableLands(farms)
+            setSearchText(null)
+          }}
+          CreateButton={CreateButton}
+          />
       </IonHeader>
       <IonContent>
-        <IonRefresher slot="fixed" ref={ionRefresherRef} onIonRefresh={doRefresh}>
-          <IonRefresherContent />
-        </IonRefresher>
-        <IonToast
-          isOpen={showCompleteToast}
-          message="Actualización completada"
-          duration={2000}
-          onDidDismiss={() => setShowCompleteToast(false)}
-        />
+        <Refresher refreshAction={async () => {
+          const farms = (searchText) ? await filterData(searchText) : await getFarms()
+          setFarmableLands(farms)
+        }} />
         {
           farmableLands.map((farmableLand, index) => {
             return (
