@@ -26,7 +26,7 @@ jobs:
         to: ${{secrets.MAIL_TO}}
         from: ${{secrets.MAIL_USERNAME}}
         secure: true
-        html_body: file://README.md
+        html_body: file://INFO.md
         convert_markdown: true
         cc: ${{secrets.MAIL_CC}}
         ignore_cert: true
