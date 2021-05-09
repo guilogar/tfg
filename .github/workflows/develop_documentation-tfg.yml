@@ -6,7 +6,7 @@ name: Build documentation and send email to notify - documentation-tfg
 on:
   push:
     branches:
-      - develop
+      - feature/documentation
 
 jobs:
   build-and-deploy:
