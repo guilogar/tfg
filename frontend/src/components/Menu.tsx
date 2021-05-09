@@ -77,10 +77,16 @@ const Menu: React.FC<{ setIsLog: Function, reduceFormat: Boolean }> = ({ setIsLo
           {
             reduceFormat
             &&
-            <IonItem routerLink={'/dashboard/page/home'} routerDirection="none" lines="none" detail={false}>
-              <IonIcon slot="start" ios={home} md={home} />
-              <IonLabel>Home</IonLabel>
-            </IonItem>
+            <IonMenuToggle autoHide={false}>
+              <IonItem
+                className={location.pathname === '/dashboard/page/Home' ? 'selected' : ''}
+                routerLink={'/dashboard/page/home'}
+                routerDirection="none" lines="none"
+                detail={false}>
+                <IonIcon slot="start" ios={home} md={home} />
+                <IonLabel>Home</IonLabel>
+              </IonItem>
+            </IonMenuToggle>
           }
           {
             appPages.map((appPage, index) => {
