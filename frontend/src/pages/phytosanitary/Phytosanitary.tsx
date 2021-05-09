@@ -2,11 +2,13 @@ import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
   IonCardContent, IonItem, IonIcon, IonLabel, IonButton,
-  IonImg, IonButtons, IonMenuButton
+  IonImg, IonButtons, IonMenuButton, IonList, IonListHeader
 } from '@ionic/react';
 import { add, create as createIcon, trash } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
+import Refresher from '../../services/refresher';
+import ToolBar from '../../services/toolbar';
 
 import { getApi } from '../../services/utils';
 import './Phytosanitary.css';
@@ -18,14 +20,36 @@ const Phytosanitary: React.FC = () => {
   const [farms, setFarms] = useState<Array<any>>([]);
   const [farmId, setFarmId] = useState<number>(0);
   const [cropId, setCropId] = useState<number>(0);
-  const [phytosanitaryId, setPhytosanitaryId] = useState<number>(0);
+
+  const [searchText, setSearchText] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
-      const { data } = await api.get('/cropPhytosanitary');
-      setFarms(data.lands);
+      const farms = await getFarms();
+      setFarms(farms);
     })();
   }, []);
+
+  const getFarms = async () => {
+    const { data } = await api.get('/cropPhytosanitary');
+    return data.lands;
+  }
+
+  const filterData = async (text: string) => {
+    if (!text) {
+      return await getFarms();
+    }
+    const { data } = await api.get(`/cropPhytosanitary?filter=${text}`);
+    return data.lands;
+  }
+
+  const CreateButton = () => {
+    return (
+      <IonButton onClick={() => { setCreate(true) }}>
+        <IonIcon slot="icon-only" icon={add} />
+      </IonButton>
+    );
+  };
 
   return (
     <IonPage>
@@ -40,19 +64,26 @@ const Phytosanitary: React.FC = () => {
         <Redirect to={`/dashboard/page/Phytosanitary/${farmId}/${cropId}/update`} push={true} exact={true} />
       }
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Phytosanitary</IonTitle>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonButtons slot="primary">
-            <IonButton onClick={() => {setCreate(true)}}>
-              <IonIcon slot="icon-only" icon={add} />
-            </IonButton>
-          </IonButtons>
-        </IonToolbar>
+        <ToolBar
+          title={`Phytosanitary`}
+          writeAction={async (text: string) => {
+            const farms: Array<any> = await filterData(text)
+            setFarms(farms)
+            setSearchText(text)
+          }}
+          cancelAction={async () => {
+            const farms: Array<any> = await getFarms()
+            setFarms(farms)
+            setSearchText(null)
+          }}
+          CreateButton={CreateButton}
+          />
       </IonHeader>
       <IonContent>
+        <Refresher refreshAction={async () => {
+          const farms = (searchText) ? await filterData(searchText) : await getFarms()
+          setFarms(farms)
+        }} />
         {
           farms.map((farm, index) => {
             return (
@@ -71,6 +102,18 @@ const Phytosanitary: React.FC = () => {
                             <IonCardSubtitle>{crop.phytosanitarys.length} Fitosanitarios(s)</IonCardSubtitle>
                           </IonCardHeader>
                           <IonCardContent>
+                            <IonList>
+                              <IonListHeader>Fitosanitarios:</IonListHeader>
+                              {
+                                crop.phytosanitarys.map((phytosanitary: any, index: any) => {
+                                  return (
+                                    <IonItem key={index}>
+                                      {phytosanitary.alias}: {phytosanitary.description}
+                                    </IonItem>
+                                  );
+                                })
+                              }
+                            </IonList>
                             <IonItem>
                               <IonLabel>Acciones</IonLabel>
                               <IonButton
@@ -81,11 +124,6 @@ const Phytosanitary: React.FC = () => {
                                   setUpdate(true)
                                 }}>
                                   <IonIcon icon={createIcon} />
-                              </IonButton>
-                              <IonButton
-                                fill="outline" slot="end" color="danger"
-                                onClick={() => {setUpdate(true)}}>
-                                  <IonIcon icon={trash} />
                               </IonButton>
                             </IonItem>
                           </IonCardContent>

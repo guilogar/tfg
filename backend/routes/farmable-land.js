@@ -3,10 +3,11 @@
 const express = require('express');
 const router = express.Router();
 
+const { Op } = require('sequelize');
+
 const FarmableLand = require('../database/models/FarmableLand');
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
-const { Op } = require('sequelize');
-const sequelize = require('../database/sequelize');
+const { getFilterFarm } = require('./constans/filters');
 
 router.get('/farmableLand', async (req, res) => {
   const id = (req.query.id !== undefined) ? JSON.parse(req.query.id) : undefined;
@@ -23,25 +24,7 @@ router.get('/farmableLand', async (req, res) => {
   };
 
   if (filter !== undefined) {
-    where[Op.or] = [
-      {
-        name: {
-          [Op.iLike]: `%${filter}%`
-        }
-      },
-      sequelize.where(
-        sequelize.cast(sequelize.col('FarmableLand.type'), 'varchar'),
-        {
-          [Op.iLike]: `%${filter}%`
-        }
-      ),
-      sequelize.where(
-        sequelize.cast(sequelize.col('FarmableLand.area'), 'varchar'),
-        {
-          [Op.iLike]: `%${filter}%`
-        }
-      ),
-    ];
+    where[Op.or] = getFilterFarm(filter);
   }
 
   const farmableLands = await FarmableLand.findAll({

@@ -3,9 +3,12 @@
 const express = require('express');
 const router = express.Router();
 
+const { Op } = require('sequelize');
+
 const Event = require('../database/models/Event');
 const UserEvent = require('../database/models/UserEvent');
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
+const { getFilterEvent } = require('./constans/filters');
 
 router.get('/events', async (req, res) => {
   const id = (req.query.id !== undefined) ? JSON.parse(req.query.id) : undefined;
@@ -13,6 +16,7 @@ router.get('/events', async (req, res) => {
   const where = (id !== undefined) ? {
     id: id
   } : { };
+
   const events = await Event.findAll({
     where: where
   });
@@ -32,16 +36,22 @@ router.get('/event-actions', async (req, res) => {
 
 router.get('/user-events', async (req, res) => {
   const id = (req.query.id !== undefined) ? JSON.parse(req.query.id) : undefined;
+  const filter = (req.query.filter !== undefined) ? req.query.filter : undefined;
 
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
 
-  const where = (id !== undefined) ? {
+  let where = (id !== undefined) ? {
     UserId: user.id,
     id: id
   } : {
     UserId: user.id
   };
+
+  if (filter !== undefined) {
+    where[Op.or] = getFilterEvent(filter);
+  }
+
   const events = await UserEvent.findAll({
     where: where,
     include: [

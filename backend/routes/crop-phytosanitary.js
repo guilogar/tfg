@@ -3,6 +3,8 @@
 const express = require('express');
 const router = express.Router();
 
+const { Op } = require('sequelize');
+
 const FarmableLand = require('../database/models/FarmableLand');
 const FarmableLandCrop = require('../database/models/FarmableLandCrop');
 const Crop = require('../database/models/Crop');
@@ -10,23 +12,29 @@ const CropPhytosanitary = require('../database/models/CropPhytosanitary');
 const Phytosanitary = require('../database/models/Phytosanitary');
 
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
+const { getFilterFarm } = require('./constans/filters');
 
 router.get('/cropPhytosanitary', async (req, res) => {
   const farmId = (req.query.farmId !== undefined) ? JSON.parse(req.query.farmId) : undefined;
   const cropId = (req.query.cropId !== undefined) ? JSON.parse(req.query.cropId) : undefined;
+  const filter = (req.query.filter !== undefined) ? req.query.filter : undefined;
 
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
 
-  const where = (farmId !== undefined) ? {
+  let where = (farmId !== undefined) ? {
     UserId: user.id,
     id: farmId
   } : {
     UserId: user.id
   };
 
+  if (filter !== undefined) {
+    where[Op.or] = getFilterFarm(filter);
+  }
+
   const farms = await FarmableLand.findAll({
-    where
+    where: where
   });
 
   let farmableLands = [];

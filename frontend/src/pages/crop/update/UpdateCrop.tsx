@@ -125,7 +125,7 @@ const UpdateCrop: React.FC = (props: any) => {
                 crops.map((crop, index) => {
                   return (
                     <IonSelectOption value={crop} key={index}>
-                      {crop.name}
+                      {crop.alias}
                     </IonSelectOption>
                   );
                 })

@@ -3,27 +3,35 @@
 const express = require('express');
 const router = express.Router();
 
+const { Op } = require('sequelize');
+
 const FarmableLand = require('../database/models/FarmableLand');
 const FarmableLandCrop = require('../database/models/FarmableLandCrop');
 const Crop = require('../database/models/Crop');
 
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
+const { getFilterFarm } = require('./constans/filters');
 
 router.get('/farmableLandCrop', async (req, res) => {
   const farmId = (req.query.farmId !== undefined) ? JSON.parse(req.query.farmId) : undefined;
+  const filter = (req.query.filter !== undefined) ? req.query.filter : undefined;
 
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
 
-  const where = (farmId !== undefined) ? {
+  let where = (farmId !== undefined) ? {
     UserId: user.id,
     id: farmId
   } : {
     UserId: user.id
   };
 
+  if (filter !== undefined) {
+    where[Op.or] = getFilterFarm(filter);
+  }
+
   const farms = await FarmableLand.findAll({
-    where
+    where: where
   });
 
   let farmableLands = [];
@@ -38,10 +46,12 @@ router.get('/farmableLandCrop', async (req, res) => {
     });
 
     for(const farmCrop of farmsCrops) {
+      where = {
+        id: farmCrop.CropId,
+      };
+
       const crops = await Crop.findAll({
-        where: {
-          id: farmCrop.CropId
-        }
+        where: where
       });
 
       for(const crop of crops) {

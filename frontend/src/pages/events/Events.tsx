@@ -7,6 +7,8 @@ import {
 import { add, create as createIcon, trash } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
+import Refresher from '../../services/refresher';
+import ToolBar from '../../services/toolbar';
 
 import { getApi } from '../../services/utils';
 import './Events.css';
@@ -18,12 +20,39 @@ const Events: React.FC = () => {
   const [userEventId, setUserEventId] = useState<number | null>(null);
   const [userEvents, setUserEvents] = useState<Array<any>>([]);
 
+  const [searchText, setSearchText] = useState<string | null>(null);
+
   useEffect(() => {
     (async () => {
-      const { data } = await api.get('/user-events');
-      setUserEvents(data.events);
+      const events = await getEvents();
+      setUserEvents(events);
     })();
   }, []);
+
+  const removeEvent = async (userEventId: number) => {
+    await api.delete(`/user-events/${userEventId}`);
+  };
+
+  const getEvents = async () => {
+    const { data } = await api.get('/user-events');
+    return data.events;
+  }
+
+  const filterData = async (text: string) => {
+    if (!text) {
+      return await getEvents();
+    }
+    const { data } = await api.get(`/user-events?filter=${text}`);
+    return data.events;
+  }
+
+  const CreateButton = () => {
+    return (
+      <IonButton onClick={() => { setCreate(true) }}>
+        <IonIcon slot="icon-only" icon={add} />
+      </IonButton>
+    );
+  };
 
   return (
     <IonPage>
@@ -38,19 +67,26 @@ const Events: React.FC = () => {
         <Redirect to={`/dashboard/page/Events/${userEventId}/update`} push={true} exact={true} />
       }
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Events</IonTitle>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonButtons slot="primary">
-            <IonButton onClick={() => {setCreate(true)}}>
-              <IonIcon slot="icon-only" icon={add} />
-            </IonButton>
-          </IonButtons>
-        </IonToolbar>
+        <ToolBar
+          title={`Event`}
+          writeAction={async (text: string) => {
+            const events: Array<any> = await filterData(text)
+            setUserEvents(events)
+            setSearchText(text)
+          }}
+          cancelAction={async () => {
+            const events: Array<any> = await getEvents()
+            setUserEvents(events)
+            setSearchText(null)
+          }}
+          CreateButton={CreateButton}
+          />
       </IonHeader>
       <IonContent>
+        <Refresher refreshAction={async () => {
+          const events = (searchText) ? await filterData(searchText) : await getEvents()
+          setUserEvents(events)
+        }} />
         {
           userEvents.map((userEvent, index) => {
             return (
@@ -59,6 +95,7 @@ const Events: React.FC = () => {
                   <IonCardTitle>Nombre: {userEvent.Event.name}</IonCardTitle>
                   <IonCardSubtitle>
                     Rango: {userEvent.minValue} - {userEvent.maxValue},
+                    Tipo de acción: {userEvent.action},
                     Ejecuciones: {userEvent.countFired}
                   </IonCardSubtitle>
                 </IonCardHeader>
@@ -78,7 +115,11 @@ const Events: React.FC = () => {
                     </IonButton>
                     <IonButton
                       fill="outline" slot="end" color="danger"
-                      onClick={() => {setUpdate(true)}}>
+                      onClick={async () => {
+                        await removeEvent(userEvent.id)
+                        const events = await getEvents()
+                        setUserEvents(events)
+                      }}>
                         <IonIcon icon={trash} />
                     </IonButton>
                   </IonItem>
