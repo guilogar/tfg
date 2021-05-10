@@ -1,13 +1,13 @@
 import {
-  IonContent, IonIcon, IonItem, IonLabel,
-  IonList, IonListHeader, IonMenu, IonMenuToggle,
-  IonNote
+  IonContent, IonIcon, IonItem, IonLabel, IonList,
+  IonListHeader, IonMenu, IonMenuToggle, IonNote
 } from '@ionic/react';
 import {
-  archiveOutline, archiveSharp, bookmarkOutline,
-  heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline,
-  paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp,
-  logOutOutline, home
+  logOutOutline, homeSharp, homeOutline, albumsOutline, albumsSharp,
+  colorFillSharp, colorFillOutline, eyedropOutline, eyedropSharp,
+  alertOutline, alertSharp, rainyOutline, rainySharp,
+  notificationsOutline, notificationsSharp, settingsOutline,
+  settingsSharp, logOutSharp
 } from 'ionicons/icons';
 
 import './Menu.css';
@@ -25,44 +25,44 @@ const appPages: AppPage[] = [
   {
     title: 'Terrenos',
     url: '/dashboard/page/FarmableLand',
-    iosIcon: mailOutline,
-    mdIcon: mailSharp
+    iosIcon: albumsOutline,
+    mdIcon: albumsSharp
   },
   {
     title: 'Cultivos',
     url: '/dashboard/page/Crop',
-    iosIcon: paperPlaneOutline,
-    mdIcon: paperPlaneSharp
+    iosIcon: colorFillOutline,
+    mdIcon: colorFillSharp
   },
   {
     title: 'Fitosanitarios',
     url: '/dashboard/page/Phytosanitary',
-    iosIcon: heartOutline,
-    mdIcon: heartSharp
+    iosIcon: eyedropOutline,
+    mdIcon: eyedropSharp
   },
   {
     title: 'Eventos',
     url: '/dashboard/page/Events',
-    iosIcon: archiveOutline,
-    mdIcon: archiveSharp
+    iosIcon: alertOutline,
+    mdIcon: alertSharp
   },
   {
     title: 'Riegos',
     url: '/dashboard/page/Irrigate',
-    iosIcon: warningOutline,
-    mdIcon: warningSharp
+    iosIcon: rainyOutline,
+    mdIcon: rainySharp
   },
   {
     title: 'Notificaciones',
     url: '/dashboard/page/Notification',
-    iosIcon: warningOutline,
-    mdIcon: warningSharp
+    iosIcon: notificationsOutline,
+    mdIcon: notificationsSharp
   },
   {
     title: 'Ajustes',
     url: '/dashboard/page/Setting',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp
+    iosIcon: settingsOutline,
+    mdIcon: settingsSharp
   }
 ];
 
@@ -86,10 +86,10 @@ const Menu: React.FC<Menu> = ({ setIsLog, reduceFormat, fullname }) => {
             <IonMenuToggle autoHide={false}>
               <IonItem
                 className={location.pathname === '/dashboard/page/Home' ? 'selected' : ''}
-                routerLink={'/dashboard/page/home'}
+                routerLink={'/dashboard/page/Home'}
                 routerDirection="none" lines="none"
                 detail={false}>
-                <IonIcon slot="start" ios={home} md={home} />
+                <IonIcon slot="start" ios={homeOutline} md={homeSharp} />
                 <IonLabel>Home</IonLabel>
               </IonItem>
             </IonMenuToggle>
@@ -114,7 +114,7 @@ const Menu: React.FC<Menu> = ({ setIsLog, reduceFormat, fullname }) => {
                     logout();
                     setIsLog(false);
                   }}>
-            <IonIcon slot="start" ios={logOutOutline} md={logOutOutline} />
+            <IonIcon slot="start" ios={logOutOutline} md={logOutSharp} />
             <IonLabel>Cerrar sesión</IonLabel>
           </IonItem>
         </IonList>

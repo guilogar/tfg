@@ -8,51 +8,59 @@ import {
   IonRow, IonCol
 } from '@ionic/react';
 import React, { useState } from 'react';
+import { Redirect } from 'react-router';
 import { getWindowDimensions } from '../../services/utils';
 
 import './Home.css';
 
 const Home: React.FC = () => {
+  const [redirect, setRedirect] = useState<boolean>(false);
+  const [redirectURL, setRedirectURL] = useState<string | null>(null);
+
   const dimensions = getWindowDimensions();
   const [ width, setWidth ] = useState<number>(dimensions.width);
-  const handleResize = () => {
+  window.addEventListener('resize', () => {
     const dimensions = getWindowDimensions();
     setWidth(dimensions.width);
-  };
-  window.addEventListener('resize', handleResize);
+  });
 
-  const imageMadison = 'https://ionicframework.com/docs/demos/api/card/madison.jpg';
-
-  const sections = [
+  const image = 'https://picsum.photos/400/200';
+  let sections = [
     {
-      image: imageMadison,
+      image: image,
       title: 'Gestión de Terrenos',
       subtitle: 'Podrás gestionar tus terrenos con comodidad',
+      redirectTo: '/dashboard/page/FarmableLand',
     },
     {
-      image: imageMadison,
-      title: 'Gestión de Terrenos',
-      subtitle: 'Podrás gestionar tus terrenos con comodidad',
+      image: image,
+      title: 'Gestión de Cultivos',
+      subtitle: 'Podrás gestionar tus cultivos con comodidad',
+      redirectTo: '/dashboard/page/Crop',
     },
     {
-      image: imageMadison,
-      title: 'Gestión de Terrenos',
-      subtitle: 'Podrás gestionar tus terrenos con comodidad',
+      image: image,
+      title: 'Gestión de Fitosanitarios',
+      subtitle: 'Podrás gestionar tus fitosanitarios con comodidad',
+      redirectTo: '/dashboard/page/Phytosanitary',
     },
     {
-      image: imageMadison,
-      title: 'Gestión de Terrenos',
-      subtitle: 'Podrás gestionar tus terrenos con comodidad',
+      image: image,
+      title: 'Gestión de Eventos',
+      subtitle: 'Podrás gestionar tus eventos con comodidad',
+      redirectTo: '/dashboard/page/Events',
     },
     {
-      image: imageMadison,
-      title: 'Gestión de Terrenos',
-      subtitle: 'Podrás gestionar tus terrenos con comodidad',
+      image: image,
+      title: 'Gestión de Riegos',
+      subtitle: 'Podrás gestionar tus riegos con comodidad',
+      redirectTo: '/dashboard/page/Irrigate',
     },
     {
-      image: imageMadison,
-      title: 'Gestión de Terrenos',
-      subtitle: 'Podrás gestionar tus terrenos con comodidad',
+      image: image,
+      title: 'Ver Notificaciones',
+      subtitle: 'Podrás ver tus notificaciones con comodidad',
+      redirectTo: '/dashboard/page/Notification',
     },
   ];
 
@@ -73,8 +81,18 @@ const Home: React.FC = () => {
               sections.map((section, index) => {
                 return (
                   <IonCol size={(width < 1024) ? `6` : `4`} key={index}>
-                    <IonCard>
-                      <IonImg src={`${section.image}`} class="img-card" />
+                    {
+                      redirect
+                      &&
+                      <Redirect to={`${redirectURL}`} exact={true} />
+                    }
+                    <IonCard
+                      className='home-card'
+                      onClick={() => {
+                        setRedirectURL(section.redirectTo)
+                        setRedirect(true)
+                      }}>
+                      <IonImg src={`${section.image}?random=${index}`} class="img-card" />
                       <IonCardHeader>
                         <IonCardTitle>
                           {section.title}

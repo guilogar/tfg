@@ -1,3 +1,7 @@
 .img-card {
-  height: 100px;
+  height: 200px;
+}
+
+.home-card:hover {
+  cursor: pointer;
 }
