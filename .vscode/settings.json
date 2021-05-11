@@ -4,5 +4,11 @@
         ".vscode{,/**}"
     ],
     "appService.defaultWebAppToDeploy": "/subscriptions/8810b202-d968-41d4-9b33-2c763c7b2e36/resourceGroups/tfg/providers/Microsoft.Web/sites/backend-tfg",
-    "appService.deploySubpath": "backend"
+    "appService.deploySubpath": "backend",
+    // latex
+    "latex-workshop.docker.enabled": true,
+    "latex-workshop.latex.outDir": "./out",
+    "latex-workshop.synctex.afterBuild.enabled": true,
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.docker.image.latex": "feverch/texlive:2018"
 }
