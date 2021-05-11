@@ -25,6 +25,94 @@ const getFilterFarm = (filter) => {
   ];
 };
 
+const getFilterCrop = (filter) => {
+  return [
+    sequelize.where(
+      sequelize.cast(sequelize.col('FarmableLand.name'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+    sequelize.where(
+      sequelize.cast(sequelize.col('Crop.name'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+    sequelize.where(
+      sequelize.cast(sequelize.col('Crop.alias'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+    sequelize.where(
+      sequelize.cast(sequelize.col('Crop.description'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+    sequelize.where(
+      sequelize.cast(sequelize.col('Crop.weeks'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+  ];
+};
+
+const getFilterPhytosanitary = (filter) => {
+  return [
+    sequelize.where(
+      sequelize.cast(sequelize.col('Phytosanitary.name'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+    sequelize.where(
+      sequelize.cast(sequelize.col('Phytosanitary.description'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+    sequelize.where(
+      sequelize.cast(sequelize.col('Phytosanitary.alias'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+    sequelize.where(
+      sequelize.cast(sequelize.col('FarmableLand.name'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+    sequelize.where(
+      sequelize.cast(sequelize.col('Crop.name'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+    sequelize.where(
+      sequelize.cast(sequelize.col('Crop.alias'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+    sequelize.where(
+      sequelize.cast(sequelize.col('Crop.description'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+    sequelize.where(
+      sequelize.cast(sequelize.col('Crop.weeks'), 'varchar'),
+      {
+        [Op.iLike]: `%${filter}%`
+      }
+    ),
+  ];
+};
+
 const getFilterEvent = (filter) => {
   return [
     sequelize.where(
@@ -111,6 +199,6 @@ const getFilterNotification = (filter) => {
 };
 
 module.exports = {
-  getFilterFarm, getFilterEvent,
-  getFilterIrrigate, getFilterNotification
+  getFilterFarm, getFilterCrop, getFilterPhytosanitary,
+  getFilterEvent, getFilterIrrigate, getFilterNotification
 };

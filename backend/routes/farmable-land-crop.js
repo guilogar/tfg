@@ -4,13 +4,14 @@ const express = require('express');
 const router = express.Router();
 
 const { Op } = require('sequelize');
+const sequelize = require('../database/sequelize');
 
 const FarmableLand = require('../database/models/FarmableLand');
 const FarmableLandCrop = require('../database/models/FarmableLandCrop');
 const Crop = require('../database/models/Crop');
 
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
-const { getFilterFarm } = require('./constans/filters');
+const { getFilterFarm, getFilterCrop } = require('./constans/filters');
 
 router.get('/farmableLandCrop', async (req, res) => {
   const farmId = (req.query.farmId !== undefined) ? JSON.parse(req.query.farmId) : undefined;
@@ -19,47 +20,68 @@ router.get('/farmableLandCrop', async (req, res) => {
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
 
-  let where = (farmId !== undefined) ? {
-    UserId: user.id,
-    id: farmId
-  } : {
-    UserId: user.id
-  };
+  let where = {};
 
-  if (filter !== undefined) {
-    where[Op.or] = getFilterFarm(filter);
+  if(farmId !== undefined) {
+    where[Op.and] = [
+      sequelize.where(
+        sequelize.cast(sequelize.col('FarmableLand.id'), 'int'),
+        {
+          [Op.eq]: farmId
+        }
+      ),
+    ];
   }
 
-  const farms = await FarmableLand.findAll({
-    where: where
+  if (filter !== undefined) {
+    where[Op.or] = getFilterCrop(filter);
+    where[Op.and] = [
+      sequelize.where(
+        sequelize.cast(sequelize.col('FarmableLand.UserId'), 'int'),
+        {
+          [Op.eq]: user.id
+        }
+      ),
+    ];
+  }
+
+  const farmsCrops = await FarmableLandCrop.findAll({
+    where: where,
+    include: [
+      { model: FarmableLand },
+      { model: Crop },
+    ]
   });
 
-  let farmableLands = [];
-  for(const farm of farms) {
-    let farmableLand = farm.toJSON();
-    farmableLand.crops = [];
+  let farmIdCrops = [];
+  for (const farmCrop of farmsCrops) {
+    if (!farmIdCrops.includes(farmCrop.FarmableLandId)) {
+      farmIdCrops.push(farmCrop.FarmableLandId);
+    }
+  }
 
-    const farmsCrops = await FarmableLandCrop.findAll({
+  let farmableLands = [];
+  for (const farmableLandId of farmIdCrops) {
+    const farm = (await FarmableLand.findOne({
       where: {
-        FarmableLandId: farm.id
+        id: farmableLandId
       }
+    })).toJSON();
+
+    const fCrops = await FarmableLandCrop.findAll({
+      where: {
+        FarmableLandId: farmableLandId
+      },
+      include: [
+        { model: Crop }
+      ]
     });
 
-    for(const farmCrop of farmsCrops) {
-      where = {
-        id: farmCrop.CropId,
-      };
+    farm.crops = fCrops.map((fCrop) => {
+      return fCrop.Crop.toJSON();
+    });
 
-      const crops = await Crop.findAll({
-        where: where
-      });
-
-      for(const crop of crops) {
-        farmableLand.crops.push(crop.toJSON());
-      }
-    }
-
-    farmableLands.push(farmableLand);
+    farmableLands.push(farm);
   }
 
   res.status(200).send({
