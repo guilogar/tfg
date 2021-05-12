@@ -15,6 +15,22 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
+    - name: create-firebase-json
+      id: create-firebase-json
+      uses: jsdaniell/create-json@1.1.2
+      with:
+        name: "firebase-credentials.json"
+        json: ${{ secrets.FIREBASE_CREDENTIALS_FRONTEND_JSON }}
+        dir: 'frontend/src/'
+
+    - name: create-firebase-json
+      id: create-firebase-json
+      uses: jsdaniell/create-json@1.1.2
+      with:
+        name: "firebase-credentials.json"
+        json: ${{ secrets.FIREBASE_CREDENTIALS_FRONTEND_JSON }}
+        dir: 'frontend/public/'
+
     - name: Set up Node.js version
       uses: actions/setup-node@v1
       with:

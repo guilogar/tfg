@@ -77,6 +77,32 @@ Complete with your info in the file
 ```
 Complete with your info in the file
 
+### frontend/src/firebase-credentials.json
+```
+{
+  "apiKey": ...,
+  "authDomain": ...,
+  "projectId": ...,
+  "storageBucket": ...,
+  "messagingSenderId": ...,
+  "appId": ...,
+  "measurementId": ...
+}
+```
+
+### frontend/public/firebase-credentials.json
+```
+{
+  "apiKey": ...,
+  "authDomain": ...,
+  "projectId": ...,
+  "storageBucket": ...,
+  "messagingSenderId": ...,
+  "appId": ...,
+  "measurementId": ...
+}
+```
+
 ## Start backend
 ```
 cd backend
