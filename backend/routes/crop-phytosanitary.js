@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const { Op } = require('sequelize');
+const sequelize = require('../database/sequelize');
 
 const FarmableLand = require('../database/models/FarmableLand');
 const FarmableLandCrop = require('../database/models/FarmableLandCrop');
@@ -12,7 +13,7 @@ const CropPhytosanitary = require('../database/models/CropPhytosanitary');
 const Phytosanitary = require('../database/models/Phytosanitary');
 
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
-const { getFilterFarm } = require('./constans/filters');
+const { getFilterPhytosanitary } = require('./constans/filters');
 
 router.get('/cropPhytosanitary', async (req, res) => {
   const farmId = (req.query.farmId !== undefined) ? JSON.parse(req.query.farmId) : undefined;
@@ -22,19 +23,51 @@ router.get('/cropPhytosanitary', async (req, res) => {
   const jwt = getJwtFromRequest(req);
   const user = await getUserFromJwt(jwt);
 
-  let where = (farmId !== undefined) ? {
-    UserId: user.id,
-    id: farmId
-  } : {
-    UserId: user.id
-  };
+  let where = {};
+
+  if(farmId !== undefined) {
+    where[Op.and] = [
+      sequelize.where(
+        sequelize.cast(sequelize.col('FarmableLand.id'), 'int'),
+        {
+          [Op.eq]: farmId
+        }
+      ),
+    ];
+  }
 
   if (filter !== undefined) {
-    where[Op.or] = getFilterFarm(filter);
+    where[Op.or] = getFilterPhytosanitary(filter);
+    where[Op.and] = [
+      sequelize.where(
+        sequelize.cast(sequelize.col('FarmableLand.UserId'), 'int'),
+        {
+          [Op.eq]: user.id
+        }
+      ),
+    ];
+  }
+
+  const farmsCropsPhytosanitary = await CropPhytosanitary.findAll({
+    where: where,
+    include: [
+      { model: FarmableLand },
+      { model: Crop },
+      { model: Phytosanitary },
+    ]
+  });
+
+  let farmIds = [];
+  for (const farmsCropPhytosanitary of farmsCropsPhytosanitary) {
+    if (!farmIds.includes(farmsCropPhytosanitary.FarmableLandId)) {
+      farmIds.push(farmsCropPhytosanitary.FarmableLandId);
+    }
   }
 
   const farms = await FarmableLand.findAll({
-    where: where
+    where: {
+      id: farmIds
+    }
   });
 
   let farmableLands = [];

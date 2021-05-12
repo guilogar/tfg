@@ -11,7 +11,7 @@ const FarmableLandCrop = require('../database/models/FarmableLandCrop');
 const Crop = require('../database/models/Crop');
 
 const { getUserFromJwt, getJwtFromRequest } = require('../routes/services/get-user-auth');
-const { getFilterFarm, getFilterCrop } = require('./constans/filters');
+const { getFilterCrop } = require('./constans/filters');
 
 router.get('/farmableLandCrop', async (req, res) => {
   const farmId = (req.query.farmId !== undefined) ? JSON.parse(req.query.farmId) : undefined;
@@ -53,15 +53,15 @@ router.get('/farmableLandCrop', async (req, res) => {
     ]
   });
 
-  let farmIdCrops = [];
+  let farmIds = [];
   for (const farmCrop of farmsCrops) {
-    if (!farmIdCrops.includes(farmCrop.FarmableLandId)) {
-      farmIdCrops.push(farmCrop.FarmableLandId);
+    if (!farmIds.includes(farmCrop.FarmableLandId)) {
+      farmIds.push(farmCrop.FarmableLandId);
     }
   }
 
   let farmableLands = [];
-  for (const farmableLandId of farmIdCrops) {
+  for (const farmableLandId of farmIds) {
     const farm = (await FarmableLand.findOne({
       where: {
         id: farmableLandId
