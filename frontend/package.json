@@ -19,6 +19,7 @@
     "@types/react-router-dom": "^5.1.7",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
+    "firebase": "^8.6.0",
     "ionicons": "^5.4.0",
     "react": "^17.0.1",
     "react-canvas-draw": "^1.1.1",

@@ -109,7 +109,7 @@ cron.schedule('* * * * *', async () => {
 
       try {
         const response = await sendNotificationToUser(userId, notification);
-        // console.log(response);
+        console.log(response);
       } catch (error) {
         console.log(error);
       }
@@ -117,11 +117,11 @@ cron.schedule('* * * * *', async () => {
       try {
         await removeEventsFromCosmos(items);
       } catch (error) {
-        // console.log(error);
+        console.log(error);
       }
     }
   } catch (error) {
-    // console.log(error);
+    console.log(error);
   }
 });
 
