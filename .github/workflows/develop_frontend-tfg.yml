@@ -15,16 +15,16 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    - name: create-firebase-json
-      id: create-firebase-json
+    - name: create-firebase-json-src
+      id: create-firebase-json-src
       uses: jsdaniell/create-json@1.1.2
       with:
         name: "firebase-credentials.json"
         json: ${{ secrets.FIREBASE_CREDENTIALS_FRONTEND_JSON }}
         dir: 'frontend/src/'
 
-    - name: create-firebase-json
-      id: create-firebase-json
+    - name: create-firebase-json-public
+      id: create-firebase-json-public
       uses: jsdaniell/create-json@1.1.2
       with:
         name: "firebase-credentials.json"
