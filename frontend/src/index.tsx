@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+  Capacitor
+} from '@capacitor/core';
+
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
@@ -18,6 +22,9 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
 (async () => {
+  const { isNative } = Capacitor;
+  if(isNative) return;
+
   const firebase = initializeFirebase();
   const token = await askPermissionNotification(firebase);
   localStorage.setItem('pushNotificationToken', token);

@@ -71,7 +71,6 @@ export const fetchKeyDataFromLocalStorage = (inputKey: string) : string | null =
 
 export const pushNotifications = async () => {
   const { isNative } = Capacitor;
-
   if(!isNative) return;
 
   const { PushNotifications } = Plugins;
