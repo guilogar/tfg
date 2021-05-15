@@ -19,4 +19,4 @@ export const askPermissionNotification = async (firebase: any) => {
   const messaging = firebase.messaging();
   await messaging.requestPermission();
   return await messaging.getToken();
-}
+};

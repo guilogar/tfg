@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {
   Capacitor
 } from '@capacitor/core';
+import * as fs from 'fs';
 
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
@@ -22,21 +23,29 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
 (async () => {
-  const { isNative } = Capacitor;
+  const { isNative, platform } = Capacitor;
   if(isNative) return;
 
-  const firebase = initializeFirebase();
-  const token = await askPermissionNotification(firebase);
-  localStorage.setItem('pushNotificationToken', token);
+  if (platform === 'electron') {
+    return;
+  }
 
-  serviceWorkerRegistration.register({
-    onSuccess: (registration) => {
-      firebase.messaging().useServiceWorker(registration);
-    },
-    onUpdate: (registration) => {
-      firebase.messaging().useServiceWorker(registration);
-    }
-  });
+  try {
+    const firebase = initializeFirebase();
+    const token = await askPermissionNotification(firebase);
+    localStorage.setItem('pushNotificationToken', token);
+
+    serviceWorkerRegistration.register({
+      onSuccess: (registration) => {
+        firebase.messaging().useServiceWorker(registration);
+      },
+      onUpdate: (registration) => {
+        firebase.messaging().useServiceWorker(registration);
+      }
+    });
+  } catch (error) {
+    console.log(error)
+  }
 })();
 
 // If you want to start measuring performance in your app, pass a function
