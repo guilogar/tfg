@@ -3,7 +3,8 @@ import {
   Plugins, Capacitor,
   PushNotification,
   PushNotificationToken,
-  PushNotificationActionPerformed
+  PushNotificationActionPerformed,
+  LocalNotificationActionPerformed
 } from '@capacitor/core';
 
 export const login = (sessionId: string) : void => {
@@ -73,7 +74,7 @@ export const pushNotifications = async () => {
   const { isNative } = Capacitor;
   if(!isNative) return;
 
-  const { PushNotifications } = Plugins;
+  const { PushNotifications, LocalNotifications } = Plugins;
 
   PushNotifications.addListener(
     'registration',
@@ -83,21 +84,36 @@ export const pushNotifications = async () => {
       } catch (error) {
         alert('error on save pushNotificationToken');
       }
-    },
+    }
   );
 
   PushNotifications.addListener(
     'pushNotificationReceived',
-    (notification: PushNotification) => {
-      alert('Push received: ' + JSON.stringify(notification));
-    },
+    async (notification: PushNotification) => {
+      try {
+        await LocalNotifications.schedule({
+          notifications: [
+            {
+              title: `${notification.title}`,
+              body: `${notification.body}`,
+              id: Math.round(Math.random() * 100),
+            }
+          ]
+        });
+      } catch (error) {
+        alert(error);
+      }
+    }
   );
 
   PushNotifications.addListener(
     'pushNotificationActionPerformed',
-    (notification: PushNotificationActionPerformed) => {
-      alert('Push action performed: ' + JSON.stringify(notification));
-    },
+    (notification: PushNotificationActionPerformed) => {}
+  );
+
+  LocalNotifications.addListener(
+    'localNotificationActionPerformed',
+    (notificationAction: LocalNotificationActionPerformed) => {}
   );
 
   const result = await PushNotifications.requestPermission();

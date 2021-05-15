@@ -41,16 +41,16 @@ const appPages: AppPage[] = [
     mdIcon: eyedropSharp
   },
   {
-    title: 'Eventos',
-    url: '/dashboard/page/Events',
-    iosIcon: alertOutline,
-    mdIcon: alertSharp
-  },
-  {
     title: 'Riegos',
     url: '/dashboard/page/Irrigate',
     iosIcon: rainyOutline,
     mdIcon: rainySharp
+  },
+  {
+    title: 'Eventos',
+    url: '/dashboard/page/Events',
+    iosIcon: alertOutline,
+    mdIcon: alertSharp
   },
   {
     title: 'Notificaciones',
