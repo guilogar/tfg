@@ -98,7 +98,6 @@ const Events: React.FC = () => {
                     {t('EVENTS_NAME')}: {t(`EVENTS_NAMES_${userEvent.Event.name}`)}
                   </IonCardTitle>
                   <IonCardSubtitle>
-                    {t('EVENTS_RANGE')}: {userEvent.minValue} - {userEvent.maxValue},{` `}
                     {t('EVENTS_ACTION_TYPE')}: {t(`EVENTS_ACTION_TYPES_${userEvent.action}`)},{` `}
                     {t('EVENTS_EXECUTIONS')}: {userEvent.countFired}
                   </IonCardSubtitle>

@@ -64,13 +64,11 @@ async function insertDataTable()
   const eventHumidity = await createEvent('HUMIDITY', 'Humidity Event');
 
   await assignEventToUser(
-    user.id, eventTemperature.id,
-    'AUTOMATIC', 20, 25
+    user.id, eventTemperature.id, 'AUTOMATIC'
   );
 
   await assignEventToUser(
-    user.id, eventHumidity.id,
-    'MANUAL', 60, 65
+    user.id, eventHumidity.id, 'MANUAL'
   );
 
   for(let i = 0; i < 5; i++)

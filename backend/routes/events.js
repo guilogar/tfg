@@ -71,8 +71,6 @@ router.post('/user-events', async (req, res) => {
   try {
     const userEvent = await UserEvent.create({
       action: req.body.action,
-      minValue: req.body.minValue,
-      maxValue: req.body.maxValue,
       EventId: req.body.eventId,
       UserId: user.id
     });
@@ -103,8 +101,6 @@ router.put('/user-events/:id', async (req, res) => {
 
     userEvent = await userEvent.update({
       action: req.body.action,
-      minValue: req.body.minValue,
-      maxValue: req.body.maxValue,
       EventId: req.body.eventId
     });
 

@@ -122,18 +122,6 @@ const getFilterEvent = (filter) => {
       }
     ),
     sequelize.where(
-      sequelize.cast(sequelize.col('UserEvent.minValue'), 'varchar'),
-      {
-        [Op.iLike]: `%${filter}%`
-      }
-    ),
-    sequelize.where(
-      sequelize.cast(sequelize.col('UserEvent.maxValue'), 'varchar'),
-      {
-        [Op.iLike]: `%${filter}%`
-      }
-    ),
-    sequelize.where(
       sequelize.cast(sequelize.col('Event.name'), 'varchar'),
       {
         [Op.iLike]: `%${filter}%`

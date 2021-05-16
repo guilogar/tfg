@@ -15,12 +15,6 @@ UserEvent.init({
   action: {
     type: DataTypes.ENUM('AUTOMATIC', 'MANUAL', 'SETTINGS')
   },
-  minValue: {
-    type: DataTypes.DOUBLE
-  },
-  maxValue: {
-    type: DataTypes.DOUBLE
-  },
   countFired: {
     type: DataTypes.INTEGER,
     defaultValue: 0

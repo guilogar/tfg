@@ -9,15 +9,12 @@ const createEvent = async(name, description) => {
 };
 
 const assignEventToUser = async(
-  userId, eventId, action,
-  minValue = 0.0, maxValue = 0.0
+  userId, eventId, action
 ) => {
   return await UserEvent.create({
     UserId: userId,
     EventId: eventId,
-    action: action,
-    minValue: minValue,
-    maxValue: maxValue
+    action: action
   });
 };
 

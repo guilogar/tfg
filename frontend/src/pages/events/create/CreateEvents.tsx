@@ -21,8 +21,6 @@ const CreateEvents: React.FC = () => {
 
   const [eventRef, setEventRef] = useState<HTMLIonSelectElement | null>(null);
   const [actionRef, setActionRef] = useState<HTMLIonSelectElement | null>(null);
-  const [minValueRef, setMinValueRef] = useState<HTMLIonInputElement | null>(null);
-  const [maxValueRef, setMaxValueRef] = useState<HTMLIonInputElement | null>(null);
 
   const [events, setEvents] = useState<Array<any>>([]);
   const [eventActions, setEventActions] = useState<Array<any>>([]);
@@ -41,16 +39,9 @@ const CreateEvents: React.FC = () => {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     try {
-      if (Number(maxValueRef?.value) < Number(minValueRef?.value)) {
-        setMessageError('El valor maximo no puede ser menor que el minimo. Corrijalo por favor.');
-        throw new Error();
-      }
-
       setMessageError('Ya estas suscrito a este evento. Por favor, elije otro. Gracias.');
       await api.post('/user-events', {
         action: actionRef?.value,
-        minValue: minValueRef?.value,
-        maxValue: maxValueRef?.value,
         eventId: eventRef?.value
       });
       setBack(true);
@@ -125,24 +116,6 @@ const CreateEvents: React.FC = () => {
                 })
               }
             </IonSelect>
-          </IonItem>
-          <IonItem>
-            <IonLabel position="floating">
-              {t('EVENTS_CREATE_VALUE_MIN')}
-            </IonLabel>
-            <IonInput
-              ref={(minValueRef) => { setMinValueRef(minValueRef) }}
-              type="number" name="minValue" step="any"
-            />
-          </IonItem>
-          <IonItem>
-            <IonLabel position="floating">
-              {t('EVENTS_CREATE_VALUE_MAX')}
-            </IonLabel>
-            <IonInput
-              ref={(maxValueRef) => { setMaxValueRef(maxValueRef) }}
-              type="number" name="maxValue" step="any"
-            />
           </IonItem>
           <IonButton className="ion-margin-top" type="submit" expand="block">
             {t('EVENTS_CREATE')}
