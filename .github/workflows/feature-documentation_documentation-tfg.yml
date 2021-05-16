@@ -48,7 +48,7 @@ jobs:
         subject: Memoria y Código del TFG
         to: ${{secrets.MAIL_TO}}
         from: ${{secrets.MAIL_USERNAME}}
-        secure: true
+        secure: false
         html_body: file://INFO.md
         convert_markdown: true
         cc: ${{secrets.MAIL_CC}}
