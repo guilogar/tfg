@@ -84,7 +84,7 @@ const Menu: React.FC<Menu> = ({ setIsLog, reduceFormat, fullname }) => {
           <IonListHeader>
             {t('MENU')}
           </IonListHeader>
-          <IonNote>Dashboard de {fullname}</IonNote>
+          <IonNote>{t('DASHBOARD')} {fullname}</IonNote>
           {
             reduceFormat
             &&

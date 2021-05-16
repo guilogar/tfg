@@ -26,6 +26,7 @@ const HOME_LANG = {
 
 const MENU_LANG = {
   MENU: 'Menú',
+  DASHBOARD: 'Panel de Control de',
   HOME: 'Inicio',
   FARMABLE_LANDS: 'Terrenos',
   CROPS: 'Cultivos',

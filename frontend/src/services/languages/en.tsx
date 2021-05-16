@@ -26,6 +26,7 @@ const HOME_LANG = {
 
 const MENU_LANG = {
   MENU: 'Menu',
+  DASHBOARD: 'Dashboard of',
   HOME: 'Home',
   FARMABLE_LANDS: 'Farmable Lands',
   CROPS: 'Crops',
