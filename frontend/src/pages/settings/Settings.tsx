@@ -4,14 +4,16 @@ import {
   IonList, IonItem, IonIcon, IonLabel, IonToggle, IonButtons, IonMenuButton, IonSelect, IonSelectOption, IonButton
 } from "@ionic/react";
 import { Redirect } from "react-router";
-import { moon } from "ionicons/icons";
+import { moon, language, trailSign } from "ionicons/icons";
 import {
   getApi, insertDataIntoLocalStorage, setI18n
 } from "../../services/utils";
 
 import "./Settings.css";
+import { useTranslation } from "react-i18next";
 
 const Settings: React.FC = () => {
+  const { t } = useTranslation();
   const api = getApi();
   const [back, setBack] = useState<boolean>(false);
 
@@ -74,7 +76,7 @@ const Settings: React.FC = () => {
       }
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Settings</IonTitle>
+          <IonTitle>{t('SETTING_LIST')}</IonTitle>
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
@@ -85,16 +87,22 @@ const Settings: React.FC = () => {
           <form className="ion-padding" onSubmit={(event) => { handleSubmit(event) }}>
             <IonItem>
               <IonIcon
-                slot="start" icon={moon} className="component-icon component-icon-dark" />
+                slot="start" icon={moon}
+                className="component-icon component-icon-dark" />
               <IonLabel>
-                {(darkMode) ? `Dark Mode` : `Light Mode`}
+                {(darkMode) ? t('SETTING_DARK_MODE') : t('SETTING_LIGHT_MODE')}
               </IonLabel>
               <IonToggle
                 slot="end" name="darkMode" checked={darkMode}
                 onClick={toggleDarkModeHandler} />
             </IonItem>
             <IonItem>
-              <IonLabel position="floating">Idioma</IonLabel>
+              <IonIcon
+                slot="start" icon={language}
+                className="component-icon component-icon-dark" />
+              <IonLabel position="floating">
+                {t('SETTING_LANGUAGE')}
+              </IonLabel>
               <IonSelect
                 ref={(languageRef) => { setLanguageRef(languageRef) }}
                 name="language" value={settings?.defaultLanguage}
@@ -103,7 +111,7 @@ const Settings: React.FC = () => {
                   languages.map((language, index) => {
                     return (
                       <IonSelectOption value={language} key={index}>
-                        {language}
+                        {t(`SETTING_LANGUAGE_TYPE_${language.toUpperCase()}`)}
                       </IonSelectOption>
                     );
                   })
@@ -111,7 +119,12 @@ const Settings: React.FC = () => {
               </IonSelect>
             </IonItem>
             <IonItem>
-              <IonLabel position="floating">Acción por defecto en eventos</IonLabel>
+              <IonIcon
+                slot="start" icon={trailSign}
+                className="component-icon component-icon-dark" />
+              <IonLabel position="floating">
+                {t('SETTING_ACTION_BY_DEFAULT')}
+              </IonLabel>
               <IonSelect
                 ref={(eventActionRef) => { setEventActionRef(eventActionRef) }}
                 name="action" value={settings?.defaultEventAction}
@@ -120,7 +133,7 @@ const Settings: React.FC = () => {
                   eventActions.map((eventAction, index) => {
                     return (
                       <IonSelectOption value={eventAction} key={index}>
-                        {eventAction}
+                        {t(`EVENTS_ACTION_TYPES_${eventAction}`)}
                       </IonSelectOption>
                     );
                   })
@@ -129,7 +142,7 @@ const Settings: React.FC = () => {
             </IonItem>
 
             <IonButton className="ion-margin-top" type="submit" expand="block">
-              Guardar
+              {t('SETTING_SAVE')}
             </IonButton>
           </form>
         </IonList>

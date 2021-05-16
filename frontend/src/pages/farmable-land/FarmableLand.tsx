@@ -14,8 +14,10 @@ import './FarmableLand.css';
 
 import Refresher from '../../services/refresher';
 import ToolBar from '../../services/toolbar';
+import { useTranslation } from 'react-i18next';
 
 const FarmableLand: React.FC = () => {
+  const { t } = useTranslation();
   const api = getApi();
   const [create, setCreate] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
@@ -70,7 +72,7 @@ const FarmableLand: React.FC = () => {
       }
       <IonHeader>
         <ToolBar
-          title={`FarmableLand`}
+          title={t('FARMABLE_LAND_LIST')}
           writeAction={async (text: string) => {
             const farms: Array<any> = await filterData(text)
             setFarmableLands(farms)
@@ -96,20 +98,31 @@ const FarmableLand: React.FC = () => {
                 <IonImg src={(farmableLand.image) ? farmableLand.image : '/assets/no-image.png'}
                         class="img-farmable-land" />
                 <IonCardHeader>
-                  <IonCardTitle>Nombre: {farmableLand.name}</IonCardTitle>
-                  <IonCardSubtitle>Tipo: {farmableLand.type}, Area: {farmableLand.area} m2</IonCardSubtitle>
+                  <IonCardTitle>
+                    {t('FARMABLE_LAND_NAME')}: {farmableLand.name}
+                    </IonCardTitle>
+                  <IonCardSubtitle>
+                  {t('FARMABLE_LAND_TYPE')}: {farmableLand.type},
+                  {t('FARMABLE_LAND_AREA')}: {farmableLand.area} m2
+                  </IonCardSubtitle>
                 </IonCardHeader>
                 <IonCardContent>
                   <IonItem lines="none">
-                    <IonLabel>Se ha agregado un sistema de IOT</IonLabel>
+                    <IonLabel>
+                      {t('FARMABLE_LAND_LIST_HAVEIOT')}
+                    </IonLabel>
                     <IonCheckbox checked={farmableLand.haveIOT} disabled={true} slot="start" />
                   </IonItem>
                   <IonItem lines="none">
-                    <IonLabel>El terreno tiene forma de cuadrado o rectangulo</IonLabel>
+                    <IonLabel>
+                      {t('FARMABLE_LAND_IS_SQUARE')}
+                    </IonLabel>
                     <IonCheckbox checked={farmableLand.isSquare} disabled={true} slot="start" />
                   </IonItem>
                   <IonItem>
-                    <IonLabel>Acciones</IonLabel>
+                    <IonLabel>
+                      {t('ACTIONS')}
+                    </IonLabel>
                     <IonButton
                       fill="outline" slot="end"
                       onClick={() => {

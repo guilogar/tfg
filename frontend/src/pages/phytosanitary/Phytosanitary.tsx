@@ -6,6 +6,7 @@ import {
 } from '@ionic/react';
 import { add, create as createIcon, trash } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router';
 import Refresher from '../../services/refresher';
 import ToolBar from '../../services/toolbar';
@@ -14,6 +15,7 @@ import { getApi } from '../../services/utils';
 import './Phytosanitary.css';
 
 const Phytosanitary: React.FC = () => {
+  const { t } = useTranslation();
   const api = getApi();
   const [create, setCreate] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
@@ -65,7 +67,7 @@ const Phytosanitary: React.FC = () => {
       }
       <IonHeader>
         <ToolBar
-          title={`Phytosanitary`}
+          title={t('PHYTOSANITARY_LIST')}
           writeAction={async (text: string) => {
             const farms: Array<any> = await filterData(text)
             setFarms(farms)
@@ -89,8 +91,12 @@ const Phytosanitary: React.FC = () => {
             return (
               <IonCard key={index}>
                 <IonCardHeader>
-                  <IonCardTitle>{farm.name}</IonCardTitle>
-                  <IonCardSubtitle>{farm.crops.length} cultivo(s)</IonCardSubtitle>
+                  <IonCardTitle>
+                    {farm.name}
+                  </IonCardTitle>
+                  <IonCardSubtitle>
+                    {farm.crops.length} {t('CROP_LENGTH')}
+                  </IonCardSubtitle>
                 </IonCardHeader>
                 <IonCardContent>
                   {
@@ -98,12 +104,18 @@ const Phytosanitary: React.FC = () => {
                       return (
                         <IonCard key={index}>
                           <IonCardHeader>
-                            <IonCardTitle>{crop.alias}</IonCardTitle>
-                            <IonCardSubtitle>{crop.phytosanitarys.length} Fitosanitarios(s)</IonCardSubtitle>
+                            <IonCardTitle>
+                              {crop.alias}
+                            </IonCardTitle>
+                            <IonCardSubtitle>
+                              {crop.phytosanitarys.length} {t('PHYTOSANITARY_LENGTH')}
+                            </IonCardSubtitle>
                           </IonCardHeader>
                           <IonCardContent>
                             <IonList>
-                              <IonListHeader>Fitosanitarios:</IonListHeader>
+                              <IonListHeader>
+                                {t('PHYTOSANITARY_NAME_PLURAL')}:
+                              </IonListHeader>
                               {
                                 crop.phytosanitarys.map((phytosanitary: any, index: any) => {
                                   return (
@@ -115,7 +127,9 @@ const Phytosanitary: React.FC = () => {
                               }
                             </IonList>
                             <IonItem>
-                              <IonLabel>Acciones</IonLabel>
+                              <IonLabel>
+                                {t('ACTIONS')}
+                              </IonLabel>
                               <IonButton
                                 fill="outline" slot="end"
                                 onClick={() => {

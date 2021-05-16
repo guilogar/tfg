@@ -13,8 +13,10 @@ import './Irrigate.css';
 import { Redirect } from 'react-router';
 import ToolBar from '../../services/toolbar';
 import Refresher from '../../services/refresher';
+import { useTranslation } from 'react-i18next';
 
 const Irrigate: React.FC = () => {
+  const { t } = useTranslation();
   const api = getApi();
   const [create, setCreate] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
@@ -69,7 +71,7 @@ const Irrigate: React.FC = () => {
       }
       <IonHeader>
         <ToolBar
-          title={`Irrigate`}
+          title={t('IRRIGATE_LIST')}
           writeAction={async (text: string) => {
             const irrigates: Array<any> = await filterData(text)
             setIrrigates(irrigates)
@@ -93,17 +95,22 @@ const Irrigate: React.FC = () => {
             return (
               <IonCard key={index}>
                 <IonCardHeader>
-                  <IonCardTitle>Terreno: {irrigate.FarmableLand.name}</IonCardTitle>
+                  <IonCardTitle>
+                    {t('IRRIGATE_FARMABLE_LAND')}: {irrigate.FarmableLand.name}
+                  </IonCardTitle>
                   <IonCardSubtitle>
-                    Cantidad de agua: {irrigate.amountWater} litros
+                    {t('IRRIGATE_AQUA_QUANTITY')}: {irrigate.amountWater}
+                    {t('IRRIGATE_AQUA_QUANTITY_TYPE')} litros
                   </IonCardSubtitle>
                 </IonCardHeader>
                 <IonCardContent>
                   <IonItem lines="none">
-                    <IonInput value={`Duración: ${irrigate.lengthMinutes} minutos`} disabled />
+                    <IonInput value={`${t('IRRIGATE_DURABILITY')}: ${irrigate.lengthMinutes} ${t('IRRIGATE_MINUTES')}`} disabled />
                   </IonItem>
                   <IonItem>
-                    <IonLabel>Acciones</IonLabel>
+                    <IonLabel>
+                      {t('ACTIONS')}
+                    </IonLabel>
                     <IonButton
                       fill="outline" slot="end"
                       onClick={() => {

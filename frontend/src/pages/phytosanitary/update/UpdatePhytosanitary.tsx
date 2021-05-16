@@ -6,12 +6,14 @@ import {
 } from '@ionic/react';
 import { add, arrowBack, arrowBackCircle, trash } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router';
 
 import { getApi } from '../../../services/utils';
 import './UpdatePhytosanitary.css';
 
 const UpdatePhytosanitary: React.FC = (props: any) => {
+  const { t } = useTranslation();
   const api = getApi();
   const [back, setBack] = useState<boolean>(false);
   const [crops, setCrops] = useState<Array<any>>([]);
@@ -75,13 +77,15 @@ const UpdatePhytosanitary: React.FC = (props: any) => {
               <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
             </IonButton>
           </IonButtons>
-          <IonTitle>EditPhytosanitary</IonTitle>
+          <IonTitle>{t('PHYTOSANITARY_EDIT')}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <form className="ion-padding" onSubmit={(event) => { handleSubmit(event) }}>
           <IonItem>
-            <IonLabel position="floating">Cultivo</IonLabel>
+            <IonLabel position="floating">
+              {t('CROP_NAME_SINGULAR')}
+            </IonLabel>
             <IonSelect
               ref={(cropRef) => { setCropRef(cropRef) }}
               name="type" value={cropId}
@@ -119,7 +123,9 @@ const UpdatePhytosanitary: React.FC = (props: any) => {
             })
           }
           <IonItem>
-            <IonLabel position="floating">Fitosanitario</IonLabel>
+            <IonLabel position="floating">
+              {t('PHYTOSANITARY_NAME_SINGULAR')}
+            </IonLabel>
             <IonSelect
               ref={(phytosanitaryRef) => { setPhytosanitaryRef(phytosanitaryRef) }}
               name="type"
@@ -142,7 +148,7 @@ const UpdatePhytosanitary: React.FC = (props: any) => {
             </IonButton>
           </IonItem>
           <IonButton className="ion-margin-top" type="submit" expand="block">
-            Guardar
+            {t('PHYTOSANITARY_EDIT')}
           </IonButton>
         </form>
       </IonContent>

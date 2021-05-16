@@ -6,12 +6,14 @@ import {
 } from '@ionic/react';
 import { arrowBack, arrowBackCircle } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router';
 
 import { getApi } from '../../../services/utils';
 import './CreatePhytosanitary.css';
 
 const CreatePhytosanitary: React.FC = () => {
+  const { t } = useTranslation();
   const api = getApi();
   const [back, setBack] = useState<boolean>(false);
   const [farms, setFarms] = useState<Array<any>>([]);
@@ -63,13 +65,15 @@ const CreatePhytosanitary: React.FC = () => {
               <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
             </IonButton>
           </IonButtons>
-          <IonTitle>CreatePhytosanitary</IonTitle>
+          <IonTitle>{t('PHYTOSANITARY_CREATE')}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <form className="ion-padding" onSubmit={(event) => { handleSubmit(event) }}>
           <IonItem>
-            <IonLabel position="floating">Terreno</IonLabel>
+            <IonLabel position="floating">
+              {t('CROP_FARMABLE_LAND')}
+            </IonLabel>
             <IonSelect
               ref={(farmRef) => { setFarmRef(farmRef) }}
               name="farm" aria-required="true" onClick={() => {
@@ -89,7 +93,9 @@ const CreatePhytosanitary: React.FC = () => {
             </IonSelect>
           </IonItem>
           <IonItem>
-            <IonLabel position="floating">Cultivo</IonLabel>
+            <IonLabel position="floating">
+            {t('CROP_NAME_SINGULAR')}
+            </IonLabel>
             <IonSelect
               ref={(cropRef) => { setCropRef(cropRef) }}
               name="crop" aria-required="true" onClick={async () => {
@@ -110,7 +116,9 @@ const CreatePhytosanitary: React.FC = () => {
             </IonSelect>
           </IonItem>
           <IonItem>
-            <IonLabel position="floating">Fitosanitario</IonLabel>
+            <IonLabel position="floating">
+              {t('PHYTOSANITARY_NAME_SINGULAR')}
+            </IonLabel>
             <IonSelect
               ref={(phytosanitaryRef) => { setPhytosanitaryRef(phytosanitaryRef) }}
               name="phytosanitary" aria-required="true"
@@ -127,7 +135,7 @@ const CreatePhytosanitary: React.FC = () => {
             </IonSelect>
           </IonItem>
           <IonButton className="ion-margin-top" type="submit" expand="block">
-            Crear
+            {t('PHYTOSANITARY_CREATE')}
           </IonButton>
         </form>
       </IonContent>

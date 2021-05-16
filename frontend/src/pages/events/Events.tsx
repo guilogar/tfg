@@ -6,6 +6,7 @@ import {
 } from '@ionic/react';
 import { add, create as createIcon, trash } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router';
 import Refresher from '../../services/refresher';
 import ToolBar from '../../services/toolbar';
@@ -14,6 +15,7 @@ import { getApi } from '../../services/utils';
 import './Events.css';
 
 const Events: React.FC = () => {
+  const { t } = useTranslation();
   const api = getApi();
   const [create, setCreate] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
@@ -68,7 +70,7 @@ const Events: React.FC = () => {
       }
       <IonHeader>
         <ToolBar
-          title={`Event`}
+          title={t('EVENTS_LIST')}
           writeAction={async (text: string) => {
             const events: Array<any> = await filterData(text)
             setUserEvents(events)
@@ -92,11 +94,13 @@ const Events: React.FC = () => {
             return (
               <IonCard key={index}>
                 <IonCardHeader>
-                  <IonCardTitle>Nombre: {userEvent.Event.name}</IonCardTitle>
+                  <IonCardTitle>
+                    {t('EVENTS_NAME')}: {userEvent.Event.name}
+                  </IonCardTitle>
                   <IonCardSubtitle>
-                    Rango: {userEvent.minValue} - {userEvent.maxValue},
-                    Tipo de acción: {userEvent.action},
-                    Ejecuciones: {userEvent.countFired}
+                    {t('EVENTS_RANGE')}: {userEvent.minValue} - {userEvent.maxValue},
+                    {t('EVENTS_ACTION_TYPE')}: {userEvent.action},
+                    {t('EVENTS_EXECUTIONS')}: {userEvent.countFired}
                   </IonCardSubtitle>
                 </IonCardHeader>
                 <IonCardContent>
@@ -104,7 +108,7 @@ const Events: React.FC = () => {
                     <IonInput value={userEvent.Event.description} disabled />
                   </IonItem>
                   <IonItem>
-                    <IonLabel>Acciones</IonLabel>
+                    <IonLabel>{t('ACTIONS')}</IonLabel>
                     <IonButton
                       fill="outline" slot="end"
                       onClick={() => {

@@ -8,12 +8,14 @@ import {
   IonRow, IonCol
 } from '@ionic/react';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router';
 import { getWindowDimensions } from '../../services/utils';
 
 import './Home.css';
 
 const Home: React.FC = () => {
+  const { t } = useTranslation();
   const [redirect, setRedirect] = useState<boolean>(false);
   const [redirectURL, setRedirectURL] = useState<string | null>(null);
 
@@ -28,38 +30,38 @@ const Home: React.FC = () => {
   let sections = [
     {
       image: image,
-      title: 'Gestión de Terrenos',
-      subtitle: 'Podrás gestionar tus terrenos con comodidad',
+      title: t('HOME_FARMABLE_LAND'),
+      subtitle: t('HOME_FARMABLE_LAND_DESCRIPTION'),
       redirectTo: '/dashboard/page/FarmableLand',
     },
     {
       image: image,
-      title: 'Gestión de Cultivos',
-      subtitle: 'Podrás gestionar tus cultivos con comodidad',
+      title: t('HOME_CROP'),
+      subtitle: t('HOME_CROP_DESCRIPTION'),
       redirectTo: '/dashboard/page/Crop',
     },
     {
       image: image,
-      title: 'Gestión de Fitosanitarios',
-      subtitle: 'Podrás gestionar tus fitosanitarios con comodidad',
+      title: t('HOME_PHYTOSANITARY'),
+      subtitle: t('HOME_PHYTOSANITARY_DESCRIPTION'),
       redirectTo: '/dashboard/page/Phytosanitary',
     },
     {
       image: image,
-      title: 'Gestión de Eventos',
-      subtitle: 'Podrás gestionar tus eventos con comodidad',
+      title: t('HOME_EVENTS'),
+      subtitle: t('HOME_EVENTS_DESCRIPTION'),
       redirectTo: '/dashboard/page/Events',
     },
     {
       image: image,
-      title: 'Gestión de Riegos',
-      subtitle: 'Podrás gestionar tus riegos con comodidad',
+      title: t('HOME_IRRIGATE'),
+      subtitle: t('HOME_IRRIGATE_DESCRIPTION'),
       redirectTo: '/dashboard/page/Irrigate',
     },
     {
       image: image,
-      title: 'Ver Notificaciones',
-      subtitle: 'Podrás ver tus notificaciones con comodidad',
+      title: t('HOME_NOTIFICATIONS'),
+      subtitle: t('HOME_NOTIFICATIONS_DESCRIPTION'),
       redirectTo: '/dashboard/page/Notification',
     },
   ];
@@ -68,7 +70,7 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Home</IonTitle>
+          <IonTitle>{t('HOME_LIST')}</IonTitle>
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>

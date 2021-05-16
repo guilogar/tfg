@@ -5,6 +5,7 @@ import {
 } from '@ionic/react';
 import React, { useState, useRef } from 'react';
 import { search, } from 'ionicons/icons';
+import { useTranslation } from 'react-i18next';
 
 interface ToolBarInterface {
   writeAction: Function;
@@ -19,6 +20,7 @@ const ToolBar: React.FC<ToolBarInterface> = (
     title, CreateButton
   }
 ) => {
+  const { t } = useTranslation();
   const [showSearchbar, setShowSearchbar] = useState<boolean>(false);
   const ionSearchBar = useRef<HTMLIonSearchbarElement>(null);
 
@@ -40,7 +42,7 @@ const ToolBar: React.FC<ToolBarInterface> = (
         showSearchbar
         &&
         <IonSearchbar
-          showCancelButton="always" placeholder="Search"
+          showCancelButton="always" placeholder={t('SEARCH')}
           ref={ionSearchBar}
           onIonChange={async (e: CustomEvent) => {
             await writeAction(e.detail.value);

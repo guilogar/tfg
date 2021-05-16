@@ -6,12 +6,14 @@ import {
 } from '@ionic/react';
 import { arrowBack, arrowBackCircle } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router';
 
 import { getApi } from '../../../services/utils';
 import './CreateCrop.css';
 
 const CreateCrop: React.FC = () => {
+  const { t } = useTranslation();
   const api = getApi();
   const [back, setBack] = useState<boolean>(false);
   const [farms, setFarms] = useState<Array<any>>([]);
@@ -59,13 +61,15 @@ const CreateCrop: React.FC = () => {
               <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
             </IonButton>
           </IonButtons>
-          <IonTitle>CreateCrop</IonTitle>
+          <IonTitle>{t('CROP_CREATE')}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <form className="ion-padding" onSubmit={(event) => { handleSubmit(event) }}>
           <IonItem>
-            <IonLabel position="floating">Terreno</IonLabel>
+            <IonLabel position="floating">
+              {t('CROP_FARMABLE_LAND')}
+            </IonLabel>
             <IonSelect
               ref={(farmRef) => { setFarmRef(farmRef) }}
               name="type"
@@ -82,7 +86,9 @@ const CreateCrop: React.FC = () => {
             </IonSelect>
           </IonItem>
           <IonItem>
-            <IonLabel position="floating">Cultivo</IonLabel>
+            <IonLabel position="floating">
+              {t('CROP_NAME_SINGULAR')}
+            </IonLabel>
             <IonSelect
               ref={(cropRef) => { setCropRef(cropRef) }}
               name="type"
@@ -99,7 +105,7 @@ const CreateCrop: React.FC = () => {
             </IonSelect>
           </IonItem>
           <IonButton className="ion-margin-top" type="submit" expand="block">
-            Crear
+            {t('CROP_CREATE')}
           </IonButton>
         </form>
       </IonContent>

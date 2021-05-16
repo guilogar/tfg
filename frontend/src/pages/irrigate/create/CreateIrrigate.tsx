@@ -6,12 +6,14 @@ import {
 } from '@ionic/react';
 import { arrowBack, arrowBackCircle } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router';
 
 import { getApi } from '../../../services/utils';
 import './CreateIrrigate.css';
 
 const CreateIrrigate: React.FC = () => {
+  const { t } = useTranslation();
   const api = getApi();
   const [back, setBack] = useState<boolean>(false);
   const [messageError, setMessageError] = useState<string>('');
@@ -59,7 +61,7 @@ const CreateIrrigate: React.FC = () => {
               <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
             </IonButton>
           </IonButtons>
-          <IonTitle>CreateIrrigate</IonTitle>
+          <IonTitle>{t('IRRIGATE_CREATE')}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -73,21 +75,27 @@ const CreateIrrigate: React.FC = () => {
         />
         <form className="ion-padding" onSubmit={(event) => { handleSubmit(event) }}>
           <IonItem>
-            <IonLabel position="floating">Cantidad de agua</IonLabel>
+            <IonLabel position="floating">
+              {t('IRRIGATE_AQUA_QUANTITY')}
+            </IonLabel>
             <IonInput
               ref={(amountWaterRef) => { setAmountWaterRef(amountWaterRef) }}
               type="number" name="amountWater" step="any"
             />
           </IonItem>
           <IonItem>
-            <IonLabel position="floating">Duración en minutos</IonLabel>
+            <IonLabel position="floating">
+              {t('IRRIGATE_DURABILITY_IN_MINUTES')}
+            </IonLabel>
             <IonInput
               ref={(lengthMinutesRef) => { setLengthMinutesRef(lengthMinutesRef) }}
               type="number" name="lengthMinutes" step="any"
             />
           </IonItem>
           <IonItem>
-            <IonLabel position="floating">Terreno</IonLabel>
+            <IonLabel position="floating">
+              {t('IRRIGATE_FARMABLE_LAND')}
+            </IonLabel>
             <IonSelect
               ref={(farmRef) => { setFarmRef(farmRef) }}
               name="farm"
@@ -104,7 +112,7 @@ const CreateIrrigate: React.FC = () => {
             </IonSelect>
           </IonItem>
           <IonButton className="ion-margin-top" type="submit" expand="block">
-            Actualizar
+            {t('IRRIGATE_CREATE')}
           </IonButton>
         </form>
       </IonContent>

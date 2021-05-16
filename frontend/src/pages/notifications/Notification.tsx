@@ -5,6 +5,7 @@ import {
   IonImg, IonButtons, IonMenuButton, IonInput
 } from '@ionic/react';
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Refresher from '../../services/refresher';
 import ToolBar from '../../services/toolbar';
 
@@ -12,6 +13,7 @@ import { getApi } from '../../services/utils';
 import './Notification.css';
 
 const Notification: React.FC = () => {
+  const { t } = useTranslation();
   const api = getApi();
   const [notifications, setNotifications] = useState<Array<any>>([]);
 

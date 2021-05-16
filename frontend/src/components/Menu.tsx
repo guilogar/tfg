@@ -95,7 +95,7 @@ const Menu: React.FC<Menu> = ({ setIsLog, reduceFormat, fullname }) => {
                 routerDirection="none" lines="none"
                 detail={false}>
                 <IonIcon slot="start" ios={homeOutline} md={homeSharp} />
-                <IonLabel>Home</IonLabel>
+                <IonLabel>{t('HOME')}</IonLabel>
               </IonItem>
             </IonMenuToggle>
           }
@@ -122,7 +122,7 @@ const Menu: React.FC<Menu> = ({ setIsLog, reduceFormat, fullname }) => {
                     setIsLog(false);
                   }}>
             <IonIcon slot="start" ios={logOutOutline} md={logOutSharp} />
-            <IonLabel>Cerrar sesión</IonLabel>
+            <IonLabel>{t('CLOSE_SESSION')}</IonLabel>
           </IonItem>
         </IonList>
       </IonContent>

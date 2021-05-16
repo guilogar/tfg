@@ -7,12 +7,14 @@ import {
 import { arrowBack, arrowBackCircle } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
 import CanvasDraw from "react-canvas-draw";
+import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router';
 
 import { getApi, inputToDataURL } from '../../../services/utils';
 import './CreateFarmableLand.css';
 
 const CreateFarmableLand: React.FC = () => {
+  const { t } = useTranslation();
   const api = getApi();
   const [nameRef, setNameRef] = useState<HTMLIonInputElement | null>(null);
   const [typeRef, setTypeRef] = useState<HTMLIonSelectElement | null>(null);
@@ -77,20 +79,26 @@ const CreateFarmableLand: React.FC = () => {
               <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
             </IonButton>
           </IonButtons>
-          <IonTitle>CreateFarmableLand</IonTitle>
+          <IonTitle>
+            {t('FARMABLE_LAND_CREATE')}
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <form className="ion-padding" onSubmit={(event) => { handleSubmit(event) }}>
           <IonItem>
-            <IonLabel position="floating">Nombre</IonLabel>
+            <IonLabel position="floating">
+              {t('FARMABLE_LAND_NAME')}
+            </IonLabel>
             <IonInput
               ref={(nameRef) => { setNameRef(nameRef) }}
               type="text" name="name"
             />
           </IonItem>
           <IonItem>
-            <IonLabel position="floating">Tipo</IonLabel>
+            <IonLabel position="floating">
+              {t('FARMABLE_LAND_TYPE')}
+            </IonLabel>
             <IonSelect
               ref={(typeRef) => { setTypeRef(typeRef) }}
               name="type"
@@ -107,7 +115,9 @@ const CreateFarmableLand: React.FC = () => {
             </IonSelect>
           </IonItem>
           <IonItem>
-            <IonLabel position="floating">Area (m2)</IonLabel>
+            <IonLabel position="floating">
+              {t('FARMABLE_LAND_AREA')} (m2)
+            </IonLabel>
             <IonInput
               ref={(areaRef) => { setAreaRef(areaRef) }}
               type="number" name="area" step="any"
@@ -134,10 +144,7 @@ const CreateFarmableLand: React.FC = () => {
             <div>
               <IonItem>
                 <IonLabel>
-                  Al no ser el terreno rectangular, por favor,
-                  dibuje la forma que tiene el mismo
-                  (es solo para tener por parte de la administracion
-                  una idea de como es el terreno)
+                  {t('FARMABLE_LAND_SQUARE_MESSAGE')}
                 </IonLabel>
               </IonItem>
               <IonItem>
@@ -150,14 +157,18 @@ const CreateFarmableLand: React.FC = () => {
             </div>
           }
           <IonItem lines="none">
-            <IonLabel>Agregar sistema de IOT</IonLabel>
+            <IonLabel>
+              {t('FARMABLE_LAND_HAVEIOT')}
+            </IonLabel>
             <IonCheckbox
               ref={(haveIOTRef) => { setHaveIOTRef(haveIOTRef) }}
               checked={true} slot="start" name="haveIOT"
             />
           </IonItem>
           <IonItem lines="none">
-            <IonLabel>Tengo foto aerea o plano del terreno</IonLabel>
+            <IonLabel>
+              {t('FARMABLE_LAND_HAVEPHOTO')}
+            </IonLabel>
             <IonCheckbox
               onClick={() => {
                 setHaveImage(!haveImage);
@@ -170,7 +181,9 @@ const CreateFarmableLand: React.FC = () => {
             !haveImage
             &&
             <IonItem lines="none">
-              <IonLabel>El terreno tiene forma de cuadrado o rectangulo</IonLabel>
+              <IonLabel>
+                {t('FARMABLE_LAND_IS_SQUARE')}
+              </IonLabel>
               <IonCheckbox
                 ref={(isSquareRef) => { setIsSquareRef(isSquareRef) }}
                 onClick={() => { setIsSquare(!isSquare) }}
@@ -179,7 +192,7 @@ const CreateFarmableLand: React.FC = () => {
             </IonItem>
           }
           <IonButton className="ion-margin-top" type="submit" expand="block">
-            Crear
+            {t('FARMABLE_LAND_CREATE')}
           </IonButton>
         </form>
       </IonContent>

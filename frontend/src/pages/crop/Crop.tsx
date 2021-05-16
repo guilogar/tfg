@@ -6,6 +6,7 @@ import {
 } from '@ionic/react';
 import { add, create as createIcon, trash } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router';
 import Refresher from '../../services/refresher';
 import ToolBar from '../../services/toolbar';
@@ -14,6 +15,7 @@ import { getApi } from '../../services/utils';
 import './Crop.css';
 
 const Crop: React.FC = () => {
+  const { t } = useTranslation();
   const api = getApi();
   const [create, setCreate] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
@@ -64,7 +66,7 @@ const Crop: React.FC = () => {
       }
       <IonHeader>
         <ToolBar
-          title={`Crop`}
+          title={t('CROP_LIST')}
           writeAction={async (text: string) => {
             const farms: Array<any> = await filterData(text)
             setFarms(farms)
@@ -88,24 +90,32 @@ const Crop: React.FC = () => {
             return (
               <IonCard key={index}>
                 <IonCardHeader>
-                  <IonCardTitle>{farm.name}</IonCardTitle>
-                  <IonCardSubtitle>{farm.crops.length} cultivo(s)</IonCardSubtitle>
+                  <IonCardTitle>
+                    {farm.name}
+                  </IonCardTitle>
+                  <IonCardSubtitle>
+                    {farm.crops.length} {t('CROP_LENGTH')}
+                  </IonCardSubtitle>
                 </IonCardHeader>
                 <IonCardContent>
                   <IonList>
-                    <IonListHeader>Cultivos:</IonListHeader>
+                    <IonListHeader>
+                      {t('CROP_NAME_PLURAL')}:
+                    </IonListHeader>
                     {
                       farm.crops.map((crop: any, index: any) => {
                         return (
                           <IonItem key={index}>
-                            {crop.alias}, {crop.weeks} semanas
+                            {crop.alias}, {crop.weeks} {t('CROP_WEEKS')}
                           </IonItem>
                         );
                       })
                     }
                   </IonList>
                   <IonItem>
-                    <IonLabel>Acciones</IonLabel>
+                    <IonLabel>
+                      {t('ACTIONS')}
+                    </IonLabel>
                     <IonButton
                       fill="outline" slot="end"
                       onClick={() => {

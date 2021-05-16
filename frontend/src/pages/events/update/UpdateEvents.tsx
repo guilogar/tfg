@@ -6,12 +6,14 @@ import {
 } from '@ionic/react';
 import { arrowBack, arrowBackCircle } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router';
 
 import { getApi } from '../../../services/utils';
 import './UpdateEvents.css';
 
 const UpdateEvents: React.FC = (props: any) => {
+  const { t } = useTranslation();
   const api = getApi();
   const [back, setBack] = useState<boolean>(false);
   const [messageError, setMessageError] = useState<string>('');
@@ -81,7 +83,7 @@ const UpdateEvents: React.FC = (props: any) => {
               <IonIcon slot="icon-only" ios={arrowBackCircle} md={arrowBack} />
             </IonButton>
           </IonButtons>
-          <IonTitle>EditEvents</IonTitle>
+          <IonTitle>{t('EVENTS_EDIT')}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -95,7 +97,9 @@ const UpdateEvents: React.FC = (props: any) => {
         />
         <form className="ion-padding" onSubmit={(event) => { handleSubmit(event) }}>
           <IonItem>
-            <IonLabel position="floating">Evento</IonLabel>
+            <IonLabel position="floating">
+              {t('EVENTS_CREATE_EVENT')}
+            </IonLabel>
             <IonSelect
               ref={(eventRef) => { setEventRef(eventRef) }}
               name="event" value={userEvent?.Event.id}
@@ -112,7 +116,9 @@ const UpdateEvents: React.FC = (props: any) => {
             </IonSelect>
           </IonItem>
           <IonItem>
-            <IonLabel position="floating">Acción</IonLabel>
+            <IonLabel position="floating">
+              {t('EVENTS_CREATE_ACTION')}
+            </IonLabel>
             <IonSelect
               ref={(actionRef) => { setActionRef(actionRef) }}
               name="action" value={userEvent?.action}
@@ -129,21 +135,25 @@ const UpdateEvents: React.FC = (props: any) => {
             </IonSelect>
           </IonItem>
           <IonItem>
-            <IonLabel position="floating">Valor minimo del rango de valores del evento</IonLabel>
+            <IonLabel position="floating">
+              {t('EVENTS_CREATE_VALUE_MIN')}
+            </IonLabel>
             <IonInput
               ref={(minValueRef) => { setMinValueRef(minValueRef) }}
               type="number" name="minValue" step="any" value={userEvent?.minValue}
             />
           </IonItem>
           <IonItem>
-            <IonLabel position="floating">Valor maximo del rango de valores del evento</IonLabel>
+            <IonLabel position="floating">
+              {t('EVENTS_CREATE_VALUE_MAX')}
+            </IonLabel>
             <IonInput
               ref={(maxValueRef) => { setMaxValueRef(maxValueRef) }}
               type="number" name="maxValue" step="any" value={userEvent?.maxValue}
             />
           </IonItem>
           <IonButton className="ion-margin-top" type="submit" expand="block">
-            Crear
+            {t('EVENTS_EDIT')}
           </IonButton>
         </form>
       </IonContent>
