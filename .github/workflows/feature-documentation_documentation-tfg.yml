@@ -24,6 +24,7 @@ jobs:
       uses: thedoctor0/zip-release@master
       with:
         filename: 'code.zip'
+        exclusions: '*.git*'
 
     - uses: actions/upload-artifact@v1
       with:
@@ -32,7 +33,6 @@ jobs:
 
     - uses: actions/upload-artifact@v1
       with:
-        name: code
         path: code.zip
 
     - name: Send mail
@@ -50,4 +50,4 @@ jobs:
         convert_markdown: true
         cc: ${{secrets.MAIL_CC}}
         ignore_cert: true
-        attachments: LICENSE,documentation/main.pdf
+        attachments: LICENSE,documentation/main.pdf,code.zip
