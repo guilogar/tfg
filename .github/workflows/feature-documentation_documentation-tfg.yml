@@ -24,7 +24,12 @@ jobs:
       uses: thedoctor0/zip-release@master
       with:
         filename: 'code.zip'
-        exclusions: '*.git*'
+
+    - name: Upload Release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: 'code.zip'
+        token: ${{secrets.GITHUB}}
 
     - uses: actions/upload-artifact@v1
       with:
@@ -33,7 +38,8 @@ jobs:
 
     - uses: actions/upload-artifact@v1
       with:
-        path: code.zip
+        name: code
+        path: .
 
     - name: Send mail
       uses: dawidd6/action-send-mail@v3
