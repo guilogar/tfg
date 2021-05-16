@@ -40,7 +40,7 @@ router.get('/farmableLandTypes', async (req, res) => {
   res.status(200).send({
     types: [
       'Irrigation', 'DryLand',
-      'GreenHourse', 'OpenLand'
+      'GreenHouse', 'OpenLand'
     ]
   });
 });

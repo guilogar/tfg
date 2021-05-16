@@ -95,11 +95,11 @@ const Events: React.FC = () => {
               <IonCard key={index}>
                 <IonCardHeader>
                   <IonCardTitle>
-                    {t('EVENTS_NAME')}: {userEvent.Event.name}
+                    {t('EVENTS_NAME')}: {t(`EVENTS_NAMES_${userEvent.Event.name}`)}
                   </IonCardTitle>
                   <IonCardSubtitle>
-                    {t('EVENTS_RANGE')}: {userEvent.minValue} - {userEvent.maxValue},
-                    {t('EVENTS_ACTION_TYPE')}: {userEvent.action},
+                    {t('EVENTS_RANGE')}: {userEvent.minValue} - {userEvent.maxValue},{` `}
+                    {t('EVENTS_ACTION_TYPE')}: {t(`EVENTS_ACTION_TYPES_${userEvent.action}`)},{` `}
                     {t('EVENTS_EXECUTIONS')}: {userEvent.countFired}
                   </IonCardSubtitle>
                 </IonCardHeader>

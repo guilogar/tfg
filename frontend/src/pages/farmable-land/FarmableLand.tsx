@@ -102,8 +102,8 @@ const FarmableLand: React.FC = () => {
                     {t('FARMABLE_LAND_NAME')}: {farmableLand.name}
                     </IonCardTitle>
                   <IonCardSubtitle>
-                  {t('FARMABLE_LAND_TYPE')}: {farmableLand.type},
-                  {t('FARMABLE_LAND_AREA')}: {farmableLand.area} m2
+                    {t('FARMABLE_LAND_TYPE')}: {t(`FARMABLE_LAND_TYPE_${farmableLand.type.toUpperCase()}`)},{` `}
+                    {t('FARMABLE_LAND_AREA')}: {farmableLand.area} m2
                   </IonCardSubtitle>
                 </IonCardHeader>
                 <IonCardContent>

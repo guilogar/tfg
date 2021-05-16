@@ -16,7 +16,7 @@ FarmableLand.init({
     defaultValue: 'Terreno X'
   },
   type: {
-    type: DataTypes.ENUM('Irrigation', 'DryLand', 'GreenHourse', 'OpenLand')
+    type: DataTypes.ENUM('Irrigation', 'DryLand', 'GreenHouse', 'OpenLand')
   },
   image: {
     type: DataTypes.TEXT

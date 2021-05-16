@@ -108,7 +108,7 @@ const UpdateEvents: React.FC = (props: any) => {
                 events.map((event, index) => {
                   return (
                     <IonSelectOption value={event.id} key={index}>
-                      {event.name}
+                      {t(`EVENTS_NAMES_${event.name}`)}
                     </IonSelectOption>
                   );
                 })
@@ -127,7 +127,7 @@ const UpdateEvents: React.FC = (props: any) => {
                 eventActions.map((eventAction, index) => {
                   return (
                     <IonSelectOption value={eventAction} key={index}>
-                      {eventAction}
+                      {t(`EVENTS_ACTION_TYPES_${eventAction}`)}
                     </IonSelectOption>
                   );
                 })

@@ -12,10 +12,12 @@ import { personCircle } from 'ionicons/icons';
 import { Redirect } from 'react-router-dom';
 
 import { getApi, login, isLogged } from '../../services/utils';
+import { useTranslation } from 'react-i18next';
 
 const Login: React.FC = () => {
+  const { t } = useTranslation();
   const api = getApi();
-  const [email, setEmail] = useState<string>('test');
+  const [username, setUsername] = useState<string>('test');
   const [password, setPassword] = useState<string>('test');
   const [iserror, setIserror] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
@@ -26,7 +28,7 @@ const Login: React.FC = () => {
     try {
       const firebaseToken = localStorage.getItem('pushNotificationToken');
       const { data } = await api.post('/login', {
-        username: email,
+        username: username,
         password: password,
         firebaseToken: (firebaseToken) ? firebaseToken : null
       });
@@ -77,11 +79,13 @@ const Login: React.FC = () => {
             <IonRow>
               <IonCol>
                 <IonItem>
-                  <IonLabel position='floating'> Email</IonLabel>
+                  <IonLabel position='floating'>
+                    {t('LOGIN_USERNAME')}
+                  </IonLabel>
                   <IonInput
                     type='text'
-                    value={email}
-                    onIonChange={(e) => setEmail(e.detail.value!)}
+                    value={username}
+                    onIonChange={(e) => setUsername(e.detail.value!)}
                   >
                   </IonInput>
                 </IonItem>
@@ -91,7 +95,9 @@ const Login: React.FC = () => {
             <IonRow>
               <IonCol>
                 <IonItem>
-                  <IonLabel position='floating'> Password</IonLabel>
+                  <IonLabel position='floating'>
+                    {t('LOGIN_PASSWORD')}
+                  </IonLabel>
                   <IonInput
                     type='password'
                     value={password}

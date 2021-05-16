@@ -3,6 +3,11 @@ const GENERAL_LANG = {
   ACTIONS: 'Acciones'
 };
 
+const LOGIN_LANG = {
+  LOGIN_USERNAME: 'Username',
+  LOGIN_PASSWORD: 'Password'
+};
+
 const HOME_LANG = {
   HOME_LIST: 'Inicio',
   HOME_FARMABLE_LAND: 'Gestión de Terrenos',
@@ -32,6 +37,13 @@ const MENU_LANG = {
   CLOSE_SESSION: 'Close session',
 };
 
+const FARMABLE_LAND_TYPES_LANG = {
+  FARMABLE_LAND_TYPE_IRRIGATION: 'Regadío',
+  FARMABLE_LAND_TYPE_DRYLAND: 'Secano',
+  FARMABLE_LAND_TYPE_GREENHOUSE: 'Invernadero',
+  FARMABLE_LAND_TYPE_OPENLAND: 'Al exterior',
+};
+
 const FARMABLE_LAND_LANG = {
   FARMABLE_LAND_LIST: 'Terrenos',
   FARMABLE_LAND_NAME: 'Nombre',
@@ -45,6 +57,7 @@ const FARMABLE_LAND_LANG = {
   FARMABLE_LAND_SQUARE_MESSAGE: 'Al no ser el terreno rectangular, por favor, dibuje la forma que tiene el mismo (es solo para tener por parte de la administracion una idea de como es el terreno)',
   FARMABLE_LAND_CREATE: 'Añadir terreno',
   FARMABLE_LAND_EDIT: 'Editar terreno',
+  ...FARMABLE_LAND_TYPES_LANG
 };
 
 const CROP_LANG = {
@@ -81,7 +94,13 @@ const IRRIGATE_LANG = {
 
 const EVENTS_ACTION_TYPES_LANG = {
   EVENTS_ACTION_TYPES_AUTOMATIC: 'AUTOMÁTICO',
-  EVENTS_ACTION_TYPES_MANUAL: 'MANUAL'
+  EVENTS_ACTION_TYPES_MANUAL: 'MANUAL',
+  EVENTS_ACTION_TYPES_SETTINGS: 'AJUSTES',
+};
+
+const EVENTS_NAMES_LANG = {
+  EVENTS_NAMES_TEMPERATURE: 'Temperature',
+  EVENTS_NAMES_HUMIDITY: 'Humidity',
 };
 
 const EVENTS_LANG = {
@@ -96,7 +115,8 @@ const EVENTS_LANG = {
   EVENTS_CREATE_VALUE_MAX: 'Valor máximo del rango de valores del evento',
   EVENTS_CREATE: 'Añadir evento',
   EVENTS_EDIT: 'Editar evento',
-  ...EVENTS_ACTION_TYPES_LANG
+  ...EVENTS_ACTION_TYPES_LANG,
+  ...EVENTS_NAMES_LANG
 };
 
 const NOTIFICATION_LANG = {
@@ -126,6 +146,7 @@ const SETTING_LANG = {
 
 export default {
   ...GENERAL_LANG,
+  ...LOGIN_LANG,
   ...HOME_LANG,
   ...MENU_LANG,
   ...FARMABLE_LAND_LANG,

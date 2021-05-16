@@ -107,7 +107,7 @@ const CreateFarmableLand: React.FC = () => {
                 types.map((type, index) => {
                   return (
                     <IonSelectOption value={type} key={index}>
-                      {type}
+                      {t(`FARMABLE_LAND_TYPE_${type.toUpperCase()}`)}
                     </IonSelectOption>
                   );
                 })
