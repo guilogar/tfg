@@ -164,7 +164,7 @@
           "name": "Transformation",
           "properties": {
             "streamingUnits": "[parameters('StreamingUnits')]",
-            "query": "SELECT\n  sensorId,\n  AVG(temperature) AS temperature,\n  AVG(humidity) AS humidity,\n  COUNT(*) AS count\nINTO\n  [CosmosDB]\nFROM\n  [IoTHub]\nGROUP BY\n  sensorId, TumblingWindow(minute, 2)\nHAVING\n  AVG(temperature) > 20\n"
+            "query": "\nSELECT\n  sensorId,\n  'Fertilizer' as EventFired,\n  COUNT(*) AS count\nINTO\n  [CosmosDB]\nFROM\n  [IoTHub]\nWHERE\n  isAtDaytime = 1\n  and\n  isRaining = 1\n  and\n  canPhotosynthesisImprove = 1\n  and\n  airHumidity < 30\nGROUP BY\n  sensorId, TumblingWindow(minute, 1)\n"
           }
         },
         "inputs": [

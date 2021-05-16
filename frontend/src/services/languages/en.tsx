@@ -99,8 +99,10 @@ const EVENTS_ACTION_TYPES_LANG = {
 };
 
 const EVENTS_NAMES_LANG = {
-  EVENTS_NAMES_TEMPERATURE: 'Temperature',
-  EVENTS_NAMES_HUMIDITY: 'Humidity',
+  EVENTS_NAMES_OpenCeilingGreenHouse: 'Abrir techo de invernadero',
+  EVENTS_NAMES_Irrigate: 'Regar',
+  EVENTS_NAMES_Fertilizer: 'Insertar fertilizante',
+  EVENTS_NAMES_OpenWallGreenhouse: 'Abrir pared de invernadero',
 };
 
 const EVENTS_LANG = {

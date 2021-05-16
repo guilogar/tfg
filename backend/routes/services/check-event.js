@@ -8,16 +8,16 @@ const checkEvent = async (cosmosData = []) => {
   for(const item of cosmosData)
   {
     const sensorId = item['sensorId'];
-
     const usersEvents = await UserEvent.findAll({
       include: [
         { model: Event }
       ]
     });
+
     for(const userEvent of usersEvents)
     {
-      const value = item[userEvent.Event.name.toLowerCase()];
-      if(value)
+      const value = item['EventFired'];
+      if(value === userEvent.Event.name)
       {
         await userEvent.update({
           countFired: (++userEvent.countFired)

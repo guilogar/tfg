@@ -2,15 +2,25 @@
 
 const Irrigate = require('../../database/models/Irrigate');
 
-const TemperatureAction = async () => {
-  console.log('TemperatureAction');
+const OpenCeilingGreenHouseAction = async () => {
+  console.log('OpenCeilingGreenHouseAction');
 };
 
-const HumidityAction = async () => {
-  console.log('HumidityAction');
+const IrrigateAction = async () => {
+  console.log('IrrigateAction');
+};
+
+const FertilizerAction = async () => {
+  console.log('FertilizerAction');
+};
+
+const OpenWallGreenhouseAction = async () => {
+  console.log('OpenWallGreenhouseAction');
 };
 
 module.exports = {
-  'TEMPERATURE': TemperatureAction,
-  'HUMIDITY': HumidityAction
+  'OpenCeilingGreenHouse': OpenCeilingGreenHouseAction,
+  'Irrigate': IrrigateAction,
+  'Fertilizer': FertilizerAction,
+  'OpenWallGreenhouse': OpenWallGreenhouseAction,
 };

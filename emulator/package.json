@@ -5,8 +5,7 @@
   "main": "simulator.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "simulator": "node simulator.js",
-    "read-messages": "node read-messages.js"
+    "simulator": "node simulator.js"
   },
   "author": "guilogar",
   "license": "GNU/GPL",

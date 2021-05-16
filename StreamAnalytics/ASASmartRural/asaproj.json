@@ -1,6 +1,6 @@
 {
     "name": "ASASmartRural",
-    "startFile": "ASASmartRural.asaql",
+    "startFile": "ASASmartRural-Fertilizer.asaql",
     "configurations": [
         {
             "filePath": "JobConfig.json",

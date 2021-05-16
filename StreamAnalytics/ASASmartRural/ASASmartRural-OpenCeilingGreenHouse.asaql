@@ -1,0 +1,14 @@
+SELECT
+  sensorId AS sensorId,
+  'OpenCeilingGreenHouse' AS EventFired,
+  COUNT(*) AS count
+INTO
+  [CosmosDB]
+FROM
+  [IoTHub]
+WHERE
+  isAtDaytime = 1
+  and
+  isRaining = 0
+GROUP BY
+  sensorId, TumblingWindow(minute, 1)

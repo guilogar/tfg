@@ -18,11 +18,13 @@ const {
   checkEvent
 } = require('./routes/services/check-event');
 
+const ACTIONS = require('./routes/constans/event-actions');
+
 const UserSensor = require('./database/models/UserSensor');
 const Event = require('./database/models/Event');
 const Notification = require('./database/models/Notification');
-
-const ACTIONS = require('./routes/constans/event-actions');
+const UserSettings = require('./database/models/UserSettings');
+const FarmableLand = require('./database/models/FarmableLand');
 
 const initCronTab = () => {
   cron.schedule('* * * * *', async () => {
@@ -40,7 +42,10 @@ const initCronTab = () => {
         const userSensor = await UserSensor.findOne({
           where: {
             id: sensorId
-          }
+          },
+          include: [
+            { model: FarmableLand }
+          ]
         });
 
         const event = await Event.findOne({
@@ -49,19 +54,37 @@ const initCronTab = () => {
           }
         });
 
-        if(action === 'AUTOMATIC') {
+        const userSettings = await UserSettings.findOne({
+          where: {
+            id: userId
+          }
+        });
+
+        if(action === 'AUTOMATIC' ||
+          (
+            action === 'SETTINGS' &&
+            userSettings.defaultEventAction === 'AUTOMATIC'
+          )
+        )
+        {
           const actionFunction = ACTIONS[event.name];
           await actionFunction();
         }
 
-        const body = (action === 'AUTOMATIC' ?
+        const body = (
+          action === 'AUTOMATIC' ||
+          (
+            action === 'SETTINGS' &&
+            userSettings.defaultEventAction === 'AUTOMATIC'
+          )
+        ) ?
           `El Evento ${event.name} ha sido disparado con el ` +
-          `sensor "${userSensor.name}" y el valor ${value}. ` +
+          `sensor "${userSensor.name}" y en el terreno ${userSensor.FarmableLand.name}. ` +
           `Se ha realizado la accion automatizada.`
           :
           `El Evento ${event.name} ha sido disparado con el ` +
-          `sensor "${userSensor.name}" y el valor ${value}. ` +
-          `Clicke aquí para realizar la acción asociada al evento.`);
+          `sensor "${userSensor.name}" y en el terreno ${userSensor.FarmableLand.name}. ` +
+          `Clicke aquí para realizar la acción asociada al evento.`;
 
         const notification = {
           title: `Evento ${event.name}`,

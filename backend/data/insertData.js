@@ -60,40 +60,47 @@ async function insertDataTable()
     );
   }
 
-  const eventTemperature = await createEvent('TEMPERATURE', 'Temperature Event');
-  const eventHumidity = await createEvent('HUMIDITY', 'Humidity Event');
-
-  await assignEventToUser(
-    user.id, eventTemperature.id, 'AUTOMATIC'
+  let events = [];
+  events.push(
+    await createEvent('OpenCeilingGreenHouse', 'OpenCeilingGreenHouse Event')
+  );
+  events.push(
+    await createEvent('Irrigate', 'Irrigate Event')
+  );
+  events.push(
+    await createEvent('Fertilizer', 'Fertilizer Event')
+  );
+  events.push(
+    await createEvent('OpenWallGreenhouse', 'OpenWallGreenhouse Event')
   );
 
   await assignEventToUser(
-    user.id, eventHumidity.id, 'MANUAL'
+    user.id, events[0].id, 'AUTOMATIC'
+  );
+
+  await assignEventToUser(
+    user.id, events[1].id, 'MANUAL'
   );
 
   for(let i = 0; i < 5; i++)
   {
-    const eventNotification = (Math.random() > 0.5) ? eventTemperature : eventHumidity;
+    const eventNotification = (Math.random() > 0.5) ? events[0] : events[1];
+
     const title = `Evento ${eventNotification.name}`;
     const body = ((Math.random() > 0.5) ?
     `El Evento ${eventNotification.name} ha sido disparado con el ` +
-    `sensor "${parseInt(Math.random() * 10)}" y el valor ${Math.random() * 20}. ` +
+    `sensor "${parseInt(Math.random() * 10)}". ` +
     `Se ha realizado la accion automatizada.` +
     `Clicke aquí para mas información.`
     :
     `El Evento ${eventNotification.name} ha sido disparado con el ` +
-    `sensor "${parseInt(Math.random() * 10)}" y el valor ${Math.random() * 20}. ` +
+    `sensor "${parseInt(Math.random() * 10)}". ` +
     `Clicke aquí para realizar la acción asociada al evento.`);
 
     await createNotification(
       title, body, user.id
     );
   }
-
-  // await createFirebaseToken(
-  //   user.id,
-  //   'clCwbQFtRniHqXbIEAJw7k:APA91bEPXfL5UtQGYM2tZ7tnWfgnpiq95AlCEznEJhmOqXMFP1M8yTMIQQgSXW4uCWM9Qm0DiatEsG6ulHTxFGE4LgmA8LtQ__Kpsg0ME6dj5taId4mlwlCdwb3jMVPbDgAStGPEONY6'
-  // );
 
   await createCrop(
     'PEA', 'El cultivo del guisante al exterior',

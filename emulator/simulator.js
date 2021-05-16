@@ -1,5 +1,3 @@
-// Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 'use strict';
 
 const dotenv = require('dotenv');
@@ -15,25 +13,46 @@ const Message = require('azure-iot-device').Message;
 
 const client = DeviceClient.fromConnectionString(connectionString, Mqtt);
 
-// Create a message and send it to the IoT hub every second
+const getWindDirection = (value) => {
+  if (value <= 0.25) {
+    return 'N';
+  } else if (value <= 0.5) {
+    return 'S';
+  } else if (value <= 0.75) {
+    return 'E';
+  } else if (value <= 1) {
+    return 'O';
+  }
+};
+// Create a message and send it to the IoT hub
 setInterval(async () => {
-  // Simulate telemetry.
-  const temperature = 20 + (Math.random() * 15);
-  const humidity = 60 + (Math.random() * 20);
-  const sensorId = parseInt(1  + (Math.random() * 100));
+  const sensorId           = parseInt(1  + (Math.random() * 100));
+  const roomTemperature    = 20 + (Math.random() * 15);
+  const airHumidity        = 20 + (Math.random() * 20);
+  const groundHumidity     = 20 + (Math.random() * 20);
+  const litrePerMeterWater = 20 + (Math.random() * 20);
+  const windForce          = 20 + (Math.random() * 20);
+  const countIllumination  = 20 + (Math.random() * 20);
+  const windDirection      = getWindDirection(Math.random());
+
+  const isCeilingGreenhouseOpen  = (Math.random() > 0.5) ? true : false;
+  const isWallGreenhouseOpen     = (Math.random() > 0.5) ? true : false;
+  // const isAtDaytime              = (Math.random() > 0.5) ? true : false;
+  // const isRaining                = (Math.random() > 0.5) ? true : false;
+  // const canPhotosynthesisImprove = (Math.random() > 0.5) ? true : false;
+  const isAtDaytime              = (Math.random() > 0.1) ? true : false;
+  const isRaining                = (Math.random() > 0.1) ? true : false;
+  const canPhotosynthesisImprove = (Math.random() > 0.1) ? true : false;
 
   const message = new Message(JSON.stringify({
-    sensorId: sensorId,
-    temperature: temperature,
-    humidity: humidity
+    sensorId, roomTemperature, airHumidity,
+    groundHumidity, litrePerMeterWater, windForce,
+    countIllumination, windDirection, isRaining,
+    isCeilingGreenhouseOpen, isWallGreenhouseOpen,
+    isAtDaytime, canPhotosynthesisImprove
   }));
 
-  // Add a custom application property to the message.
-  // An IoT hub can filter on these properties without access to the message body.
-  message.properties.add('temperatureAlert', (temperature > 30) ? 'true' : 'false');
   console.log('Sending message: ' + message.getData());
-  // Send the message.
-
   try {
     await client.sendEvent(message);
     console.log('message sent');

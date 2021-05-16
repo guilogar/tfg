@@ -1,0 +1,19 @@
+
+SELECT
+  sensorId,
+  'Fertilizer' as EventFired,
+  COUNT(*) AS count
+INTO
+  [CosmosDB]
+FROM
+  [IoTHub]
+WHERE
+  isAtDaytime = 1
+  and
+  isRaining = 1
+  and
+  canPhotosynthesisImprove = 1
+  and
+  airHumidity < 30
+GROUP BY
+  sensorId, TumblingWindow(minute, 1)

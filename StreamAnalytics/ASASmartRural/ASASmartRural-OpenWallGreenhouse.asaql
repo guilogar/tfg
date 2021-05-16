@@ -1,0 +1,17 @@
+
+SELECT
+  sensorId,
+  'OpenWallGreenhouse' as EventFired,
+  COUNT(*) AS count
+INTO
+  [CosmosDB]
+FROM
+  [IoTHub]
+WHERE
+  windForce < 30
+and
+  isRaining = 0
+and
+  roomTemperature > 25
+GROUP BY
+  sensorId, TumblingWindow(minute, 1)
