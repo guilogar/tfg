@@ -28,12 +28,6 @@ jobs:
       with:
         filename: 'code.zip'
 
-    - name: Upload Release
-      uses: ncipollo/release-action@v1
-      with:
-        artifacts: 'code.zip'
-        token: ${{secrets.GITHUB}}
-
     - uses: actions/upload-artifact@v1
       with:
         name: docs
