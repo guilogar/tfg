@@ -50,4 +50,4 @@ jobs:
         convert_markdown: true
         cc: ${{secrets.MAIL_CC}}
         ignore_cert: true
-        attachments: LICENSE,documentation/main.pdf,code.zip
+        attachments: LICENSE,documentation/main.pdf
