@@ -7,7 +7,8 @@ import Login from './pages/login/Login';
 import Dashboard from './pages/dashboard/Dashboard';
 import {
   getApi, isLogged, getSessionId, logout,
-  pushNotifications, backButtonNative, fetchKeyDataFromLocalStorage, insertDataIntoLocalStorage
+  pushNotifications, setI18n, backButtonNative,
+  fetchKeyDataFromLocalStorage
 } from './services/utils';
 
 /* Core CSS required for Ionic components to work properly */
@@ -28,6 +29,17 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+
+const settings: string = `${fetchKeyDataFromLocalStorage('userSettings')}`;
+const userSettings = JSON.parse(settings);
+if (userSettings) {
+  if (userSettings.backgroundColor === 'DARK') {
+    document.body.classList.add('dark');
+  }
+  setI18n(userSettings.defaultLanguage);
+} else {
+  setI18n();
+}
 
 const App: React.FC = () => {
   const api = getApi();
@@ -56,14 +68,6 @@ const App: React.FC = () => {
     pushNotifications();
     checkSession();
     setInterval(checkSession, Number(process.env.REACT_APP_CHECK_SESSION_TIME));
-
-    const settings: string = `${fetchKeyDataFromLocalStorage('userSettings')}`;
-    const userSettings = JSON.parse(settings);
-    if (userSettings) {
-      if (userSettings.backgroundColor === 'DARK') {
-        document.body.classList.add('dark');
-      }
-    }
   }, []);
 
   const AlertSession = withRouter(({ history }) => (

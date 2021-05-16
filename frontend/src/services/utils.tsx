@@ -6,6 +6,9 @@ import {
   PushNotificationActionPerformed,
   LocalNotificationActionPerformed
 } from '@capacitor/core';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import { EN, ES } from './languages/languages';
 
 export const login = (sessionId: string) : void => {
   localStorage.setItem('sessionId', sessionId);
@@ -137,4 +140,22 @@ export const backButtonNative = () => {
       }
     });
   }
+};
+
+export const setI18n = (lng = 'en', fallbackLng = 'en') => {
+  i18n.use(initReactI18next).init({
+    resources: {
+      en: {
+        translation: EN
+      },
+      es: {
+        translation: ES
+      }
+    },
+    lng: lng,
+    fallbackLng: fallbackLng,
+    interpolation: {
+      escapeValue: false
+    }
+  });
 };

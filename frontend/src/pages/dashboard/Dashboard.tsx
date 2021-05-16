@@ -5,7 +5,11 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import { isLogged, getWindowDimensions, getApi } from '../../services/utils';
+
+import {
+  isLogged, getWindowDimensions,
+  getApi, setI18n
+} from '../../services/utils';
 import Menu from '../../components/Menu';
 import Home from '../home/Home';
 import Settings from '../settings/Settings';
@@ -16,6 +20,18 @@ import CropRoute from '../routes/crop-routes';
 import EventsRoute from '../routes/event-routes';
 import PhytosanitaryRoute from '../routes/phytosanitary-routes';
 import IrrigateRoute from '../routes/irrigate-routes';
+
+const localSettings = localStorage.getItem('localSettings');
+if (!localSettings) {
+  (async () => {
+    const api = getApi();
+    const { data } = await api.get('/settings');
+    if (data.userSettings?.backgroundColor === 'DARK') {
+      document.body.classList.add("dark");
+    }
+    setI18n(data.userSettings?.defaultLanguage);
+  })();
+}
 
 const Dashboard: React.FC = () => {
   const api = getApi();
@@ -35,16 +51,6 @@ const Dashboard: React.FC = () => {
       const { data } = await api.get('/user/fullname');
       setFullname(data.fullname);
     })();
-
-    const localSettings = localStorage.getItem('localSettings');
-    if (!localSettings) {
-      (async () => {
-        const { data } = await api.get('/settings');
-        if (data.userSettings?.backgroundColor === 'DARK') {
-          document.body.classList.add("dark");
-        }
-      })();
-    }
   }, []);
 
   return (

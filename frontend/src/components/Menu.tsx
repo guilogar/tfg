@@ -11,8 +11,10 @@ import {
 } from 'ionicons/icons';
 
 import './Menu.css';
-import { useLocation } from 'react-router-dom';
 import { logout } from '../services/utils';
+
+import { useTranslation } from "react-i18next";
+import { useLocation } from 'react-router-dom';
 
 interface AppPage {
   url: string;
@@ -23,43 +25,43 @@ interface AppPage {
 
 const appPages: AppPage[] = [
   {
-    title: 'Terrenos',
+    title: 'FARMABLE_LANDS',
     url: '/dashboard/page/FarmableLand',
     iosIcon: albumsOutline,
     mdIcon: albumsSharp
   },
   {
-    title: 'Cultivos',
+    title: 'CROPS',
     url: '/dashboard/page/Crop',
     iosIcon: colorFillOutline,
     mdIcon: colorFillSharp
   },
   {
-    title: 'Fitosanitarios',
+    title: 'PHYTOSANITARYS',
     url: '/dashboard/page/Phytosanitary',
     iosIcon: eyedropOutline,
     mdIcon: eyedropSharp
   },
   {
-    title: 'Riegos',
+    title: 'IRRIGATES',
     url: '/dashboard/page/Irrigate',
     iosIcon: rainyOutline,
     mdIcon: rainySharp
   },
   {
-    title: 'Eventos',
+    title: 'EVENTS',
     url: '/dashboard/page/Events',
     iosIcon: alertOutline,
     mdIcon: alertSharp
   },
   {
-    title: 'Notificaciones',
+    title: 'NOTIFICATIONS',
     url: '/dashboard/page/Notification',
     iosIcon: notificationsOutline,
     mdIcon: notificationsSharp
   },
   {
-    title: 'Ajustes',
+    title: 'SETTINGS',
     url: '/dashboard/page/Setting',
     iosIcon: settingsOutline,
     mdIcon: settingsSharp
@@ -73,12 +75,15 @@ interface Menu {
 };
 
 const Menu: React.FC<Menu> = ({ setIsLog, reduceFormat, fullname }) => {
+  const { t } = useTranslation();
   const location = useLocation();
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent forceOverscroll={false}>
         <IonList lines="none">
-          <IonListHeader>Menú</IonListHeader>
+          <IonListHeader>
+            {t('MENU')}
+          </IonListHeader>
           <IonNote>Dashboard de {fullname}</IonNote>
           {
             reduceFormat
@@ -102,7 +107,9 @@ const Menu: React.FC<Menu> = ({ setIsLog, reduceFormat, fullname }) => {
                           routerLink={appPage.url} routerDirection="none"
                           lines="none" detail={false}>
                     <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
-                    <IonLabel>{appPage.title}</IonLabel>
+                    <IonLabel>
+                      {t(appPage.title)}
+                    </IonLabel>
                   </IonItem>
                 </IonMenuToggle>
               );
