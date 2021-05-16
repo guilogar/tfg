@@ -13,20 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+    - uses: actions/checkout@master
 
     - name: Compile LaTeX documentation
       uses: xu-cheng/latex-action@v2
       with:
         working_directory: documentation/
         root_file: main.tex
-
-    - name: Archive Release
-      uses: thedoctor0/zip-release@master
-      with:
-        filename: 'code.zip'
 
     - uses: actions/upload-artifact@v1
       with:
@@ -48,9 +41,9 @@ jobs:
         subject: Memoria y Código del TFG
         to: ${{secrets.MAIL_TO}}
         from: ${{secrets.MAIL_USERNAME}}
-        secure: false
+        secure: true
         html_body: file://INFO.md
         convert_markdown: true
         cc: ${{secrets.MAIL_CC}}
         ignore_cert: true
-        attachments: LICENSE,documentation/main.pdf,code.zip
+        attachments: LICENSE,documentation/main.pdf
