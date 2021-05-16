@@ -7,14 +7,13 @@ on:
   push:
     branches:
       - feature/documentation
-    tags:
-      - '*'
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
       with:
         fetch-depth: 0
 
