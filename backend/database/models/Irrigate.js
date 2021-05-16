@@ -18,7 +18,7 @@ Irrigate.init({
   modelName: 'Irrigate',
   freezeTableName: true,
   tableName: 'Irrigate',
-  timestamps: false,
+  timestamps: true,
 });
 
 Irrigate.belongsTo(FarmableLand);

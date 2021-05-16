@@ -23,7 +23,10 @@ router.get('/notifications', async (req, res) => {
   }
 
   const notifications = await Notification.findAll({
-    where: where
+    where: where,
+    order: [
+      ['createdAt', 'DESC'],
+    ],
   });
 
   res.status(200).send({

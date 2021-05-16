@@ -35,7 +35,7 @@ FarmableLand.init({
   modelName: 'FarmableLand',
   freezeTableName: true,
   tableName: 'FarmableLand',
-  timestamps: false,
+  timestamps: true,
 });
 
 FarmableLand.belongsTo(User);

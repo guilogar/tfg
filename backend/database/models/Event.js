@@ -21,7 +21,7 @@ Event.init({
   modelName: 'Event',
   freezeTableName: true,
   tableName: 'Event',
-  timestamps: false,
+  timestamps: true,
 });
 
 module.exports = Event;

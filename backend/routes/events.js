@@ -18,7 +18,10 @@ router.get('/events', async (req, res) => {
   } : { };
 
   const events = await Event.findAll({
-    where: where
+    where: where,
+    order: [
+      ['createdAt', 'DESC'],
+    ],
   });
 
   res.status(200).send({
@@ -56,7 +59,10 @@ router.get('/user-events', async (req, res) => {
     where: where,
     include: [
       { model: Event }
-    ]
+    ],
+    order: [
+      ['createdAt', 'DESC'],
+    ],
   });
 
   res.status(200).send({

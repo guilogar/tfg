@@ -27,7 +27,7 @@ Crop.init({
   modelName: 'Crop',
   freezeTableName: true,
   tableName: 'Crop',
-  timestamps: false,
+  timestamps: true,
 });
 
 module.exports = Crop;

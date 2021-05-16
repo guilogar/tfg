@@ -18,7 +18,7 @@ Notification.init({
   modelName: 'Notification',
   freezeTableName: true,
   tableName: 'Notification',
-  timestamps: false,
+  timestamps: true,
 });
 
 Notification.belongsTo(User);

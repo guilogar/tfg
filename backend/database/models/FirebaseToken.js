@@ -20,7 +20,7 @@ FirebaseToken.init({
   modelName: 'FirebaseToken',
   freezeTableName: true,
   tableName: 'FirebaseToken',
-  timestamps: false,
+  timestamps: true,
 });
 
 FirebaseToken.belongsTo(User);

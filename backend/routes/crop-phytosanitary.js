@@ -54,7 +54,10 @@ router.get('/cropPhytosanitary', async (req, res) => {
       { model: FarmableLand },
       { model: Crop },
       { model: Phytosanitary },
-    ]
+    ],
+    order: [
+      ['createdAt', 'DESC'],
+    ],
   });
 
   let farmIds = [];
@@ -206,22 +209,6 @@ router.put('/cropPhytosanitary/:farmId/:cropId', async (req, res) => {
       error: 'unknow error'
     });
   }
-});
-
-router.delete('/cropPhytosanitary/:farmId', async (req, res) => {
-  // const jwt = getJwtFromRequest(req);
-  // const user = await getUserFromJwt(jwt);
-
-  // await FarmableLandCrop.destroy({
-  //   where: {
-  //     FarmableLandId: req.params.farmId,
-  //     UserId: user.id
-  //   }
-  // });
-
-  // res.status(200).send({
-  //   msg: 'destroyed!'
-  // });
 });
 
 module.exports = router;

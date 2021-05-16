@@ -18,7 +18,7 @@ UserSensor.init({
   modelName: 'UserSensor',
   freezeTableName: true,
   tableName: 'UserSensor',
-  timestamps: false,
+  timestamps: true,
 });
 
 UserSensor.belongsTo(User);

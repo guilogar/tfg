@@ -50,7 +50,10 @@ router.get('/farmableLandCrop', async (req, res) => {
     include: [
       { model: FarmableLand },
       { model: Crop },
-    ]
+    ],
+    order: [
+      ['createdAt', 'DESC'],
+    ],
   });
 
   let farmIds = [];
@@ -173,22 +176,6 @@ router.put('/farmableLandCrop/:farmId', async (req, res) => {
       error: 'unknow error'
     });
   }
-});
-
-router.delete('/farmableLandCrop/:farmId', async (req, res) => {
-  const jwt = getJwtFromRequest(req);
-  const user = await getUserFromJwt(jwt);
-
-  await FarmableLandCrop.destroy({
-    where: {
-      FarmableLandId: req.params.farmId,
-      UserId: user.id
-    }
-  });
-
-  res.status(200).send({
-    msg: 'destroyed!'
-  });
 });
 
 module.exports = router;

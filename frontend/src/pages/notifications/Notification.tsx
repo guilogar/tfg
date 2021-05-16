@@ -76,7 +76,7 @@ const Notification: React.FC = () => {
                 </IonCardHeader>
                 <IonCardContent>
                   <IonItem lines="none">
-                    <IonInput value={`${new Date().toLocaleString()}`} disabled />
+                    <IonInput value={notification.createdAt} disabled />
                   </IonItem>
                 </IonCardContent>
               </IonCard>

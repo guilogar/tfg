@@ -28,7 +28,10 @@ router.get('/farmableLand', async (req, res) => {
   }
 
   const farmableLands = await FarmableLand.findAll({
-    where: where
+    where: where,
+    order: [
+      ['createdAt', 'DESC'],
+    ],
   });
 
   res.status(200).send({

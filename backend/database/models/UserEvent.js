@@ -32,7 +32,7 @@ UserEvent.init({
   modelName: 'UserEvent',
   freezeTableName: true,
   tableName: 'UserEvent',
-  timestamps: false,
+  timestamps: true,
 });
 
 UserEvent.belongsTo(User);

@@ -29,7 +29,7 @@ UserSettings.init({
   modelName: 'UserSettings',
   freezeTableName: true,
   tableName: 'UserSettings',
-  timestamps: false,
+  timestamps: true,
 });
 
 UserSettings.belongsTo(User);

@@ -18,7 +18,7 @@ CropPhytosanitary.init({
   modelName: 'CropPhytosanitary',
   freezeTableName: true,
   tableName: 'CropPhytosanitary',
-  timestamps: false,
+  timestamps: true,
 });
 
 CropPhytosanitary.belongsTo(FarmableLand);

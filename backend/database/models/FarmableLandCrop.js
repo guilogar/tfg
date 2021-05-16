@@ -17,7 +17,7 @@ FarmableLandCrop.init({
   modelName: 'FarmableLandCrop',
   freezeTableName: true,
   tableName: 'FarmableLandCrop',
-  timestamps: false,
+  timestamps: true,
 });
 
 FarmableLandCrop.belongsTo(FarmableLand);

@@ -24,7 +24,7 @@ Phytosanitary.init({
   modelName: 'Phytosanitary',
   freezeTableName: true,
   tableName: 'Phytosanitary',
-  timestamps: false,
+  timestamps: true,
 });
 
 module.exports = Phytosanitary;
