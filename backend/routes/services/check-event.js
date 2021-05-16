@@ -17,7 +17,7 @@ const checkEvent = async (cosmosData = []) => {
     for(const userEvent of usersEvents)
     {
       const value = item[userEvent.Event.name.toLowerCase()];
-      if(value > userEvent.maxValue || value < userEvent.minValue)
+      if(value)
       {
         await userEvent.update({
           countFired: (++userEvent.countFired)
