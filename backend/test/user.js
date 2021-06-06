@@ -1,4 +1,9 @@
 const axios = require('axios').default;
+
+process.env.ENVFILE = '.env';
+const dotenv = require('dotenv');
+dotenv.config({ path: process.env.ENVFILE });
+
 const { createUser } = require('../routes/services/create-user');
 const { removeUser } = require('../routes/services/remove-user');
 
@@ -22,7 +27,6 @@ describe('create user', function() {
       testUser.password,
       testUser.fullname
     );
-    console.log(user);
   }).timeout(timeout);
 
   it('login correct user', async () => {
@@ -30,7 +34,6 @@ describe('create user', function() {
       username: testUser.username,
       password: testUser.password,
     })).data;
-    console.log(login);
   }).timeout(timeout);
 
   it('get correct user', async () => {
@@ -50,11 +53,9 @@ describe('create user', function() {
         username: testUser.fullname
       }
     })).data;
-    console.log(user);
   }).timeout(timeout);
 
   it('destroy correct user', async () => {
     const confirm = await removeUser(testUser.username);
-    console.log(confirm);
   }).timeout(timeout);
 });
