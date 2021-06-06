@@ -6,8 +6,8 @@ import {
 } from '@ionic/react';
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import Refresher from '../../services/refresher';
-import ToolBar from '../../services/toolbar';
+import Refresher from '../../components/refresher';
+import ToolBar from '../../components/toolbar';
 
 import { getApi } from '../../services/utils';
 import './Notification.css';

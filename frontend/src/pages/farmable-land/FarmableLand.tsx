@@ -12,8 +12,8 @@ import { getApi } from '../../services/utils';
 import { Redirect } from 'react-router';
 import './FarmableLand.css';
 
-import Refresher from '../../services/refresher';
-import ToolBar from '../../services/toolbar';
+import Refresher from '../../components/refresher';
+import ToolBar from '../../components/toolbar';
 import { useTranslation } from 'react-i18next';
 
 const FarmableLand: React.FC = () => {
