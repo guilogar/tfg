@@ -1,6 +1,6 @@
 const GENERAL_LANG = {
-  SEARCH: 'Buscar',
-  ACTIONS: 'Acciones'
+  SEARCH: 'Search',
+  ACTIONS: 'Actions'
 };
 
 const LOGIN_LANG = {
@@ -9,19 +9,19 @@ const LOGIN_LANG = {
 };
 
 const HOME_LANG = {
-  HOME_LIST: 'Inicio',
-  HOME_FARMABLE_LAND: 'Gestión de Terrenos',
-  HOME_CROP: 'Gestión de Cultivos',
-  HOME_PHYTOSANITARY: 'Gestión de Fitosanitarios',
-  HOME_EVENTS: 'Gestión de Eventos',
-  HOME_IRRIGATE: 'Gestión de Riegos',
-  HOME_NOTIFICATIONS: 'Ver Notificaciones',
-  HOME_FARMABLE_LAND_DESCRIPTION: 'Podrás gestionar tus terrenos con comodidad',
-  HOME_CROP_DESCRIPTION: 'Podrás gestionar tus cultivos con comodidad',
-  HOME_PHYTOSANITARY_DESCRIPTION: 'Podrás gestionar tus fitosanitarios con comodidad',
-  HOME_EVENTS_DESCRIPTION: 'Podrás gestionar tus eventos con comodidad',
-  HOME_IRRIGATE_DESCRIPTION: 'Podrás gestionar tus riegos con comodidad',
-  HOME_NOTIFICATIONS_DESCRIPTION: 'Podrás ver tus notificaciones con comodidad',
+  HOME_LIST: 'Home',
+  HOME_FARMABLE_LAND: 'Land Management',
+  HOME_CROP: 'Crop Management',
+  HOME_PHYTOSANITARY: 'Phytosanitary Management',
+  HOME_EVENTS: 'Events Management',
+  HOME_IRRIGATE: 'Irrigates Management',
+  HOME_NOTIFICATIONS: 'List Notifications',
+  HOME_FARMABLE_LAND_DESCRIPTION: 'You can manage your land comfortably',
+  HOME_CROP_DESCRIPTION: 'You can manage your crop comfortably',
+  HOME_PHYTOSANITARY_DESCRIPTION: 'You can manage your phytosanitary comfortably',
+  HOME_EVENTS_DESCRIPTION: 'You can manage your events comfortably',
+  HOME_IRRIGATE_DESCRIPTION: 'You can manage your irrigates comfortably',
+  HOME_NOTIFICATIONS_DESCRIPTION: 'You can list your notifications comfortably',
 };
 
 const MENU_LANG = {
@@ -39,111 +39,111 @@ const MENU_LANG = {
 };
 
 const FARMABLE_LAND_TYPES_LANG = {
-  FARMABLE_LAND_TYPE_IRRIGATION: 'Regadío',
-  FARMABLE_LAND_TYPE_DRYLAND: 'Secano',
-  FARMABLE_LAND_TYPE_GREENHOUSE: 'Invernadero',
-  FARMABLE_LAND_TYPE_OPENLAND: 'Al exterior',
+  FARMABLE_LAND_TYPE_IRRIGATION: 'Irrigation',
+  FARMABLE_LAND_TYPE_DRYLAND: 'Dry Land',
+  FARMABLE_LAND_TYPE_GREENHOUSE: 'Greenhouse',
+  FARMABLE_LAND_TYPE_OPENLAND: 'To the exterior',
 };
 
 const FARMABLE_LAND_LANG = {
-  FARMABLE_LAND_LIST: 'Terrenos',
-  FARMABLE_LAND_NAME: 'Nombre',
-  FARMABLE_LAND_TYPE: 'Tipo',
-  FARMABLE_LAND_AREA: 'Área',
-  FARMABLE_LAND_IMAGE: 'Imagen',
-  FARMABLE_LAND_LIST_HAVEIOT: 'Se ha agregado un sistema de IOT',
-  FARMABLE_LAND_HAVEIOT: 'Agregar sistema de IOT',
-  FARMABLE_LAND_HAVEPHOTO: 'Tengo foto aerea o plano del terreno',
-  FARMABLE_LAND_IS_SQUARE: 'El terreno tiene forma de cuadrado o rectángulo',
-  FARMABLE_LAND_SQUARE_MESSAGE: 'Al no ser el terreno rectangular, por favor, dibuje la forma que tiene el mismo (es solo para tener por parte de la administracion una idea de como es el terreno)',
-  FARMABLE_LAND_CREATE: 'Añadir terreno',
-  FARMABLE_LAND_EDIT: 'Editar terreno',
+  FARMABLE_LAND_LIST: 'Lands',
+  FARMABLE_LAND_NAME: 'Name',
+  FARMABLE_LAND_TYPE: 'Type',
+  FARMABLE_LAND_AREA: 'Area',
+  FARMABLE_LAND_IMAGE: 'Image',
+  FARMABLE_LAND_LIST_HAVEIOT: 'An IOT system has been added',
+  FARMABLE_LAND_HAVEIOT: 'Add IOT system',
+  FARMABLE_LAND_HAVEPHOTO: 'I have an aerial photo or plan of the terrain',
+  FARMABLE_LAND_IS_SQUARE: 'The terrain is shaped like a square or rectangle',
+  FARMABLE_LAND_SQUARE_MESSAGE: 'As the terrain is not rectangular, please draw the shape it has (it is only to have an idea of ​​how the terrain is on the part of the administration)',
+  FARMABLE_LAND_CREATE: 'Add land',
+  FARMABLE_LAND_EDIT: 'Edit land',
   ...FARMABLE_LAND_TYPES_LANG
 };
 
 const CROP_LANG = {
-  CROP_LIST: 'Cultivos',
-  CROP_LENGTH: 'cultivos(s)',
-  CROP_NAME_PLURAL: 'Cultivos',
-  CROP_NAME_SINGULAR: 'Cultivo',
-  CROP_FARMABLE_LAND: 'Terreno',
-  CROP_WEEKS: 'semana(s)',
-  CROP_CREATE: 'Crear cultivo',
-  CROP_EDIT: 'Editar cultivo'
+  CROP_LIST: 'Crops',
+  CROP_LENGTH: 'crop\'s',
+  CROP_NAME_PLURAL: 'Crops',
+  CROP_NAME_SINGULAR: 'Crop',
+  CROP_FARMABLE_LAND: 'Land',
+  CROP_WEEKS: 'week\s',
+  CROP_CREATE: 'Add crop',
+  CROP_EDIT: 'Edit crop'
 };
 
 const PHYTOSANITARY_LANG = {
-  PHYTOSANITARY_LIST: 'Fitosanitarios',
-  PHYTOSANITARY_LENGTH: 'Fitosanitario(s)',
-  PHYTOSANITARY_NAME_PLURAL: 'Fitosanitarios',
-  PHYTOSANITARY_NAME_SINGULAR: 'Fitosanitario',
-  PHYTOSANITARY_CREATE: 'Añadir fitosanitario',
-  PHYTOSANITARY_EDIT: 'Editar fitosanitario',
+  PHYTOSANITARY_LIST: 'Phytosanitarys',
+  PHYTOSANITARY_LENGTH: 'Phytosanitary\'s',
+  PHYTOSANITARY_NAME_PLURAL: 'Phytosanitarys',
+  PHYTOSANITARY_NAME_SINGULAR: 'Phytosanitary',
+  PHYTOSANITARY_CREATE: 'Add phytosanitary',
+  PHYTOSANITARY_EDIT: 'Edit phytosanitary',
 };
 
 const IRRIGATE_LANG = {
-  IRRIGATE_LIST: 'Riegos',
-  IRRIGATE_FARMABLE_LAND: 'Terreno',
-  IRRIGATE_AQUA_QUANTITY: 'Cantidad de agua',
-  IRRIGATE_AQUA_QUANTITY_TYPE: 'litros',
-  IRRIGATE_DURABILITY: 'Duración',
-  IRRIGATE_DURABILITY_IN_MINUTES: 'Duración en minutos',
-  IRRIGATE_MINUTES: 'minutos',
-  IRRIGATE_CREATE: 'Añadir riego',
-  IRRIGATE_EDIT: 'Editar riego',
+  IRRIGATE_LIST: 'Irrigates',
+  IRRIGATE_FARMABLE_LAND: 'Land',
+  IRRIGATE_AQUA_QUANTITY: 'Water amount',
+  IRRIGATE_AQUA_QUANTITY_TYPE: 'liters',
+  IRRIGATE_DURABILITY: 'Length',
+  IRRIGATE_DURABILITY_IN_MINUTES: 'Length in minutes',
+  IRRIGATE_MINUTES: 'minutes',
+  IRRIGATE_CREATE: 'Add irrigate',
+  IRRIGATE_EDIT: 'Edit irrigate',
 };
 
 const EVENTS_ACTION_TYPES_LANG = {
-  EVENTS_ACTION_TYPES_AUTOMATIC: 'AUTOMÁTICO',
+  EVENTS_ACTION_TYPES_AUTOMATIC: 'AUTOMATIC',
   EVENTS_ACTION_TYPES_MANUAL: 'MANUAL',
-  EVENTS_ACTION_TYPES_SETTINGS: 'AJUSTES',
+  EVENTS_ACTION_TYPES_SETTINGS: 'SETTINGS',
 };
 
 const EVENTS_NAMES_LANG = {
-  EVENTS_NAMES_OpenCeilingGreenHouse: 'Abrir techo de invernadero',
-  EVENTS_NAMES_Irrigate: 'Regar',
-  EVENTS_NAMES_Fertilizer: 'Insertar fertilizante',
-  EVENTS_NAMES_OpenWallGreenhouse: 'Abrir pared de invernadero',
+  EVENTS_NAMES_OpenCeilingGreenHouse: 'Open greenhouse roof',
+  EVENTS_NAMES_Irrigate: 'Irrigate',
+  EVENTS_NAMES_Fertilizer: 'Insert fertilizer',
+  EVENTS_NAMES_OpenWallGreenhouse: 'Open greenhouse wall',
 };
 
 const EVENTS_LANG = {
-  EVENTS_LIST: 'Eventos',
-  EVENTS_NAME: 'Nombre',
-  EVENTS_RANGE: 'Rango',
-  EVENTS_ACTION_TYPE: 'Tipo de acción',
-  EVENTS_EXECUTIONS: 'Ejecuciones',
-  EVENTS_CREATE_EVENT: 'Evento',
-  EVENTS_CREATE_ACTION: 'Acción',
-  EVENTS_CREATE_VALUE_MIN: 'Valor mínimo del rango de valores del evento',
-  EVENTS_CREATE_VALUE_MAX: 'Valor máximo del rango de valores del evento',
-  EVENTS_CREATE: 'Añadir evento',
-  EVENTS_EDIT: 'Editar evento',
+  EVENTS_LIST: 'Events',
+  EVENTS_NAME: 'Name',
+  EVENTS_RANGE: 'Rank',
+  EVENTS_ACTION_TYPE: 'Action type',
+  EVENTS_EXECUTIONS: 'Executions',
+  EVENTS_CREATE_EVENT: 'Event',
+  EVENTS_CREATE_ACTION: 'Action',
+  EVENTS_CREATE_VALUE_MIN: 'Minimum value of the event\'s range of values',
+  EVENTS_CREATE_VALUE_MAX: 'Maximum value of the event\'s range of values',
+  EVENTS_CREATE: 'Add event',
+  EVENTS_EDIT: 'Edit event',
   ...EVENTS_ACTION_TYPES_LANG,
   ...EVENTS_NAMES_LANG
 };
 
 const NOTIFICATION_LANG = {
-  NOTIFICATION_LIST: 'Notificaciones',
-  NOTIFICATION_EVENT: 'Evento',
-  NOTIFICATION_DESCRIPTION_1: 'El Evento',
-  NOTIFICATION_DESCRIPTION_2: 'ha sido disparado con el sensor',
-  NOTIFICATION_DESCRIPTION_3: 'y el valor',
-  NOTIFICATION_DESCRIPTION_4: 'Clicke aquí para realizar la acción asociada al evento',
-  NOTIFICATION_DESCRIPTION_5: 'Se ha realizado la accion automatizada. Clicke aquí para mas información',
+  NOTIFICATION_LIST: 'Notifications',
+  NOTIFICATION_EVENT: 'Event',
+  NOTIFICATION_DESCRIPTION_1: 'The Event',
+  NOTIFICATION_DESCRIPTION_2: 'has been triggered with the sensor',
+  NOTIFICATION_DESCRIPTION_3: 'and the value',
+  NOTIFICATION_DESCRIPTION_4: 'Click here to perform the action associated with the event',
+  NOTIFICATION_DESCRIPTION_5: 'The automated action has been performed. Click here for more information',
 };
 
 const SETTING_LANGUAGE_TYPE_LANG = {
-  SETTING_LANGUAGE_TYPE_ES: 'Español',
-  SETTING_LANGUAGE_TYPE_EN: 'Inglés'
+  SETTING_LANGUAGE_TYPE_ES: 'Spanish',
+  SETTING_LANGUAGE_TYPE_EN: 'English'
 };
 
 const SETTING_LANG = {
-  SETTING_LIST: 'Ajustes',
-  SETTING_SAVE: 'Guardar',
+  SETTING_LIST: 'Settings',
+  SETTING_SAVE: 'Save',
   SETTING_DARK_MODE: 'Dark Mode',
   SETTING_LIGHT_MODE: 'Light Mode',
-  SETTING_LANGUAGE: 'Idioma',
-  SETTING_ACTION_BY_DEFAULT: 'Acción por defecto en eventos',
+  SETTING_LANGUAGE: 'Language',
+  SETTING_ACTION_BY_DEFAULT: 'Default action on events',
   ...SETTING_LANGUAGE_TYPE_LANG
 };
 
