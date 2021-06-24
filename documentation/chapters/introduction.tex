@@ -1,0 +1,61 @@
+\section{Ámbito}
+Actualmente, en el mundo rural, la tecnología no juega un gran papel, ya que, el trabajo en el campo se considera un trabajo anquilosado en el pasado, donde solo tiene cabida el trabajo manual pesado y la experiencia transmitida a lo largo de generaciones.
+
+Con este proyecto, queremos cambiar esa situación, haciendo más ameno el trabajo manual al agricultor experimentado y facilitar la incorporación de personas jóvenes más familiarizada con las nuevas tecnologías.
+
+Además, este proyecto está basado en necesidades expuestas por un grupo de agricultores, a los cuales se les ha consultado sobre si tuvieran la oportunidad de tener una aplicación para gestionar su trabajo rural, que le pedirían a dicha aplicación. Estos agricultores expusieron que les gustaría una aplicación accesible desde cualquier lado y que les guiará en temas de innovación sobre la agricultura y que les ayudará a automatizar tareas.
+
+Por esto último, este proyecto usará las últimas tecnologías del mercado que permiten de forma nativa la capacidad multiplataforma. Así pues, usará el Software Deveploment Kit (SDK) Ionic \cite{ionic} con el FrameWork React \cite{react} para el Frontend \cite{frontend}. Como también, usará NodeJS \cite{nodejs} para la parte Backend \cite{backend} y Azure \cite{azure} para la integración de ambas partes con el Sistema de Internet de las Cosas (Internet of Things, IoT).
+
+\section{Motivación}
+La principal motivación que nos ha llevado a querer desarrollar este proyecto, ha sido la necesidad de mejorar la industrialización del medio rural, con lo que conlleva eso, es decir, la mejora en la productividad.
+
+Además, facilitamos el acceso de personas de otros sectores a sector primario, ya que, con la herramienta propuesta, alivia mucho el trabajo sin ese conomiciento de generaciones del que hablamos en el anterior apartado.
+
+También, nos motiva usar y aprender las últimas tecnologías en el mercado, donde con ellas generamos aplicaciones híbridas que usen la nube, en este caso, con la Plataforma como Servicio (Platform as a Service, PaaS) de Azure Cloud \cite{azure}.
+
+Por último, una de las principales motivaciones a la hora de desarrollar este proyecto, ha sido la idea de innovar donde muy pocos investigadores lo han hecho, adaptar esas mismas innovaciones a un uso comercial y poder tener una alternativa en este sector tan competitivo donde tener una visión diferente en un momento dado, puede hacerte destacar y triunfar.
+
+\section{Objetivos}
+El objetivo de este TFG consiste en el diseño, desarrollo e implementación de, una aplicación hídrida que sirva como gestor de medios rurales al agricultor y de un Sistema de IoT con capacidad de detectar situaciones de interés, enviar alertas o notificaciones al usuario y de realizar las acciones automatizadas respecto a los mismos.
+
+A su vez, este objetivo podríamos subdividirlo en distintos subojetivos más específicos. Estos son:
+
+\begin{itemize}
+    \item Gestionar los recursos rurales del agricultor a tráves de un dashboard web.
+    \item Detectar situaciones de interés para el usuario.
+    \item Notificar al usuario afectado mediante notificaciones o alertas en tiempo real.
+    \item Tener un registro de todo lo que se ha comentado anteriormente y que se pueda consultar en todo momento desde un dashboard web.
+\end{itemize}
+
+\section{Alcance}
+Este proyecto, es una aplicación híbrida (Web, Android, Desktop), para facilitar el acceso a la misma a todas las personas que quieran usarla en cualquier momento.
+
+Las funcionalidades que tiene son:
+
+\begin{itemize}
+    \item Login: aquí el agricultor podrá loguearse en el sistema, entrar a su panel de dashboard y gestionar sus recursos.
+    \item Gestionar Terrenos: aquí el agricultor podrá ver, añadir, actualizar y borrar los terrenos que posea, junto con sus caracteristicas.
+    \item Gestionar Cultivos: aquí el agricultor podrá ver, añadir, actualizar y borrar los cultivos de un terreno.
+    \item Gestionar Fitosanitarios: aquí el agricultor podrá ver, añadir, actualizar y borrar los fitosanitarios añadidos a un cultivo.
+    \item Gestionar Riegos: aquí el agricultor podrá ver, añadir, actualizar y borrar los riegos sobre un terreno.
+    \item Gestionar Eventos: aquí el agricultor podrá suscribirse/dessuscribirse a un evento complejo y podrá decidir que tipo de acción se ejecute una vez el evento se dispare.
+    \item Notificaciones: aquí el agricultor podrá ver todo el listado de notificaciones que ha recibido en el tiempo, ordenados de más cercano a mas lejano.
+    \item Ajustes: aquí el agricultor podrá cambiar ciertos ajustes de su perfil, tales como Modo Claro / Modo Oscuro (Look and Feel), Idioma o Acción por defecto en los eventos complejos.
+    \item Búsqueda por palabras coincidentes: el agricultor podrá buscar en cada sección del dashboard para así filtrar por las palabras clave que el desee.
+\end{itemize}
+
+\section{Estructura de la memoria}
+La actual memoria se divide en los siguientes capítulos:
+\begin{itemize}
+    \item 1. Introducción: En este capítulo se expone la motivación para la realización del trabajo fin de grado actual, el alcance del mismo, el enfoque metodológico aplicado para la realización del mismo y un glosario con los acrónimos usados en la presente memoria.
+    \item 2. Conceptos preliminares y estado del arte: En este capítulo se mostrarán aplicaciones y herramientas similares. Explicando lo que aporta la presente aplicación desarrollada respecto a las ya existentes.
+    \item 3. Planificación del proyecto: En este capítulo se mostrará el enfoque metodológico usado. Así como la investigación previa, los diagramas Gantt usados para la planificación de actividades y proyecto finalizado.
+    \item 4. Análisis del sistema: En este capítulo se mostrarán los objetivos del sistema, los actores y los requisitos tanto funcionales, como no funcionales del sistema.
+    \item 5. Diseño del sistema: En este capítulo mostraremos los distintos modelos de datos.
+    \item 6. Implementación del sistema: En este capítulo se expondrá las distintas tecnologías usadas para el desarrollo del sistema actual incluyendo enlaces al repositorio de Github donde se encontrará el código fuente.
+    \item 7. Pruebas del sistema: En este capítulo se detallará las diferentes pruebas usadas para la verificación del sistema.
+    \item 8. Manual de instalación: En este capítulo se explicará como desplegar el sistema en el cloud de Azure, los requisitos previos del sistema y como instalar el software en los distintos dispositivos.
+    \item 9. Manual de usuario: En este capítulo se explicará como puede usar el software el usuario, tanto el acceso al mismo como el manejo del software para su óptimo funcionamiento.
+    \item 10. Conclusión: En este capítulo pondremos en común los conocimientos adquiridos tras el desarrollo del proyecto. También, se expondrán las mejoras futuras y los objetivos cumplidos tras el desarrollo del mismo.
+\end{itemize}

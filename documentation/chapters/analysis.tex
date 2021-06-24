@@ -1,0 +1,1010 @@
+En este capítulo se realiza un estudio desde los requerimientos necesarios y profundizando las necesidades de la misma para cumplir con los objetivos que se esperan.
+
+\newpage
+
+\section{Requisitos}
+En este apartado se indican los requisitos para el sistema a implementar. Así conseguiremos identificar las necesidades del mismo. Esto también nos servira para corroborar el cumplimiento de los requisitos establecidos.
+
+En los siguientes apartados, mostraremos los requisitos funcionales, los requisitos no funcionales, los requisitos de información y los distintos diagramas de casos de uso.
+
+\section{Objetivos del sistema}
+A continuación, describimos los objetivos del sistema:
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            OBJ-0001 & Acceso al sistema \\
+          \hline
+            Descripción & Se deberá controlar el acceso al sistema, mediante un sistema
+                          de login y el cual a parte de permitir el acceso a las pantallas
+                          de gestión, deberá controlar a nivel de petición el login. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{OBJ-0001}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            OBJ-0002 & Gestionar Terrenos \\
+          \hline
+            Descripción & Se deberá permitir leer, borrar, crear y actualizar los
+                          terrenos disponibles \\
+           \hline
+        \end{tabular}
+    }
+    \caption{OBJ-0002}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            OBJ-0003 & Gestionar Cultivos \\
+          \hline
+            Descripción & Se deberá permitir leer, borrar, crear y actualizar los
+                          cultivos en los terrenos disponibles \\
+           \hline
+        \end{tabular}
+    }
+    \caption{OBJ-0003}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            OBJ-0004 & Gestionar Fitosanitarios \\
+          \hline
+            Descripción & Se deberá permitir leer, borrar, crear y actualizar los fitosanitarios                     aplicados a los cultivos de los terrenos disponibles \\
+           \hline
+        \end{tabular}
+    }
+    \caption{OBJ-0004}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            OBJ-0005 & Gestionar Riegos \\
+          \hline
+            Descripción & Se deberá permitir leer, borrar, crear y actualizar los
+                          riegos sobre terrenos disponibles \\
+           \hline
+        \end{tabular}
+    }
+    \caption{OBJ-0005}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            OBJ-0006 & Gestionar Suscripción a Eventos Complejos \\
+          \hline
+            Descripción & Se deberá permitir la suscripción al evento complejo que se quiera
+                          y escoger la acción a hacer por defecto cuando el evento complejo
+                          se realiza. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{OBJ-0006}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            OBJ-0007 & Consultar las notificaciones \\
+          \hline
+            Descripción & Se deberá permitir consultar el histórico de las notificaciones
+                          del usuario, respecto a los eventos lanzados. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{OBJ-0007}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            OBJ-0008 & Modificar el idioma de la aplicación \\
+          \hline
+            Descripción & Se deberá permitir la elección del idioma en la aplicación.
+                          En concreto, entre castellano o inglés. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{OBJ-0008}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            OBJ-0009 & Modificar la acción por defecto en eventos \\
+          \hline
+            Descripción & Se deberá permitir la elección del tipo de acción por defecto
+                          en los eventos complejos. En concreto, entre Manual o Automático. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{OBJ-0009}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            OBJ-0010 & Modificar el look and feel de la aplicación \\
+          \hline
+            Descripción & Se deberá permitir la elección del aspecto de la aplicación,
+                          en concreto la elección será entre modo claro o modo oscuro. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{OBJ-0010}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            OBJ-0011 & Búsqueda por palabras coincidentes \\
+          \hline
+            Descripción & Se deberá permitir en cada sección buscar y filtrar por palabras clave. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{OBJ-0011}
+\end{table}
+
+\newpage
+
+\section{Catálogo de actores}
+En este apartado, mostraremos todos los actores implicados en el uso de la aplicación:
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            ACT-001 & Usuario habitual \\
+          \hline
+            Descripción & Este usuario es el usuario final, es decir, el cliente. Dicho usuario
+                          puede usar toda la aplicación en su totalidad. Es decir, tiene todos
+                          los privilegios en el front-office. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{OBJ-0011}
+\end{table}
+
+\section{Requisitos funcionales}
+A continuación, exponemos los requisitos funcionales de nuestro sistema:
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-001 & Inicio de Sesión \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a continuación
+                          cuando un usuario desee iniciar sesión para acceder al sistema \\
+            Precondición & El usuario debe existir con la contraseña especificada y con permisos para                 poder hacer el login \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla para iniciar sesión \\
+                                 & 2. El usuario introduce sus credenciales en el formulario \\
+                                 & 3. El sistema verifica que existe el usuario y que la contraseña es      correcta y muestra la pantalla principal del sistema. \\
+            Postcondición & El usuario tiene la sesión iniciada con un tiempo máximo de una hora. \\
+            Excepciones & 1. El usuario no existe y por tanto, el sistema da un error. \\
+                        & 2. La contraseña no coincide con la del usuario, y por tanto el sistema
+                             da un error. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-001}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-002 & Cerrar Sesión \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a continuación
+                          cuando un usuario desee cerrar sesión para salir del sistema \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Cerrar sesión'' \\
+                                 & 3. El sistema detecta el cierre de sesión y expulsa al usuario
+                                      del sistema \\
+            Postcondición & El usuario tiene la sesión cerrada y ya no puede acceder al sistema \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición de
+                             cerrar sesión no funciona. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-002}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-003 & Listar Terrenos \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a continuación
+                          cuando un usuario desee listar sus terrenos \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Terrenos'' \\
+                                 & 3. El sistema detecta la petición y muestra los terrenos
+                                      asociados al usuario. \\
+            Postcondición & El usuario tiene un listado en la pantalla de sus terrenos asociados \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene terrenos asociados, y por tanto, aparece un
+                             listado vacío. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-003}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-004 & Buscar Terrenos \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a continuación
+                          cuando un usuario desee buscar sus terrenos \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Terrenos'' \\
+                                 & 3. El usuario pulsa en el icono con forma de lupa \\
+                                 & 4. El sistema detecta la petición y muestra los terrenos
+                                      asociados al usuario que coinciden con la búsqueda. \\
+            Postcondición & El usuario tiene un listado en la pantalla de sus terrenos asociados \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene terrenos asociados, y por tanto, aparece un
+                             listado vacío. \\
+                        & 3. El usuario no tiene terrenos asociados que coincidan con la búsqueda,
+                             y por tanto, aparece un listado vacío. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-004}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-005 & Añadir Terreno \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a continuación
+                          cuando un usuario desee añadir un terreno \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Terrenos'' \\
+                                 & 3. El usuario pulsa en el icono con el símbolo ``+'' \\
+                                 & 4. El sistema detecta la petición y muestra la pantalla
+                                      de añadir terreno \\
+                                 & 5. El usuario completa todos los campos y pulsa el botón de
+                                      ``Añadir Terreno'' \\
+            Postcondición & El usuario tiene un listado de sus terrenos con el terreno que acaba
+                            de añadir \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                            no funciona. \\
+                        & 2. El usuario no ha introducido de forma correcta algunos de los campos
+                             y por tanto, la petición falla. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-005}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-006 & Modificar Terreno \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a continuación
+                          cuando un usuario desee modificar un terreno \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Terrenos'' \\
+                                 & 3. El usuario pulsa en el icono con el símbolo de edición de
+                                      color azul \\
+                                 & 4. El sistema detecta la petición y muestra la pantalla
+                                      de editar terreno \\
+                                 & 5. El usuario modifica los campos que quiera y pulsa el botón de
+                                      ``Modificar Terreno'' \\
+            Postcondición & El usuario tiene un listado de sus terrenos con el terreno que acaba
+                            de editar \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no ha introducido de forma correcta algunos de los campos
+                             y por tanto, la petición falla. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-006}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-007 & Borrar Terreno \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a continuación
+                          cuando un usuario desee borrar un terreno \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Terrenos'' \\
+                                 & 3. El usuario pulsa en el icono con el símbolo de borrado de
+                                      color rojo \\
+                                 & 4. El sistema detecta la petición, borra el terreno y
+                                      actualiza el listado de terrenos \\
+            Postcondición & El usuario tiene un listado de sus terrenos sin el terreno que acaba
+                            de borrar \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-007}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-008 & Listar Cultivos \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a continuación
+                          cuando un usuario desee listar los cultivos de sus terrenos \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Cultivos'' \\
+                                 & 4. El sistema detecta la petición, y lista los cultivos asociados
+                                      a cualquier de sus terrenos \\
+            Postcondición & El usuario tiene un listado de los cultivos de cualquiera de sus terrenos \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún terreno asociado y por tanto, el listado
+                             aparece vacío. \\
+                        & 3. El usuario no tiene ningún cultivo asociado y por tanto, el listado
+                             aparece vacío. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-008}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-009 & Buscar Cultivos \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a continuación
+                          cuando un usuario desee buscar los cultivos de sus terrenos \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Cultivos'' \\
+                                 & 3. El usuario pulsa en el icono con forma de lupa \\
+                                 & 4. El usuario escribe la búsqueda que desea \\
+                                 & 5. El sistema detecta la petición, y lista los cultivos asociados
+                                      a cualquier de sus terrenos que coincida con la búsqueda \\
+            Postcondición & El usuario tiene un listado de los cultivos de cualquiera de sus terrenos \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún terreno asociado y por tanto, el listado
+                             aparece vacío. \\
+                        & 3. El usuario no tiene ningún cultivo asociado y por tanto, el listado
+                             aparece vacío. \\
+                        & 4. El usuario no tiene ninguún cultivo o terreno que coincida con la
+                             búsqueda \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-009}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-010 & Añadir Cultivo \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a continuación
+                        cuando un usuario desee añadir un cultivo a un terreno \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Cultivos'' \\
+                                 & 3. El usuario pulsa en el icono con el símbolo ``+'' \\
+                                 & 4. El usuario selecciona el cultivo y el terreno que desea añadir \\
+                                 & 5. El sistema detecta la petición y añadir el cultivo al terreno
+                                      deseado \\
+            Postcondición & El usuario tiene un listado de los cultivos de cualquiera de sus terrenos
+                            con el cultivo añadido \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún terreno asociado y por tanto, el listado
+                             aparece vacío. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-010}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-011 & Modificar Listado de Cultivos \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a continuación
+                          cuando un usuario desee modificar un cultivo a un terreno \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Cultivos'' \\
+                                 & 3. El usuario pulsa en el icono con el símbolo de editar
+                                      de color azul \\
+                                 & 4. El usuario selecciona el cultivo y el terreno que desea añadir \\
+                                 & 5. El sistema detecta la petición y modifica el listado de
+                                      cultivos al terreno deseado \\
+            Postcondición & El usuario tiene un listado de los cultivos de cualquiera de sus terrenos
+                            con el nuevo listado de cultivos \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún terreno asociado y por tanto, el listado
+                             aparece vacío. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-011}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-012 & Listar Fitosanitarios \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a continuación
+                        cuando un usuario desee listar los fitosanitarios de sus cultivos \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Fitosanitarios'' \\
+                                 & 3. El sistema detecta la petición y lista los fitosanitarios \\
+            Postcondición & El usuario tiene un listado de los fitosanitarios de los cultivos de
+                            sus terrenos \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún terreno asociado y por tanto, el listado
+                             aparece vacío. \\
+                        & 3. El usuario no tiene ningún cultivo asociado y por tanto, el listado
+                             aparece vacío. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-012}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-013 & Buscar Fitosanitarios \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a continuación
+                          cuando un usuario desee listar los fitosanitarios de sus cultivos y
+                          que coincida con la búsqueda \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Fitosanitarios'' \\
+                                 & 3. El usuario pulsa en el icono con forma de lupa \\
+                                 & 4. El usuario escribe la búsqueda que desea \\
+                                 & 5. El sistema detecta la petición, y lista los fitosanitarios
+                                      con los cultivos asociados a cualquier de sus terrenos que
+                                      coincida con la búsqueda \\
+            Postcondición & El usuario tiene un listado de los fitosanitarios de los cultivos de
+                            sus terrenos \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún terreno asociado y por tanto, el listado
+                             aparece vacío. \\
+                        & 3. El usuario no tiene ningún cultivo asociado y por tanto, el listado
+                             aparece vacío. \\
+                        & 4. El usuario no tiene ningún fitosanitario, cultivo o terreno que
+                             coincida con la búsqueda. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-013}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-014 & Añadir Fitosanitario \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a continuación
+                        cuando un usuario desee añadir un fitosanitario a uno de sus cultivos \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Fitosanitarios'' \\
+                                 & 3. El usuario pulsa en el icono con el símbolo ``+'' \\
+                                 & 4. El sistema detecta la petición, y añade el fitosanitario al
+                                      cultivo seleccionado. \\
+            Postcondición & El usuario tiene un listado de los fitosanitarios de los cultivos de
+                            sus terrenos con el fitosanitario añadido \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún terreno asociado y por tanto, el listado
+                             aparece vacío. \\
+                        & 3. El usuario no tiene ningún cultivo asociado y por tanto, el listado
+                             aparece vacío. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-014}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-015 & Modificar Listado de Fitosanitarios \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a
+                          continuación cuando un usuario desee modificar el listado de
+                          fitosanitarios de un cultivo \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Fitosanitarios'' \\
+                                 & 3. El usuario pulsa en el icono de editar de color azul \\
+                                 & 4. El sistema detecta la petición, y muestra la pantalla de
+                                      edición de fitosanitarios \\
+            Postcondición & El usuario tiene un listado de los fitosanitarios de los cultivos de
+                            sus terrenos con la lista de fitosanitarios modificada \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún terreno asociado y por tanto, el listado
+                             aparece vacío. \\
+                        & 3. El usuario no tiene ningún cultivo asociado y por tanto, el listado
+                             aparece vacío. \\
+                        & 4. El usuario no tiene ningún fitosanitario asociado y por tanto, el listado
+                             aparece vacío. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-015}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-016 & Listar Riegos \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a
+                          continuación cuando un usuario desee listar los riegos asociados
+                          a sus terrenos \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Riegos'' \\
+                                 & 3. El sistema detecta la petición y muestra el listado
+                                      de los riegos \\
+            Postcondición & El usuario tiene un listado de los riegos de sus terrenos \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún terreno asociado y por tanto, el listado
+                             aparece vacío. \\
+                        & 3. El usuario no tiene ningún riego asociado y por tanto, el listado
+                             aparece vacío. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-016}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-017 & Buscar Riegos \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a
+                          continuación cuando un usuario desee listar los riegos asociados
+                          a sus terrenos que coincida con la búsqueda realizada \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Riegos'' \\
+                                 & 3. El usuario pulsa en el icono con forma de lupa \\
+                                 & 4. El usuario escribe la búsqueda que desee. \\
+                                 & 5. El sistema detecta la petición y lista los riegos de sus
+                                      terrenos que coincida con la búsqueda \\
+            Postcondición & El usuario tiene un listado de los riegos de sus terrenos que
+                            coincida con la búsqueda \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún terreno asociado y por tanto, el listado
+                             aparece vacío. \\
+                        & 3. El usuario no tiene ningún riego asociado y por tanto, el listado
+                             aparece vacío. \\
+                        & 4. El usuario no tiene ningún terreno o riego asociado que coincida
+                             con la búsqueda. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-017}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-018 & Añadir Riego \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a
+                          continuación cuando un usuario desee añadir un riego
+                          asociado a un terreno \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Riegos'' \\
+                                 & 3. El usuario pulsa en el icono con el símbolo ``+'' \\
+                                 & 4. El usuario rellena los campos que se exigen \\
+                                 & 5. El sistema detecta la petición y añade el riego al terreno
+                                      seleccionado \\
+            Postcondición & El usuario tiene un listado de los riegos de sus terrenos con
+                            el riego añadido \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún terreno asociado y por tanto, el listado
+                             aparece vacío. \\
+                        & 3. El usuario no ha rellenado bien los campos exigidos y por tanto,
+                             la petición falla. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-018}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-019 & Modificar Riego \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a
+                          continuación cuando un usuario desee un riego con sus propiedades \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Riegos'' \\
+                                 & 3. El usuario pulsa en el icono de editar con el color azul \\
+                                 & 4. El usuario modifica los campos como desee. \\
+                                 & 5. El sistema detecta la petición y actualiza el riego
+                                      con sus respectivas propiedades \\
+            Postcondición & El usuario tiene un listado de los riegos de sus terrenos con
+                            el riego modificado \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún terreno asociado y por tanto, el listado
+                             aparece vacío. \\
+                        & 3. El usuario no ha rellenado correctamente los campos y por tanto,
+                             la petición falla. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-019}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-020 & Borrar Riego \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a
+                          continuación cuando un usuario desee borrar un riego \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Riegos'' \\
+                                 & 3. El usuario pulsa en el icono de borrar de color rojo \\
+                                 & 4. El sistema detecta la petición y borrar el riego
+                                      seleccionado \\
+            Postcondición & El usuario tiene un listado de los riegos sin el riego que se
+                            acaba de borrar \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún terreno asociado y por tanto, el listado
+                             aparece vacío. \\
+                        & 3. El usuario no tiene ningún riego asociado y por tanto, el listado
+                             aparece vacío. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-020}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-021 & Listar Eventos Complejos \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a
+                          continuación cuando un usuario desee listar los eventos complejos
+                          a los que esta suscrito \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Eventos'' \\
+                                 & 3. El sistema detecta la petición y lista los eventos complejos \\
+            Postcondición & El usuario tiene un listado de los eventos complejos a los que el
+                            usuario esta suscrito \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún evento complejo asociado, y por tanto,
+                             el listado aparece vacío. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-021}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-022 & Buscar Eventos Complejos \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a
+                          continuación cuando un usuario desee listar los eventos complejos
+                          a los que esta suscrito y que coincida con la búsqueda deseada \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Eventos'' \\
+                                 & 3. El usuario pulsa en el icono con forma de lupa \\
+                                 & 4. El usuario escribe la búsqueda deseada \\
+                                 & 5. El sistema detecta la petición y lista los eventos
+                                      complejos que coincida con la búsqueda \\
+            Postcondición & El usuario tiene un listado de los eventos complejos a los que el
+                            usuario esta suscrito y que coincide con la búsqueda realizada \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún evento complejo asociado, y por tanto,
+                             el listado aparece vacío. \\
+                        & 3. El usuario no tiene ningún evento complejo asociado que coincida
+                             con la búsqueda realizada, y por tanto, el listado aparece vacío. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-022}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-023 & Suscribirse a Eventos Complejos \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a
+                        continuación cuando un usuario desee suscribirse a un evento complejo \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Eventos'' \\
+                                 & 3. El usuario pulsa en el icono con el símbolo ``+'' \\
+                                 & 4. El usuario selecciona el evento complejo y la acción
+                                      automatizada a realizar \\
+                                 & 5. El sistema detecta la petición, y suscribe al usuario al
+                                      evento complejo \\
+            Postcondición & El usuario tiene un listado de los eventos complejos a los que el
+                            usuario esta suscrito con el evento que acaba de añadir \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún evento complejo asociado, y por tanto,
+                             el listado aparece vacío. \\
+                        & 3. El usuario a seleccionado un evento al que ya esta suscrito, y
+                             por tanto, la petición falla. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-023}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-024 & Desuscribirse de Eventos Complejos \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a
+                          continuación cuando un usuario desee desuscribirse de algún evento
+                          complejo \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Eventos'' \\
+                                 & 3. El usuario pulsa el botón de borrar de color rojo \\
+                                 & 4. El sistema detecta la petición y desuscribe al usuario
+                                      del evento complejo \\
+            Postcondición & El usuario tiene un listado de los eventos complejos a los que el
+                            usuario esta suscrito sin el evento del que se acaba de desuscribir \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ningún evento complejo asociado, y por tanto,
+                             el listado aparece vacío. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-024}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-025 & Listar Notificaciones \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a
+                          continuación cuando un usuario desee listar el historico
+                          de las notificaciones \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Notificaciones'' \\
+                                 & 3. El sistema detecta la petición y lista las notificaciones
+                                      del usuario \\
+            Postcondición & El usuario tiene un listado de todo el historico de las notificaciones,
+                            ordenadas de más cercana a más lejana \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ninguna notificación, por tanto, el listado
+                             aparece vacío. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-025}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-026 & Buscar Notificaciones \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a
+                        continuación cuando un usuario desee listar el historico
+                        de las notificaciones que coincida con la búsqueda \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Notificaciones'' \\
+                                 & 3. El usuario pulsa en el botón con forma de lupa \\
+                                 & 4. El usuario escribe la búsqueda deseada \\
+                                 & 5. El sistema detecta la petición, y lista las notificaciones
+                                      que coincida con la búsqueda \\
+            Postcondición & El usuario tiene un listado de todo el historico de las notificaciones,
+                            ordenadas de más cercana a más lejana que coincida con la búsqueda \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+                        & 2. El usuario no tiene ninguna notificación, por tanto, el listado
+                             aparece vacío. \\
+                        & 3. El usuario no tiene ninguna notificación que coincida con la búsqueda,
+                             por tanto, el listado aparece vacío. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-026}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-027 & Ver Ajustes \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a
+                        continuación cuando un usuario desee ver los ajustes del sistema \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Ajustes'' \\
+                                 & 3. El sistema detecta la petición, y muestra los ajustes del
+                                      usuario \\
+            Postcondición & El usuario tiene un listado de sus ajutes del sistema \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                             no funciona. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-027}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{p{4cm} | p{10cm}}
+          \hline
+            UC-028 & Modificar Ajustes \\
+          \hline
+            Descripción & El sistema deberá mostrar el comportamiento que se describe a
+                          continuación cuando un usuario desee modificar sus ajustes
+                          del sistema \\
+            Precondición & El usuario debe existir y debe estar logueado. \\
+            Secuencia Normal (S) & 1. El sistema muestra la pantalla principal del sistema \\
+                                 & 2. El usuario pulsa la opción llamada ``Ajustes'' \\
+                                 & 3. El usuario modifica el ajuste que desee y le da al botón
+                                      de guardar \\
+                                 & 4. El sistema detecta la petición, y guarda las opciones
+                                      modificadas \\
+            Postcondición & El usuario tiene un listado con los ajustes del sistema actualizados
+                            y el sistema se actualiza en vivo. \\
+            Excepciones & 1. El usuario no tiene conexión a internet, y por tanto, la petición
+                            no funciona. \\
+           \hline
+        \end{tabular}
+    }
+    \caption{UC-028}
+\end{table}
+
+\blankpage
+
+\section{Requisitos no funcionales}
+Los requisitos no funcionales de este proyecto son sacados del estándar ISO 25010 \cite{iso25010}, que son los siguientes:
+
+\begin{itemize}
+    \item Escalabilidad: se debe poder ampliar la aplicacion tanto a nivel lógico como a nivel físico.
+    \item Disponibilidad: se debe permitir el acceso al sistema en cualquier momento y lugar.
+    \item Usabilidad: la utilización del sistema debe ser algo sencillo e intuitivo. Además, ofreciendo funciones de utilidad como busquedas, copiar datos, entre otras.
+    \item Seguridad: el sistema debe ser robusto, resistiendo contra ataques informáticos, por ende tanto la creación de usuarios como el login del mismo se hace mediante tokens de sesión únicos, irrepetibles y temporales.
+    \item Compatibilidad: el sistema debe ser capaz de compartir información con otros, con independencia de la plataforma virtual o física en la cual este instalada.
+    \item Mantenibilidad: el código del programa debe ser legible, modulado y fácilmente mantenible. Es decir, seguir los principios del Clean Code \cite{cleancode}.
+\end{itemize}

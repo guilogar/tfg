@@ -1,4 +1,4 @@
-\documentclass[a4paper, 11pt, dvipsnames]{book}
+\documentclass[a4paper, 11pt]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage{xcolor}
@@ -28,12 +28,20 @@
 \usepackage[Sonny]{fncychap}
 \usepackage{nameref}
 \usepackage{listings}
-\usepackage{tocbibind}
 \usepackage{tocloft}
+\usepackage{etoolbox}
 \usepackage[bottom]{footmisc}
-\usepackage[backend=biber]{biblatex}
-\addbibresource{sample.bib}
+\usepackage[nottoc]{tocbibind}
 \usepackage{booktabs}
+
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  frame=single,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
 \newcommand\YAMLcolonstyle{\color{red}\mdseries}
 \newcommand\YAMLkeystyle{\color{black}\bfseries}
 \newcommand\YAMLvaluestyle{\color{blue}\mdseries}
@@ -87,10 +95,10 @@
     \newpage
 }
 
-\newcommand{\DNI}{.........}
+\newcommand{\DNI}{49340296Y}
 \newcommand{\autor}{Guillermo López García}
-\newcommand{\director}{Guadalupe Ortiz}
-\newcommand{\codirector}{David Corral}
+\newcommand{\director}{Guadalupe Ortiz Bellot}
+\newcommand{\codirector}{David Corral Plaza}
 \newcommand{\proyecto}{Smart Rural}
 \newcommand{\nombre}{Acrónimo proyecto}
 \newcommand{\tipo}{Grado}
@@ -169,26 +177,12 @@
 {\hline\end{tabular}}
 
 \begin{document}
-    \begin{titlepage}
-        \newgeometry{left=2cm,right=2cm,top=2cm,bottom=1cm}
-        \includegraphics[width=7cm, keepaspectratio]{images/UCA.jpg}  \\ \vspace{1cm}
-        \begin{center}
-            \Large \MakeUppercase{Trabajo de Fin de Grado} \\ \vspace{1cm}
-            \Large \MakeUppercase{\titulacion} \\ \vspace{6cm}
-            \LARGE \MakeUppercase{\textbf{\proyecto}} \\ \vspace{7cm}
-            \Large \MakeUppercase{Autor: \autor} \\ \vspace{0.5cm}
-            Puerto Real, \fecha{}
-        \end{center}
-        \restoregeometry{}
-    \end{titlepage}
-
-    \blankpage{}
-
     \begin{portada}
         \Large \MakeUppercase{Trabajo de Fin de Grado} \\ \vspace{1cm}
         \Large \MakeUppercase{\titulacion} \\ \vspace{6cm}
         \LARGE \MakeUppercase{\textbf{\proyecto}} \\ \vspace{7cm}
         \Large \MakeUppercase{Director: \director} \\
+        \Large \MakeUppercase{Co-Director: \codirector} \\
         \Large \MakeUppercase{Autor: \autor} \\ \vspace{0.5cm}
         Puerto Real, \fecha{}
     \end{portada}
@@ -204,35 +198,26 @@
 
     \tableofcontents
     \chapter{Introducción}
-    \section{Ámbito}
-    \section{Motivación}
-    \section{Objetivos}
-    \section{Alcance}
-    \section{Estructura de la memoria}
-    \section{Glosario}
+    \input{chapters/introduction}
     \chapter{Conceptos preliminares y estado del arte}
+    \input{chapters/state-art}
     \chapter{Planificación}
-    \section{Investigación previa}
-    \section{Enfoque metodológico}
-    \section{Planificación del proyecto}
-    \section{Diagrama Gantt}
+    \input{chapters/planning}
     \chapter{Análisis}
-    \section{Catálogo de actores}
-    \section{Requisitos funcionales}
-    \section{Requisitos no funcionales}
-    \section{Descripción de los casos de uso}
+    \input{chapters/analysis}
     \chapter{Diseño}
-    \section{Arquitectura lógica}
-    \section{Modelo Relacional}
-    \section{Diseño de la interfaz}
+    \input{chapters/design}
     \chapter{Implementación}
+    \input{chapters/implementation}
     \chapter{Pruebas}
-    \chapter{Manual de Instalación}
-    \chapter{Manual de Usuario}
+    \input{chapters/test}
 
     \chapter{Conclusiones}
-    \begin{thebibliography}{9}
-    \bibitem{texbook}
-    NodeJS, \url{https://nodejs.org/es/}
-    \end{thebibliography}
+    \input{chapters/conclusion}
+
+    \input{bibliography}
+
+    \chapter{Anexos}
+    \input{chapters/instalation-manual}
+    \input{chapters/user-manual}
 \end{document}

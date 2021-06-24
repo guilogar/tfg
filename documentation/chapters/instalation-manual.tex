@@ -1,0 +1,122 @@
+\section{Manual de Instalación}
+
+En este capítulo hablaremos sobre la instalación de las tecnologías necesarias y con sus configuraciones para arrancar el proyecto de forma satisfactoria.
+
+Además, las tecnologías seleccionadas suelen tener un gran grado de retrocompatibilidad, así que, aunque se podrán versiones en concreto, muy seguramente con versiones más nuevas el proyecto funcionará igual.
+
+\newpage
+
+\subsection{Git}
+Para instalar Git, solo tenemos que seguir los pasos del siguiente enlace \textcolor{blue}{\href{https://git-scm.com/book/en/v2/Getting-Started-Installing-Git}{Git}}
+
+\subsection{Docker}
+Con este sistema de virtualización, nos permite instalar versiones antiguas de software, que muchas veces con las actualizaciones de los sistema operativos, sin imposibles de actualizar.
+
+Sobre todo, lo que más importa con eso son las base de datos, ya que son los casos más evidentes y más comunes. Veasé con el caso de MySQL 5.8.
+
+Así pues, siguiendo las instrucciones de \textcolor{blue}{\href{https://docs.docker.com/engine/install}{Docker}}, instalaremos Docker en nuestro sistema.
+
+\subsection{PostgreSQL}
+Para instanciar una base de datos de PostgreSQL, usaremos lo instalado en el paso anterior y simplmente levantaremos el fichero docker-compose.yml y ya tenemos la base de datos que necesitamos.
+
+\subsection{NVM}
+Otro de los sistemas que necesitamos es NodeJS. Pero en vez de instalarnos el binario tal cual, usaremos esta tecnología llamada Node Version Manager.
+
+Para instalar dicha tecnología, seguiremos las siguientes instrucciones \textcolor{blue}{\href{https://github.com/nvm-sh/nvm}{NVM}}.
+
+Por último, para instalar NodeJS junto con su versión de NPM, solo tendremos que ejecutar el comando \textbf{nvm install 14}. Esto instala la versión de NodeJS 14.x.
+
+\subsection{Ionic}
+A parte de NodeJS y NPM, necesitamos el SDK de Ionic.
+
+Este SDK lo podemos instalar con NPM, ejecutando el siguiente comando \textbf{npm install -g @ionic/cli}
+
+Una vez lo tengamos instalado, solo tendremos que realizar el comando \textbf{ionic -v} para verificar dicha instalación.
+
+\subsection{Código fuente}
+Para obtener el código fuente de la aplicación, solo tenemos que hacer un git clone del repositorio. Dicho repositorio, es el siguiente: \textcolor{blue}{\href{https://github.com/guilogar/tfg}{https://github.com/guilogar/tfg}}.
+
+Por tanto, si queremos hacer el clone, ejecutariamos el comando \\
+\textbf{git clone https://github.com/guilogar/tfg}.
+
+\subsection{Backend}
+Para terminar la instalación del Backend, solo tendriamos que crear los archivos de credenciales necesarios.
+
+Para esto, solo hay que crear 2 ficheros. Uno con variables de entorno genericas para la ejecución local y otro para las credenciales de Firebase.
+
+A continuación, expongo el formato de los mismos.
+
+\begin{lstlisting}[language=Java,caption={Fichero .env},captionpos=b]
+DATABASE_NAME=smartrural
+DATABASE_USERNAME=smartrural
+DATABASE_PASSWORD=smartrural
+DATABASE_HOST=127.0.0.1
+DATABASE_DIALECT=postgres
+ENVIRONMENT=develop
+
+COSMOS_ENDPOINT=...
+COSMOS_KEY=...
+COSMOS_DATABASE=...
+COSMOS_CONTAINER_ID=...
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,caption={Fichero firebaseServiceAccount.json},captionpos=b]
+{
+  "type": "service_account",
+  "project_id": "",
+  "private_key_id": "",
+  "private_key": "",
+  "client_email": "",
+  "client_id": "",
+  "auth_uri": "",
+  "token_uri": "",
+  "auth_provider_x509_cert_url": "",
+  "client_x509_cert_url": ""
+}
+\end{lstlisting}
+
+Por último, para instanciar el Backend, tan solo son necesarios 4 comandos.
+
+\begin{itemize}
+    \item \textbf{docker-compose up -d}
+    \item \textbf{cd backend}
+    \item \textbf{npm install}
+    \item \textbf{node .}
+\end{itemize}
+
+\subsection{Frontend}
+Respecto al Frontend, los ficheros de variables de entorno están versionados. Por tanto, para iniciar el frontend solo necesita 3 comandos.
+
+\begin{itemize}
+    \item \textbf{cd frontend}
+    \item \textbf{npm install}
+    \item \textbf{ionic serve}
+\end{itemize}
+
+\subsection{Datos por defecto}
+Para poder usar el proyecto en local, se necesitan datos por defecto. Para poder generarlos, ya existe una funcionalidad que se ha programado que lo hace de forma automática.
+
+Para insertar estos datos de ejemplo, se puede usar el comando \textbf{npm run makeNewData}.
+
+De estos datos de ejemplo, se inserta un usuario con las siguientes credenciales:
+
+\begin{itemize}
+    \item Username: \textbf{test}
+    \item Password: \textbf{test}
+\end{itemize}
+
+\subsection{Emulator}
+Respecto al simulador de eventos simples, también se necesita crear un archivo de variables de entorno. A continuación, exponemos el formato del mismo.
+
+\begin{lstlisting}[language=Java,caption={Fichero emulator/.env},captionpos=b]
+CONNECTION_STRING=...
+TIME_INTERVAL=30000
+\end{lstlisting}
+
+Para ejecutar el simulador, solo hace falta 3 comandos.
+
+\begin{itemize}
+    \item \textbf{cd emulator}
+    \item \textbf{npm install}
+    \item \textbf{node .}
+\end{itemize}
