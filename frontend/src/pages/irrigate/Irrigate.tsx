@@ -11,8 +11,8 @@ import { getApi } from '../../services/utils';
 import './Irrigate.css';
 
 import { Redirect } from 'react-router';
-import ToolBar from '../../services/toolbar';
-import Refresher from '../../services/refresher';
+import ToolBar from '../../components/toolbar';
+import Refresher from '../../components/refresher';
 import { useTranslation } from 'react-i18next';
 
 const Irrigate: React.FC = () => {

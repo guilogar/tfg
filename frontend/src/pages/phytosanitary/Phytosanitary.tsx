@@ -8,8 +8,8 @@ import { add, create as createIcon, trash } from 'ionicons/icons';
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router';
-import Refresher from '../../services/refresher';
-import ToolBar from '../../services/toolbar';
+import Refresher from '../../components/refresher';
+import ToolBar from '../../components/toolbar';
 
 import { getApi } from '../../services/utils';
 import './Phytosanitary.css';

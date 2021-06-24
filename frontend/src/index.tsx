@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {
   Capacitor
 } from '@capacitor/core';
-import * as fs from 'fs';
 
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
