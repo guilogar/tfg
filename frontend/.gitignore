@@ -9,6 +9,9 @@ android/capacitor.settings.gradle
 android/app/capacitor.build.gradle
 android/app/src/main/res/xml/config.xml
 
+# ios
+ios/
+
 # dependencies
 /node_modules
 /.pnp
