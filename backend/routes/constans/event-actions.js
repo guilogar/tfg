@@ -1,7 +1,7 @@
 'use strict';
 
-const Irrigate = require('../../database/models/Irrigate');
-
+const CropPhytosanitary = require('../../database/models/CropPhytosanitary');
+const FarmableLandCrop = require('../../database/models/FarmableLandCrop');
 const { createIrrigate } = require('../services/create-irrigate');
 
 const OpenCeilingGreenHouseAction = async (farmId) => {
@@ -15,6 +15,20 @@ const IrrigateAction = async (farmId) => {
 
 const FertilizerAction = async (farmId) => {
   console.log('FertilizerAction');
+
+  const crops = await FarmableLandCrop.findAll({
+    where: {
+      FarmableLandId: farmId
+    }
+  });
+
+  for(const crop of crops) {
+    await CropPhytosanitary.create({
+      FarmableLandId: farmId,
+      CropId: crop.id,
+      PhytosanitaryId: 1
+    });
+  }
 };
 
 const OpenWallGreenhouseAction = async (farmId) => {
