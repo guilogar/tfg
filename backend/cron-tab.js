@@ -68,7 +68,7 @@ const initCronTab = () => {
         )
         {
           const actionFunction = ACTIONS[event.name];
-          await actionFunction();
+          await actionFunction(userSensor.FarmableLand.id);
         }
 
         const body = (
