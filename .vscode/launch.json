@@ -32,7 +32,7 @@
       "name": "Launch Server js with local database",
       "program": "${workspaceFolder}/backend/app.js",
       "args": [
-        ".env.test"
+        ".env"
       ],
       "cwd": "${workspaceFolder}/backend",
       "runtimeExecutable": "node"
@@ -44,7 +44,7 @@
       "program": "${workspaceFolder}/backend/app.js",
       "cwd": "${workspaceFolder}/backend",
       "args": [
-        ".env"
+        ".env.production"
       ],
       "runtimeExecutable": "node"
     },
