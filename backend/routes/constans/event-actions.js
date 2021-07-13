@@ -25,7 +25,7 @@ const FertilizerAction = async (farmId) => {
   for(const crop of crops) {
     await CropPhytosanitary.create({
       FarmableLandId: farmId,
-      CropId: crop.id,
+      CropId: crop.CropId,
       PhytosanitaryId: 1
     });
   }
